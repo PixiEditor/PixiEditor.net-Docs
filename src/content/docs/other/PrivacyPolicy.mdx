@@ -93,13 +93,13 @@ By using the Website, you acknowledge that you have read and understood this Pri
 
 # PixiEditor Application Privacy Policy
 
-Last updated: 14.12.2023
+Last updated: 20.05.2025
 
 We reserve the right to update and modify this Privacy Policy at any time. The "Last updated" date at the beginning of the policy will reflect the latest revision date. We encourage you to review this Privacy Policy periodically.
 
 ## Crash reports
 
-In an event of a crash, a report containing diagnostic data will be automatically sent to us via Discord. The report includes:
+In an event of a crash, a report containing diagnostic data will be automatically sent to us via Discord and to our servers. The report includes:
 - The version of PixiEditor you are running
 - Date and time when PixiEditor crashed
 - Date and time when PixiEditor was opened
@@ -121,7 +121,7 @@ In an event of a crash, a report containing diagnostic data will be automaticall
         - Info about current transformation
 - A stack trace, which is a location in the PixiEditor code where the error happened. It contains no personal data.
 - An error message, which may include textual data related to the files currently opened in the app, or related to actions done in the app prior to the crash. Examples include, but are not limited to:
-    - The filenames and full paths (including your Windows username) of the currently opened files
+    - The filenames and full paths (including your system username) of the currently opened files
     - Text that you've previously entered in the app
     - The name of currently selected layer
 
@@ -157,6 +157,44 @@ All the options can be disabled in the settings as well as Rich Presence itself.
 
 The Standalone version of PixiEditor (the one you can download from this website) checks for updates using the GitHub API.
 
-Please refer to [GitHubs Privacy Policy](https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement) for further information
+Please refer to [GitHubs Privacy Policy](https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement) for further information. We only check for updates and do not send any data to GitHub.
+We do not collect any personal data from you when checking for updates.
 
 You can disable this option in the settings.
+
+## Anonymous usage statistics
+
+By default, PixiEditor collects anonymous usage statistics. This data is used to improve the application and it's features, find the issues and performance bottlenecks. It does not contain any personal information and is not shared with third parties.
+We use this data to understand how users interact with the application and to identify areas for improvement.
+
+Information we collect includes:
+
+- Commands you execute (actions like opening a file, creating a new document, etc. Each user interaction that changes the document/image is counted as a command. UI clicks are not tracked),
+- Shortcut that was used to execute the command,
+- Time it took PixiEditor to startup the application,
+- Memory allocation information,
+- Amount of threads used by the application,
+- Animation cels/keyframes count,
+- Animation FPS,
+- Tools usage, which includes:
+    - Position on canvas the tool was used,
+    - Old tool used before switching to the new one,
+    - Performance related information (time it took to execute the tool action)
+- Session length, which is the time you spend in PixiEditor,
+- Build information, which includes:
+    - Version,
+    - Source of the build (Steam, Microsoft Store, Standalone),
+    - Operating system and its version,
+
+You can disable this option in the settings.
+
+## Purchases
+
+### Steam
+
+For purchases made through Steam, follow the Steam Privacy Policy. We do not collect any information related to purchases made through Steam and do not store any information on our servers.
+We access your Steam account via Steamworks API to verify your ownership of the application and to provide you with the purchased features.
+
+### Standalone
+
+// TODO: purchase policy and GDPR
