@@ -24,21 +24,29 @@ This tells everyone what you are working on, and this way you'll be able to get 
 
 ## The basics
 
-* PixiEditor is written in C#, .NET 7
-* We use WPF framework for the UI and SkiaSharp for everything related to drawing/painting.
+* PixiEditor is written in C#, .NET
+* We use AvaloniaUI framework for the UI and SkiaSharp for everything related to drawing/painting.
 * The app has two general parts
-    * A GUI built in WPF (with plans to eventually switch to AvaloniaUI or other UI framework)
+    * A GUI built in AvaloniaUI
     * The PixiEditor's Core, the part that implements most of the functionality, like drawing, handling layers, keeping track of the changes for the undo system, etc.
+
+PixiEditor is split int several sub-projects:
+- [Drawie](https://github.com/PixiEditor/Drawie) - GPU accelerated drawing library. It manages GPU context, provides it to SkiaSharp, exposes high level drawing API and is responsible for interopping with AvaloniaUI.
+- [PixiParser](https://github.com/PixiEditor/PixiParser) - A library for parsing .pixi files.
+- [PixiDocks](https://github.com/PixiEditor/PixiDocks) - A library for creating and managing dockable windows in AvaloniaUI.
+- [ColorPicker](https://github.com/PixiEditor/ColorPicker) - A ui component for picking colors and gradients.
+
+All of above subprojects are used via git submodules.
 
 ## Code main points
 
 ### `PixiEditor` project (the GUI)
 
-- The constructor of [MainWindow](https://github.com/PixiEditor/PixiEditor/blob/1c3cb41a35f1bab03e5613b9383b3a5da81330ab/src/PixiEditor/Views/MainWindow.xaml) is considered to be the entry point of program.
-- Part of the initialization also happens in [ViewModelMain](https://github.com/PixiEditor/PixiEditor/blob/1c3cb41a35f1bab03e5613b9383b3a5da81330ab/src/PixiEditor/ViewModels/ViewModelMain.cs), which is the `DataContext` of `MainWindow`
-- The outside look and layout of PixiEditor's GUI is defined in .xaml files, located in the [Views directory](https://github.com/PixiEditor/PixiEditor/tree/master/src/PixiEditor/Views)
+- The constructor of [MainWindow](https://github.com/PixiEditor/PixiEditor/blob/master/src/PixiEditor/Views/MainWindow.axaml) is considered to be the entry point of program.
+- Part of the initialization also happens in [ViewModelMain](https://github.com/PixiEditor/PixiEditor/blob/master/src/PixiEditor/ViewModels/ViewModelMain.cs), which is the `DataContext` of `MainWindow`
+- The outside look and layout of PixiEditor's GUI is defined in .axaml files, located in the [Views directory](https://github.com/PixiEditor/PixiEditor/tree/master/src/PixiEditor/Views)
 - The C# code that backs the GUI is mostly located in the [ViewModels directory](https://github.com/PixiEditor/PixiEditor/tree/master/src/PixiEditor/ViewModels)
-- [ActionAccumulator](https://github.com/PixiEditor/PixiEditor/blob/1c3cb41a35f1bab03e5613b9383b3a5da81330ab/src/PixiEditor/Models/DocumentModels/ActionAccumulator.cs) is the main class that ties the GUI with the Core.
+- [ActionAccumulator](https://github.com/PixiEditor/PixiEditor/blob/master/src/PixiEditor/Models/DocumentModels/ActionAccumulator.cs) is the main class that ties the GUI with the Core.
 
 ### `PixiEditor.ChangeableDocument` project (the Core)
 
