@@ -39,10 +39,6 @@ export default defineConfig({
           // 	autogenerate: { directory: 'reference' },
           // },
           {
-              label: 'Getting Started 🏠',
-              autogenerate: { directory: 'getting-started' },
-          },
-          {
               label: 'Open Beta 🚀',
               autogenerate: { directory: 'open-beta' },
           },
