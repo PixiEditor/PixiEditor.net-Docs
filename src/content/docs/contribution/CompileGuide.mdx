@@ -1,0 +1,55 @@
+---
+title: Compilation Guide
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+
+1. Clone Repository with nested submodules
+
+`git clone --recurse-submodules -j8 https://github.com/PixiEditor/PixiEditor.git`
+
+or if cloned already, init submodules with
+
+```
+cd PixiEditor
+```
+```
+git submodule update --init --recursive
+```
+
+2. Download [Wasi-sdk](https://github.com/WebAssembly/wasi-sdk/releases) release for your system
+3. Extract downloaded sdk 
+4. Set `WASI_SDK_PATH` enviroment variable to extracted directory
+5. Run 
+
+<Aside type="tip">
+    You can skip this step if you only want to run PixiEditor.Desktop project
+</Aside>
+
+```
+dotnet workload install wasi-experimental
+```
+
+6. Open PixiEditor/src/PixiEditor.sln in Visual Studio or other IDE of your choice
+
+7. Build solution and run PixiEditor.Desktop project
+
+
+<Aside type="caution">
+
+If you build whole solution, you may encounter an error saying workload `wasm-tools` is not installed. You can ignore that error, since it only applies to PixiEditor.Browser project, which is not currently supported. 
+
+</Aside>
+
+### Known issues and solutions
+
+#### Class `X_Action` not found
+
+It means that code generators did not run correctly. This happens on .NET versions below 8.0.405. Ensure that you have .NET SDK 8.0.**405** or higher installed.
+
+Do not run PixiEditor with .NET 9, `wasi-experimental` workload is not compatible with .NET 9.
+
+#### `wasm-tools` workload is not installed
+
+This error can be ignored, since it only applies to PixiEditor.Browser project, which is not currently supported.
