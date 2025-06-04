@@ -3,38 +3,79 @@ title: Compilation Guide
 ---
 
 import { Aside } from '@astrojs/starlight/components';
+import { Steps, Code, FileTree, Tabs, TabItem } from '@astrojs/starlight/components';
 
+
+<Steps>
 
 1. Clone Repository with nested submodules
 
-`git clone --recurse-submodules -j8 https://github.com/PixiEditor/PixiEditor.git`
+    `git clone --recurse-submodules -j8 https://github.com/PixiEditor/PixiEditor.git`
 
-or if cloned already, init submodules with
+    or if cloned already, init submodules with
 
-```
-cd PixiEditor
-```
-```
-git submodule update --init --recursive
-```
+    ```
+    cd PixiEditor
+    ```
+    ```
+    git submodule update --init --recursive
+    ```
 
 2. Download [Wasi-sdk](https://github.com/WebAssembly/wasi-sdk/releases) release for your system
 3. Extract downloaded sdk 
 4. Set `WASI_SDK_PATH` enviroment variable to extracted directory
 5. Run 
 
-<Aside type="tip">
-    You can skip this step if you only want to run PixiEditor.Desktop project
-</Aside>
+    <Aside type="tip">
+        You can skip this step if you only want to run PixiEditor.Desktop project
+    </Aside>
 
-```
-dotnet workload install wasi-experimental
-```
+    ```
+    dotnet workload install wasi-experimental
+    ```
 
 6. Open PixiEditor/src/PixiEditor.sln in Visual Studio or other IDE of your choice
 
 7. Build solution and run PixiEditor.Desktop project
 
+    This is how the repo structure looks like after cloning:
+
+    <FileTree>
+    - PixiEditor
+      - src
+        - PixiEditor.sln < -- Source code solution file
+        - PixiEditor.Desktop.csproj < -- run it to start PixiEditor
+        - PixiEditor.csproj < -- Main project, contains most of the code
+      - tests
+        - PixiEditorTests.sln
+      - samples
+        - PixiEditorExtensionSamples.sln < -- Solution containing sample extensions for PixiEditor
+        - Sample1_HelloWorld.csproj
+        - Sample2_LocalizationSample.csproj
+    </FileTree>
+
+    Either open `PixiEditor/src/PixiEditor.sln` in your IDE of choice or run the following command in terminal:
+    
+    <Tabs>
+    <TabItem label="Windows">
+    ```
+    dotnet run src/PixiEditor.Desktop/ -r win-x64
+    ```
+    </TabItem>
+    <TabItem label="Linux">
+    ```
+    dotnet run src/PixiEditor.Desktop/ -r linux-x64
+    ```
+    </TabItem>
+    <TabItem label="macOS">
+    ```
+    dotnet run src/PixiEditor.Desktop/ -r osx-arm64
+    ```
+    Replace `osx-arm64` with `osx-x64` if you are on Intel Mac.
+    </TabItem>
+    </Tabs>
+
+</Steps>
 
 <Aside type="caution">
 
