@@ -39,23 +39,23 @@ export default defineConfig({
           // 	autogenerate: { directory: 'reference' },
           // },
           {
-              label: 'Open Beta 🚀',
+              label: 'Open Beta',
               autogenerate: { directory: 'open-beta' },
           },
           {
-              label: 'Usage 🎮',
+              label: 'Usage',
               autogenerate: { directory: 'usage' },
           },
           {
-              label: 'Contributing 💻',
+              label: 'Contributing',
               autogenerate: { directory: 'contribution' },
           },
           {
-              label: 'Color Picker 🎨',
+              label: 'Color Picker',
               autogenerate: { directory: 'color-picker' },
           },
           {
-              label: 'Other 🔍',
+              label: 'Other',
               autogenerate: { directory: 'other' },
           },
       ],
