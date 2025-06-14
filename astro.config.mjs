@@ -3,6 +3,7 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
 import tailwindcss from '@tailwindcss/vite';
+import starlightVideos from 'starlight-videos';
 
 // https://astro.build/config
 export default defineConfig({
@@ -11,6 +12,7 @@ export default defineConfig({
 
   integrations: [starlight({
       title: 'PixiEditor Docs',
+      plugins: [starlightVideos()],
       editLink: {
           baseUrl: "https://github.com/PixiEditor/PixiEditor.net-Docs/tree/main",
       },

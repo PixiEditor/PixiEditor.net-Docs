@@ -15,6 +15,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@astro-community/astro-embed-youtube@npm:^0.5.6":
+  version: 0.5.6
+  resolution: "@astro-community/astro-embed-youtube@npm:0.5.6"
+  dependencies:
+    lite-youtube-embed: "npm:^0.3.3"
+  peerDependencies:
+    astro: ^2.0.0 || ^3.0.0-beta || ^4.0.0-beta || ^5.0.0-beta
+  checksum: 10c0/37c7d3c86d588f427aa063a2a7fd4f8123ecd071f8b340f2bc62a546197db936773bad9934127c3f275d213a818250a126c6a8421bbfe143e19f2c5bcb9c23f9
+  languageName: node
+  linkType: hard
+
 "@astrojs/compiler@npm:^2.11.0":
   version: 2.12.0
   resolution: "@astrojs/compiler@npm:2.12.0"
@@ -3190,6 +3201,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"iso8601-duration@npm:^2.1.2":
+  version: 2.1.2
+  resolution: "iso8601-duration@npm:2.1.2"
+  checksum: 10c0/6b19e0e2cdbb6f76608c74c2ac55de338ca52ca396d9c89278f33daf3894a17d31e188af26087634a55455fac5ba6f868b1a585e2a008df3731f2d77f91d3250
+  languageName: node
+  linkType: hard
+
 "jackspeak@npm:^3.1.2":
   version: 3.4.3
   resolution: "jackspeak@npm:3.4.3"
@@ -3365,6 +3383,13 @@ __metadata:
   version: 3.1.3
   resolution: "lilconfig@npm:3.1.3"
   checksum: 10c0/f5604e7240c5c275743561442fbc5abf2a84ad94da0f5adc71d25e31fa8483048de3dcedcb7a44112a942fed305fd75841cdf6c9681c7f640c63f1049e9a5dcc
+  languageName: node
+  linkType: hard
+
+"lite-youtube-embed@npm:^0.3.3":
+  version: 0.3.3
+  resolution: "lite-youtube-embed@npm:0.3.3"
+  checksum: 10c0/de44c657d429bb73d417eb84e7dc5149239a067e218112ba91c901293562985d8c63589b65ce80b1c49a3fa51fb46f379d6ee0f1f9acd81eeba83c59d3e287ee
   languageName: node
   linkType: hard
 
@@ -5173,6 +5198,7 @@ __metadata:
     "@tailwindcss/vite": "npm:^4.1.7"
     astro: "npm:5.7.13"
     sharp: "npm:^0.32.5"
+    starlight-videos: "npm:^0.3.0"
     tailwindcss: "npm:^4.1.7"
   languageName: unknown
   linkType: soft
@@ -5443,12 +5469,36 @@ __metadata:
   languageName: node
   linkType: hard
 
+"srt-parser-2@npm:^1.2.3":
+  version: 1.2.3
+  resolution: "srt-parser-2@npm:1.2.3"
+  bin:
+    srt-parser-2: bin/index.js
+  checksum: 10c0/00f30e9162879f3926ea4f19dc92a89d4c2fed7882b97b826f0fb4c616b930abe98c2a8ccd952ccf05ece9f1a0936f8495b087a844d17d7d6ef9599c6f64d44c
+  languageName: node
+  linkType: hard
+
 "ssri@npm:^12.0.0":
   version: 12.0.0
   resolution: "ssri@npm:12.0.0"
   dependencies:
     minipass: "npm:^7.0.3"
   checksum: 10c0/caddd5f544b2006e88fa6b0124d8d7b28208b83c72d7672d5ade44d794525d23b540f3396108c4eb9280dcb7c01f0bef50682f5b4b2c34291f7c5e211fd1417d
+  languageName: node
+  linkType: hard
+
+"starlight-videos@npm:^0.3.0":
+  version: 0.3.0
+  resolution: "starlight-videos@npm:0.3.0"
+  dependencies:
+    "@astro-community/astro-embed-youtube": "npm:^0.5.6"
+    hastscript: "npm:^9.0.0"
+    iso8601-duration: "npm:^2.1.2"
+    srt-parser-2: "npm:^1.2.3"
+    unist-util-visit: "npm:^5.0.0"
+  peerDependencies:
+    "@astrojs/starlight": ">=0.34.0"
+  checksum: 10c0/4ef8248a70f9aee50eb21539aceb3aeb5b3a9525b4b7f697212026adc74dea9712a06ed1cca9feb6a7beae4fa015381317308ea6bc7b9b6ca0449135dee5b8d1
   languageName: node
   linkType: hard
 

@@ -9,6 +9,7 @@ import { Image } from 'astro:assets';
 import nodeImage from 'node.png';
 import graphImage from 'graph.png';
 import openGraphImage from 'open-graph.png';
+import { Quiz, QuizOption } from 'starlight-videos/components'
 
 ## Intorduction
 
@@ -53,3 +54,25 @@ Each document in PixiEditor has its own Node Graph. You can access it by pressin
 <Image src={openGraphImage} alt="Open Node Graph button"/>
 
 or by accessing the `View -> Open Tab -> Graph View` menu.
+
+## Check your understanding
+
+<Quiz title="What are Nodes?" variant='tip'>
+  <QuizOption correct>Individual elements that make up your scene</QuizOption>
+  <QuizOption>Tools to edit the properties of a single layer</QuizOption>
+  <QuizOption>Components that export your scene to an image</QuizOption>
+  <QuizOption>A group of cats</QuizOption>
+</Quiz>
+
+<Quiz title="What is a Node Graph?" variant='tip'>
+  <QuizOption>A single node that represents the whole scene</QuizOption>
+  <QuizOption correct>It is a combination of all nodes in your file/document</QuizOption>
+  <QuizOption>A graph that displays statistics of your image</QuizOption>
+  <QuizOption>Pictures of a single cat</QuizOption>
+</Quiz>
+
+<Quiz title="What is the purpose of the Output Node?" variant='tip'>
+  <QuizOption>To confuse</QuizOption>
+  <QuizOption>It is a tool that views the properties of a single node.</QuizOption>
+  <QuizOption correct>It displays the result of the connected nodes in the viewport.</QuizOption>
+</Quiz>

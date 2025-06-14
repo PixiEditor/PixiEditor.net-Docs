@@ -1,0 +1,42 @@
+---
+title: Your First Graph
+description: Learn how to create your first Node Graph in PixiEditor.
+sidebar:
+  order: 2
+---
+
+import { List } from 'starlight-videos/components'
+import { Aside } from '@astrojs/starlight/components';
+import { Steps } from '@astrojs/starlight/components';
+import { Image } from 'astro:assets';
+import ctxMenuImage from './assets/ctx-menu.png';
+
+First of all, congratulations on deciding to learn about Node Graphs in PixiEditor! It's a fascinating and powerful system, you won't regret it.
+
+<Aside type="caution">
+
+Node Graph is a feature only present in PixiEditor 2.0 and later versions.
+
+</Aside>
+
+## Creating Your First Node Graph
+
+If you didn't read the [Getting Started with Nodes](/docs/usage/node-graph/getting-started-with-node-graph) guide, we recommend you to do so first. It will help you understand the basics of nodes and how they work.
+
+Without further ado, let's create your first Node Graph!
+
+<Steps>
+
+1. Create a new document in PixiEditor by going to `File -> New`.
+2. Open the Node Graph by clicking the <span class="pixi-icon"></span> button in the top center of the window or by going to `View -> Open Tab -> Graph View`.
+3. You will see a Node Graph with a single layer connected to the Output Node. This is the starting point of your Node Graph.
+
+</Steps>
+
+## Adding Nodes
+
+Now that you have your first Node Graph, let's add some nodes to it.
+
+Right click on the empty space, this will open a context menu with a list of available nodes. You can type the name of the node you want to add in the search bar.
+
+<Image src={ctxMenuImage} alt="Context menu with nodes" width="400"/>
