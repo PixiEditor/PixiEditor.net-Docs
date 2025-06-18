@@ -1,0 +1,72 @@
+---
+title: Property Sockets
+description: Learn about property sockets in PixiEditor's Node Graph.
+sidebar:
+  order: 3
+---
+
+import { Image } from 'astro:assets';
+import nodeImage from 'node.png';
+import connectedImage from './assets/Connected.png';
+import disconnectedImage from './assets/Disconnected.png';
+import painter from './assets/Painter.png';
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Property sockets are part of a Node Graph system. If you are not familiar with the Node Graph, we recommend you to read the [Getting Started with Nodes](/docs/usage/node-graph/getting-started-with-node-graph) guide first.
+
+## What are Property Sockets?
+
+Each Node consists of 2 things: inputs and outputs.
+
+Inputs are on the left side of the Node, and outputs are on the right side. Each input and output has a type, which defines what kind of data it can accept or produce.
+
+<Image src={nodeImage} width="200" alt="Node image"/>
+
+### Inputs
+
+Inputs can be in 2 states. **Connected** or **disconnected**. Disconnected inputs usually expose a value editor to the user, allowing them to change the value of the input.
+
+<Tabs>
+  <TabItem label="Connected">
+  Connected `Size` input does not expose anything. It's value is determined by the output of the node it is connected to. You can preview the value of the input by hovering over the socket.
+    <Image src={connectedImage} alt="Connected input" width="200"/>
+  </TabItem>
+  <TabItem label="Disconnected">
+    Disconnected `Size` input exposes two number inputs.
+    <Image src={disconnectedImage} alt="Disconnected input" width="200"/>
+  </TabItem>
+</Tabs>
+
+### Outputs
+
+Outputs are always in a connected state. They produce data that can be used by other nodes. Outputs can be connected to inputs of other nodes, allowing you to create complex graphs.
+
+## Property Types
+
+Each property holds/can process a specific type of data. Each data type is represented by a specific color:
+
+### <span style={{color: "#ff8c00"}}>⬤</span> Painter 
+
+A painting operation, each Node that accepts a Painter either connects to the chain of painting operations or paints the chain of operations to the texture.
+
+The simplest example are layers and the **Output Node**. Each layer accepts a <span style={{color: "#ff8c00"}}>⬤</span> `Background` input and returns a `Output` <span style={{color: "#ff8c00"}}>⬤</span>.
+
+While the **Output Node** accepts a <span style={{color: "#ff8c00"}}>⬤</span> `Background` input and does not return anything.
+
+<Image src={painter} alt="Painter Node" />
+
+In that example, chain of 2 painting operations is created.
+
+1. Paint the "New layer 1"
+2. Paint the "New layer 2" on top of the first layer with blend mode "Normal" and opacity 100%.
+
+**Output Node** then takes the result of the chain and displays it in the viewport.
+
+### <span style={{color: "#99c47a"}}>⬤</span> Texture
+
+A texture with defined width and height. For example the [Create Image Node](/docs/usage/node-graph/nodes/create-image)  produces a <span style={{color: "#99c47a"}}>⬤</span> `Texture` output, which can be used by other nodes that accept textures, such as the [Modify Image Node](/docs/usage/node-graph/nodes/modify-image).
+
+- <span style={{color: "#cc5c5c"}}>⬤</span>
+- <span style={{color: "#cc5c5c"}}>⬤</span>
+- <span style={{color: "#cc5c5c"}}>⬤</span>
+- <span style={{color: "#cc5c5c"}}>⬤</span>

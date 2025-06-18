@@ -51,14 +51,17 @@ export default defineConfig({
           {
               label: 'Contributing',
               autogenerate: { directory: 'contribution' },
+              collapsed: true,
           },
           {
               label: 'Color Picker',
               autogenerate: { directory: 'color-picker' },
+              collapsed: true,
           },
           {
               label: 'Other',
               autogenerate: { directory: 'other' },
+              collapsed: true,
           },
       ],
       })],
