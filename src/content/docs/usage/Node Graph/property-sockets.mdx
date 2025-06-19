@@ -9,7 +9,9 @@ import { Image } from 'astro:assets';
 import nodeImage from 'node.png';
 import connectedImage from './assets/Connected.png';
 import disconnectedImage from './assets/Disconnected.png';
+import gpuContext from './assets/gpu-context.png';
 import painter from './assets/Painter.png';
+import diamond from './assets/diamond.png';
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 Property sockets are part of a Node Graph system. If you are not familiar with the Node Graph, we recommend you to read the [Getting Started with Nodes](/docs/usage/node-graph/getting-started-with-node-graph) guide first.
@@ -64,9 +66,187 @@ In that example, chain of 2 painting operations is created.
 
 ### <span style={{color: "#99c47a"}}>⬤</span> Texture
 
-A texture with defined width and height. For example the [Create Image Node](/docs/usage/node-graph/nodes/create-image)  produces a <span style={{color: "#99c47a"}}>⬤</span> `Texture` output, which can be used by other nodes that accept textures, such as the [Modify Image Node](/docs/usage/node-graph/nodes/modify-image).
+A texture with defined width and height. For example [Create Image Node](/docs/usage/node-graph/nodes/create-image) produces a <span style={{color: "#99c47a"}}>⬤</span> `Texture` output, which can be used by other nodes that accept textures, such as the [Modify Image Node](/docs/usage/node-graph/nodes/modify-image).
 
-- <span style={{color: "#cc5c5c"}}>⬤</span>
-- <span style={{color: "#cc5c5c"}}>⬤</span>
-- <span style={{color: "#cc5c5c"}}>⬤</span>
-- <span style={{color: "#cc5c5c"}}>⬤</span>
+### <span style={{color: "#cc5c5c"}}>⬤</span> Filter
+
+Filter object that can be applied via the [Apply Filter Node](/docs/usage/node-graph/nodes/apply-filter) or directly to the layer. Filters can be used to modify the appearance of the texture, such as applying a blur or a color adjustment.
+
+### <span style={{color: "#68abdf"}}>⬤</span> Boolean
+
+A boolean value, which can be either `true` or `false`. Value `0` is equal `false`, and any other value evaluates to `true`.
+
+### <span style={{color: "#ffc66d"}}>⬤</span> Float
+
+A floating point number, which can be used to represent decimal values. It occupies 4 bytes of memory and can represent values from approximately	±1,5 x 10<sup>−45</sup> to ±3,4 x 10<sup>38</sup>
+
+### <span style={{color: "#eea55c"}}>⬤</span> Double
+
+A double-precision floating point number, which can be used to represent decimal values with higher precision than a float. It occupies 8 bytes of memory and can represent values from approximately	±5,0 x 10<sup>−324</sup> to ±1,7 x 10<sup>308</sup>
+
+### <span style={{color: "#8cf2dd"}}>⬤</span> Color
+
+A 32-bit ARGB unpremultiplied color value.
+
+### <span style={{color: "#48b099"}}>⬤</span> Paintable
+
+Paintable is a type that describes fill/brush. Color is a paintable, it describes a solid color fill. Another type of paintable is a Gradient, which describes a gradient fill.
+
+### <span style={{color: "#c984ca"}}>⬤</span> VecD (Vector 2 of double precision numbers)
+
+A vector with 2 double precision numbers.
+
+### <span style={{color: "#597513"}}>⬤</span> Vec3D (Vector 3 of double precision numbers)
+
+A vector with 3 double precision numbers.
+
+### <span style={{color: "#c9b4ca"}}>⬤</span> VecI (Vector 2 of integers)
+
+A vector with 2 integers.
+
+### <span style={{color: "#4c64b1"}}>⬤</span> Integer
+
+An integer value, which can be used to represent whole numbers. It occupies 4 bytes of memory and can represent a number from range: -2,147,483,648 to 2,147,483,647
+
+### <span style={{color: "#C9E4C6"}}>⬤</span> String
+
+A string value, which can be used to represent text.
+
+### <span style={{color: "#a473a5"}}>⬤</span> Ellipse Data (Vector Shape)
+
+An ellipse data type, which can be used to represent an ellipse shape.
+Properties of the ellipse data type are:
+- `Center` (VecD)
+- `Radius` (VecD)
+
+### <span style={{color: "#e1d0e1"}}>⬤</span> Points Data (Vector Shape)
+
+A list of points (VecD).
+
+### <span style={{color: "#f2f2f2"}}>⬤</span> Text Data (Vector Shape)
+
+A text shape data type, which can be used to represent a text shape.
+
+### <div style={{display: 'inline-block',width: '24px',height: '24px',borderRadius: '50%',background: `conic-gradient( #a473a5 0% 33%, #f2f2f2 33% 66%, #e1d0e1 66% 100% )`,border: '1px solid #ccc', verticalAlign: 'middle'}} /> Vector Shape
+
+A vector shape data type. It can accept any other vector shape data type, such as Ellipse Data, Points Data or Text Data.
+
+### <span style={{color: "#ffea4f"}}>⬤</span> Matrix3x3
+
+A 3x3 matrix, which can be used to represent transformations such as translation, rotation, scaling and perspective.
+
+Each matrix has 9 values, which are represented as a 3x3 grid:
+
+```
+| Scale X | Skew X | Offset X |
+| Skew Y | Scale Y | Offset Y |
+| Persp 0 | Persp 1 | Persp 2 |
+```
+
+each component of the matrix is a single precision number (`float`).
+
+### <span style={{color: "#ff00ff"}}>⬤</span> Default
+
+A magenta color is used when the property doesn't have a unique color attached. It usually means that property type is not meant to be connected. Such as dropdown (enum) values.
+
+## Diamond Sockets
+
+Some nodes have diamond-shaped sockets. Which look like this:
+
+<Image src={diamond} width="80" alt="Diamond socket"/>
+
+They accept the same data types as regular, circular sockets, but they are used to represent a special type of data flow.
+
+Diamond sockets are contextful, meaning that the data they "hold" is determined by the context of the node they are connected to.
+
+There are 2 types of contexts:
+
+### No Context
+
+A default context (CPU), which is the only context for circular sockets. A property socket with this context represents a single value of the specified type.
+
+### GPU Context
+
+Some Nodes such as [Modify Image Node](/docs/usage/node-graph/nodes/modify-image) expose a GPU context. In GPU context, the property socket with diamond shape work **per pixel**. This means that there is no a single value for the property,
+but rather a formula that is applied to the pixel that is being processed.
+
+Let's take a look at this example:
+
+<figure>
+<Image src={gpuContext} alt="GPU Context Node" />
+<figcaption>_click to zoom_</figcaption>
+</figure>
+
+In this example, we're modifying the Mona Lisa image with [Modify Image Node](/docs/usage/node-graph/nodes/modify-image). This node exposes 2 diamond-shaped sockets:
+- `UV`
+- `Color`
+
+Notice how [Modify Image Node](/docs/usage/node-graph/nodes/modify-image) consists of 2 parts: Begin and End with blue zone between them.
+
+There are also 2 Nodes connected to Modify Image: [Separate Color](/docs/usage/node-graph/nodes/separate-color) and [Combine Color](/docs/usage/node-graph/nodes/combine-color). Essentially, in this example, we are swapping red with green channel of the image.
+
+A `Color` is not a single value, but **it points to a color of currently processed pixel**. The `UV` is a coordinate of the pixel in the texture, which is being processed. It's essentially a one big loop.
+
+Imagine it processes a very first pixel of the image (top-left corner). The `Color` would be equal to #647360 <span style={{color: "#647360"}}>■</span> and `UV` would be equal to (0, 0). Then Separate Color Node would 
+return:
+
+- `R` = 100
+- `G` = 115
+- `B` = 96
+- `A` = 255
+
+:::caution
+In reality color values inside GPU Context are normalized to 0-1 range, but it's irrelevant for this example.
+:::
+
+Finally, the `Combine Color Node` would take these values and swap them, resulting in:
+
+- `R` = 115
+- `G` = 100
+- `B` = 96
+- `A` = 255
+
+This color value and the `UV` are passed to the `End Modify Image`, which puts the modified pixel back to the texture at the same `UV` coordinate (0, 0).
+
+:::tip
+You can modify UV as well to put the pixel to a different location in the texture. For example, you can use UV to flip the image, or to apply a transformation to the image.
+:::
+
+Then it processes the next pixel to the right, and so on until it reaches the end of the image.
+
+### Mixing GPU and CPU Contexts
+
+You can connect circular sockets to diamond sockets and vice versa. But you need to be careful about the context:
+
+| Context flow | Behavior                                                     |
+|--------------|--------------------------------------------------------------|
+| CPU -> GPU   | ✅ Single value is passed to GPU context, it doesn't change. |
+| GPU -> GPU   | ✅ Normal GPU data flow. Value dependend on the context      |
+| GPU -> CPU   | 🚫 Not allowed! Context data can never leave GPU context.    |
+
+**Diamond socket can act the same as circular socket, if it is used in CPU context, but circular socket can never become GPU context aware.**
+
+_GPU context is basically a Shader. Modify Image Node generates a shader code out of connected Nodes and their properties_
+
+## Implicit conversions
+
+Some property types can be implicitly converted from one type to another. If the connection is possible, a noodle (line) connecting both sockets will become a gradient line, that starts with the color of the source socket and ends with the color of the destination socket.
+
+### Multi value to single value 
+
+A `VecD` can be implicitly converted to a `Float` (or any single numeric value) by taking the first value of the vector.
+
+(10, 20) -> 10
+(10, 20, 30) -> 10
+
+### Single value to multi value
+
+A `Float` (or any single numeric value) can be implicitly converted to a `VecD` by creating a vector with X and Y values equal to the float value.
+
+For VecD to Vec3D conversion, the Z value is set to Y value (X, Y, Y).
+
+```
+(10) -> (10, 10) (Double -> VecD)
+(10) -> (10, 10, 10) (Double -> Vec3D)
+(10, 20) -> (10, 20, 20) (VecD -> Vec3D)
+```

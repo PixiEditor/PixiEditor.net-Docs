@@ -4,6 +4,7 @@ import starlight from '@astrojs/starlight';
 
 import tailwindcss from '@tailwindcss/vite';
 import starlightVideos from 'starlight-videos';
+import starlightImageZoom from 'starlight-image-zoom';
 
 // https://astro.build/config
 export default defineConfig({
@@ -12,7 +13,10 @@ export default defineConfig({
 
   integrations: [starlight({
       title: 'PixiEditor Docs',
-      plugins: [starlightVideos()],
+      plugins: [starlightVideos(), starlightImageZoom()],
+      components: {
+            MarkdownContent: './src/components/overrides/MarkdownContent.astro',
+      },
       editLink: {
           baseUrl: "https://github.com/PixiEditor/PixiEditor.net-Docs/tree/main",
       },

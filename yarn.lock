@@ -3650,7 +3650,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mdast-util-mdx-jsx@npm:^3.0.0":
+"mdast-util-mdx-jsx@npm:^3.0.0, mdast-util-mdx-jsx@npm:^3.1.3":
   version: 3.2.0
   resolution: "mdast-util-mdx-jsx@npm:3.2.0"
   dependencies:
@@ -5237,6 +5237,7 @@ __metadata:
     "@tailwindcss/vite": "npm:^4.1.7"
     astro: "npm:5.9.4"
     sharp: "npm:^0.32.5"
+    starlight-image-zoom: "npm:^0.12.0"
     starlight-videos: "npm:^0.3.0"
     tailwindcss: "npm:^4.1.7"
   languageName: unknown
@@ -5523,6 +5524,20 @@ __metadata:
   dependencies:
     minipass: "npm:^7.0.3"
   checksum: 10c0/caddd5f544b2006e88fa6b0124d8d7b28208b83c72d7672d5ade44d794525d23b540f3396108c4eb9280dcb7c01f0bef50682f5b4b2c34291f7c5e211fd1417d
+  languageName: node
+  linkType: hard
+
+"starlight-image-zoom@npm:^0.12.0":
+  version: 0.12.0
+  resolution: "starlight-image-zoom@npm:0.12.0"
+  dependencies:
+    mdast-util-mdx-jsx: "npm:^3.1.3"
+    rehype-raw: "npm:^7.0.0"
+    unist-util-visit: "npm:^5.0.0"
+    unist-util-visit-parents: "npm:^6.0.1"
+  peerDependencies:
+    "@astrojs/starlight": ">=0.32.0"
+  checksum: 10c0/cef138a344e15382e445fd77c178bb7e9418dfe5e14ac61a24501ababcb7e348f3b2bec491ce6f148866c9216c3766c6ccde241aaa362ad9f7b162d7dc0990d5
   languageName: node
   linkType: hard
 
