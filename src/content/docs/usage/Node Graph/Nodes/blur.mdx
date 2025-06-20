@@ -1,0 +1,31 @@
+---
+title: 'Blur Filter'
+node:
+  name: 'Blur Filter'
+  category: Filters
+  icon: icon-droplet-filled
+  isPair: false
+  hasPreview: false
+  inputs:
+  - name: Preserve Alpha
+    type: Boolean
+    description: 'If true, the alpha channel will be preserved during the blur operation. Meaning it will not be blurred.'
+    isContextful: false
+    default: 'true'
+  - name: Radius
+    type: VecD
+    description: 'The radius of the blur effect. The larger the radius, the more blurred the image will be.'
+    isContextful: false
+    default: (1, 1)
+  - name: Previous
+    type: Filter
+    description: 'The previous filter in the chain. Previous filter will be applied first.'
+    isContextful: false
+    default: 'null'
+  outputs:
+  - name: Filters
+    type: Filter
+    description: 'Filter that can be used to apply the blur effect. Use Apply Filter node to apply the filter or plug it directly to the layer.'
+    default: 'null'
+  description: 'The Blur Filter node applies a blur effect to the image. It can be used to create a softening effect or to reduce noise in the image. The blur effect is applied based on the specified radius, and it can preserve the alpha channel if desired. This node is useful for creating various visual effects in images and textures.'
+---

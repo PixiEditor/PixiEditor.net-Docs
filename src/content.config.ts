@@ -18,12 +18,19 @@ export const collections = {
 					inputs: z.array(z.object({
 						name: z.string(),
 						type: z.string(),
+						typeLink: z.string().optional(),
+						hideSocket: z.boolean().optional().default(false),
+						isContextful: z.boolean().optional().default(false),
 						description: z.string().optional(),
 						default: z.any().optional(),
 					})).optional().nullable(),
 				outputs: z.array(z.object({
 						name: z.string(),
 						type: z.string(),
+						typeLink: z.string().optional(),
+						hideSocket: z.boolean().optional().default(false),
+						default: z.any().optional(),
+						isContextful: z.boolean().optional().default(false),
 						description: z.string().optional(),
 					})).optional().nullable(),
 					

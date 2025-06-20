@@ -32,13 +32,13 @@ const data = Astro.props;
     <strong>Is Pair Node:</strong>
     <Badge
         variant={data.isPair ? "success" : "danger"}
-        text={data.isPair ? "True" : "False"}
+        text={data.isPair ? "Yes" : "No"}
     />
 
-    <br />
 
-    <strong>Description:</strong>
+    <p>
     {data.description}
+    </p>
 </p>
 
 <AnchorHeading id="inputs" level={2}>Inputs</AnchorHeading>
@@ -52,13 +52,13 @@ const data = Astro.props;
             <p>
                 <strong>Type:</strong>{" "}
                 <a
-                    href={`/docs/usage/node-graph/property-sockets/#-${input.type.toLowerCase()}`}
+                    href={input.typeLink ?? `/docs/usage/node-graph/property-sockets/#-${input.type.toLowerCase()}`}
                 >
                     {input.type}
                 </a>
                 <br />
                 <strong>Default:</strong>{" "}
-                <code>{input.default ?? `default(${input.type})`}</code>
+                <code>{input.default ?? `unset`}</code>
                 <br />
                 {input.min ? (
                     <span>
@@ -82,13 +82,13 @@ const data = Astro.props;
             <p>
                 <strong>Type:</strong>{" "}
                 <a
-                    href={`/docs/usage/node-graph/property-sockets/#-${output.type.toLowerCase()}`}
+                    href={output.typeLink ?? `/docs/usage/node-graph/property-sockets/#-${output.type.toLowerCase()}`}
                 >
                     {output.type}
                 </a>
                 <br />
                 <strong>Default:</strong>{" "}
-                <code>{output.default ?? `default(${output.type})`}</code>
+                <code>{output.default ?? `unset`}</code>
                 <br />
                 {output.min ? (
                     <span>

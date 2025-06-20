@@ -1,0 +1,24 @@
+---
+title: 'Apply Filter '
+node:
+  name: 'Apply Filter '
+  description: 'The Apply Filter Node is used to apply a filter to an image. It can be used to apply various effects like blurring, sharpening, etc.'
+  category: Filters
+  icon: icon-magic
+  isPair: false
+  hasPreview: true
+  inputs:
+  - name: Image
+    type: Painter
+    description: 'Image to apply this filter to.'
+    default: null
+  - name: Filter
+    type: Filter
+    description: 'Filter to apply to the image.'
+    default: 'null'
+  outputs:
+  - name: Output
+    type: Painter
+    description: 'Paint instruction to render the image with the filter applied.'
+    default: null
+---

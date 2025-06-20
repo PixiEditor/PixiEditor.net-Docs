@@ -11,21 +11,20 @@ output_dir = Path("src/content/docs/usage/Node Graph/Nodes/")
 viewmodel_pattern = re.compile(r'\[NodeViewModel\("([^"]+)",\s*"([^"]+)",\s*([^\)]+)\)\]')
 pair_pattern = re.compile(r'\[PairNode\(typeof\(([^)]+)\)')
 input_pattern_generic = re.compile(
-    r'Create(?:Func)?Input<([^>]+)>\(([^,]+),\s*"([^"]+)"(?:,\s*(.+?))?\)'
+    r'Create(?:(?P<kind>Func))?Input<([^>]+)>\(([^,]+),\s*"([^"]+)"(?:,\s*(.+?))?\)'
 )
 
 output_pattern_generic = re.compile(
-    r'Create(?:Func)?Output<([^>]+)>\(([^,]+),\s*"([^"]+)"(?:,\s*(.+?))?\)'
+    r'Create(?:(?P<kind>Func))?Output<([^>]+)>\(([^,]+),\s*"([^"]+)"(?:,\s*(.+?))?\)'
 )
 
-
-# Without generics: CreateRenderInput(...), CreateRenderOutput(...)
+# Non-generic inputs/outputs (Func/Render/plain)
 input_pattern_nongeneric = re.compile(
-    r'Create(?:Render)?Input\(([^,]+),\s*"([^"]+)"(?:,\s*(.+?))?\)'
+    r'Create(?:(?P<kind>Func|Render))?Input\(([^,]+),\s*"([^"]+)"(?:,\s*(.+?))?\)'
 )
 
 output_pattern_nongeneric = re.compile(
-    r'Create(?:Render)?Output\(([^,]+),\s*"([^"]+)"(?:,\s*(.+?))?\)'
+    r'Create(?:(?P<kind>Func|Render))?Output\(([^,]+),\s*"([^"]+)"(?:,\s*(.+?))?\)'
 )
 
 
@@ -56,48 +55,64 @@ def extract_inputs_outputs_from_content(file_content, prop_types):
 
     # generic inputs
     for match in input_pattern_generic.finditer(file_content):
-        type_, name, label, default = match.groups()
+        kind, type_, name, label, default = match.groups()
         inputs.append({
             "name": screaming_to_words(label),
-            "type": type_.strip(),
+            "type": map_type(type_.strip()),
             "description": "TODO: Add a description.",
+            "isContextful": kind == "Func",
             "default": default.strip() if default else None
         })
 
     # non-generic inputs
     for match in input_pattern_nongeneric.finditer(file_content):
-        name, label, default = match.groups()
+        kind, name, label, default = match.groups()
         type_ = prop_types.get(name, "unknown")  # look up type from properties
         inputs.append({
             "name": screaming_to_words(label),
-            "type": type_,
+            "type": map_type(type_),
             "description": "TODO: Add a description.",
+            "isContextful": kind == "Func",
             "default": default.strip() if default else None
         })
 
     # generic outputs
     for match in output_pattern_generic.finditer(file_content):
-        type_, name, label, default = match.groups()
+        kind, type_, name, label, default = match.groups()
         outputs.append({
             "name": screaming_to_words(label),
-            "type": type_.strip(),
+            "type": map_type(type_.strip()),
             "description": "TODO: Add a description.",
+            "isContextful": kind == "Func",
             "default": default.strip() if default else None
         })
 
     # non-generic outputs
     for match in output_pattern_nongeneric.finditer(file_content):
-        name, label, default = match.groups()
+        kind, name, label, default = match.groups()
         type_ = prop_types.get(name, "unknown")  # look up type from properties
         outputs.append({
             "name": screaming_to_words(label),
-            "type": type_,
+            "type": map_type(type_),
             "description": "TODO: Add a description.",
+            "isContextful": kind == "Func",
             "default": default.strip() if default else None
         })
 
     return inputs, outputs
 
+
+def map_type(type_name):
+    type_mapping = {
+        "Float1": "Double",
+        "Float2": "VecD",
+        "Int1": "Integer",
+        "Half3": "Vec3D",
+        "Half4": "Color",
+        "Int2": "VecI",
+    }
+
+    return type_mapping.get(type_name, type_name)
 
 def find_base_class_name(file_content):
     # Extract base class from class declaration, first base class only

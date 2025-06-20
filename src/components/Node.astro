@@ -2,13 +2,14 @@
 import { categoryColors } from "./categoryColors.js";
 import { socketColors } from "./socketColors.js";
 
-const getSocketDot = (type) => {
+const getSocketDot = (type, contextful) => {
     const color = socketColors[type] ?? "#999";
     return `<div style="
     width: 10px;
     height: 10px;
-    border-radius: 50%;
-    background-color: ${color};
+    border-radius: ${contextful ? "10%" : "50%"};
+    ${contextful ? "transform: rotate(45deg);" : ""}
+    background: ${color};
   "></div>`;
 };
 
@@ -54,25 +55,25 @@ const { data } = Astro.props;
         >
     </div>
 
-    <div style="padding: 0px">
+    <div style="padding: 0 2px">
         {
             data.outputs?.map((output) => (
                 <div style="margin: 0px;" key={output.name}>
-                    <div style="display: flex; justify-content: end; flex-direction: row; align-items: baseline; gap: 8px;">
+                    <div style="display: flex; justify-content: end; flex-direction: row; align-items: baseline; gap: 4px;">
                         <span style="font-size: 12px;">{output.name}</span>
-                        <div set:html={getSocketDot(output.type)} />
+                        <div set:html={output.hideSocket ? "" : getSocketDot(output.type, output.isContextful)} />
                     </div>
                 </div>
             ))
         }
     </div>
 
-    <div style="margin: 0px 0px 0px 0px; padding: 0px;">
+    <div style="margin: 0px 0px 0px 0px; padding: 0 2px;">
         {
             data.inputs?.map((input) => (
-                <div style="margin: 4px 0;" key={input.name}>
-                    <div style="display: flex; flex-direction: row; align-items: baseline; gap: 8px;">
-                        <div set:html={getSocketDot(input.type)} />
+                <div style="margin: 4px 0; 0 0" key={input.name}>
+                    <div style="display: flex; flex-direction: row; align-items: baseline; gap: 4px;">
+                        <div set:html={input.hideSocket ? "" : getSocketDot(input.type, input.isContextful)} />
                         <span style="font-size: 12px;">{input.name}</span>
                         {input.default ? (
                             <div
