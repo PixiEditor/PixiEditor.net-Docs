@@ -20,12 +20,12 @@ export const collections = {
 						type: z.string(),
 						description: z.string().optional(),
 						default: z.any().optional(),
-					})).optional(),
+					})).optional().nullable(),
 				outputs: z.array(z.object({
 						name: z.string(),
 						type: z.string(),
 						description: z.string().optional(),
-					})).optional(),
+					})).optional().nullable(),
 					
 				}).optional(),
 			})
