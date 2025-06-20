@@ -10,6 +10,6 @@ const nodeData = Astro.locals.starlightRoute.entry.data.node;
 ---
 
 <ImageZoom />
-{isNodeDoc ? <Default><NodeDoc {...nodeData}></NodeDoc> <slot/> </Default>:
+{isNodeDoc ? <Default><NodeDoc {...nodeData}><slot/></NodeDoc></Default>:
 <StarlightVideosMarkdownContent><slot/></StarlightVideosMarkdownContent>
 }

@@ -1,0 +1,100 @@
+---
+title: Color Adjustments Filter
+node:
+  name: Color Adjustments Filter
+  category: Filters
+  icon: 'icon-sun'
+  isPair: false
+  hasPreview: false
+  inputs:
+  - name: Adjust Brightness
+    type: Boolean
+    description: 'Sets whether to adjust the brightness of the image. If true, the Brightness Value will be applied.'
+    isContextful: false
+    default: 'false'
+  - name: Brightness Value
+    type: Double
+    description: 'Brightness adjustment value in range [-1.0, 1.0]. Negative values will darken the image, while positive values will brighten it.'
+    min: "-1.0"
+    max: "1.0"
+    isContextful: false
+    default: '0.0'
+  - name: Adjust Contrast
+    type: Boolean
+    description: 'Sets whether to adjust the contrast of the image. If true, the Contrast Value will be applied.'
+    isContextful: false
+    default: 'false'
+  - name: Contrast Value
+    type: Double
+    description: 'Contrast adjustment value in range [-1.0, 1.0]. Negative values will reduce contrast, while positive values will increase it.'
+    isContextful: false
+    default: '0.0'
+    min: "-1.0"
+    max: "1.0"
+  - name: Adjust Temperature
+    type: Boolean
+    description: 'Sets whether to adjust the temperature of the image. If true, the Temperature Value will be applied.'
+    isContextful: false
+    default: 'false'
+  - name: Temperature Value
+    type: Double
+    description: 'Temperature adjustment value in range [-1.0, 1.0]. Negative values will make the image cooler (more blue), while positive values will make it warmer (more red).'
+    isContextful: false
+    default: '0.0'
+    min: "-1.0"
+    max: "1.0"
+  - name: Adjust Tint
+    type: Boolean
+    description: 'Sets whether to adjust the tint of the image. If true, the Tint Value will be applied.'
+    isContextful: false
+    default: 'false'
+  - name: Tint Value
+    type: Double
+    description: 'Tint adjustment value in range [-1.0, 1.0]. Negative values will add a green tint, while positive values will add a magenta tint.'
+    isContextful: false
+    default: '0.0'
+    min: "-1.0"
+    max: "1.0"
+  - name: Adjust Saturation
+    type: Boolean
+    description: 'Sets whether to adjust the saturation of the image. If true, the Saturation Value will be applied.'
+    isContextful: false
+    default: 'false'
+  - name: Saturation Value
+    type: Double
+    description: 'Saturation adjustment value in range [-1.0, 1.0]. Negative values will desaturate the image (make it more grayscale), while positive values will increase saturation.'
+    isContextful: false
+    default: '0.0'
+    min: "-1.0"
+    max: "1.0"
+  - name: Adjust Hue
+    type: Boolean
+    description: 'Sets whether to adjust the hue of the image. If true, the Hue Value will be applied.'
+    isContextful: false
+    default: 'false'
+  - name: Hue Value
+    type: Double
+    description: 'Hue adjustment value in range [-180, 180]. Negative values will shift the hue to the left, while positive values will shift it to the right.'
+    isContextful: false
+    default: '0.0'
+    min: "-180.0"
+    max: "180.0"
+  - name: Previous
+    type: Filter
+    description: 'The previous filter in the chain. Previous filter will be applied first.'
+    isContextful: false
+    default: 'null'
+  outputs:
+  - name: Filters
+    type: Filter
+    description: 'Filter that can be used to apply the color adjustments. Use Apply Filter node to apply the filter or plug it directly to the layer.'
+    isContextful: false
+    default: 'null'
+  description: 'The Color Adjustments Filter node allows you to apply various color adjustments to an image, such as brightness, contrast, temperature, tint, saturation, and hue.'
+---
+
+Each adjustment can be enabled or disabled independently, and the values can be set to achieve the desired effect. This node is useful for enhancing images and textures by modifying their color properties.
+
+Note that the values are applied in top-to-bottom order. If you have multiple adjustments enabled, the one that is listed first will be applied first, and so on. This means that the order of the adjustments can affect the final result.
+
+If you want to change the order, chain multiple Color Adjustment Filetrs together.

@@ -1,0 +1,42 @@
+---
+title: 'Evaluate Path '
+node:
+  name: 'Evaluate Path '
+  category: Shape
+  icon: icon-train
+  isPair: false
+  hasPreview: false
+  inputs:
+  - name: Shape
+    type: ShapeVectorData
+    description: 'TODO: Add a description.'
+    isContextful: false
+    default: 'null'
+  - name: Offset
+    type: double
+    description: 'TODO: Add a description.'
+    isContextful: false
+    default: '0.0'
+  - name: Normalize Offset
+    type: bool
+    description: 'TODO: Add a description.'
+    isContextful: false
+    default: 'true'
+  outputs:
+  - name: Position
+    type: VecD
+    description: 'TODO: Add a description.'
+    isContextful: false
+    default: VecD.Zero
+  - name: Tangent
+    type: VecD
+    description: 'TODO: Add a description.'
+    isContextful: false
+    default: VecD.Zero
+  - name: Matrix
+    type: Matrix3X3
+    description: 'TODO: Add a description.'
+    isContextful: false
+    default: Matrix3X3.Identity
+  description: 'TODO: Add a description.'
+---

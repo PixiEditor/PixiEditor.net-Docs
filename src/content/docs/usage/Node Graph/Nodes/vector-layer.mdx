@@ -1,0 +1,92 @@
+---
+title: Vector Layer
+node:
+  name: Vector Layer
+  category: Structure
+  icon: icon-vectorpen
+  isPair: false
+  hasPreview: true
+  inputs:
+  - name: Input
+    type: ShapeVectorData
+    description: 'TODO: Add a description.'
+    isContextful: false
+    default: 'null'
+  - name: Opacity
+    type: float
+    description: 'TODO: Add a description.'
+    isContextful: false
+    default: '1'
+  - name: Is Visible
+    type: bool
+    description: 'TODO: Add a description.'
+    isContextful: false
+    default: 'true'
+  - name: Mask Is Visible
+    type: bool
+    description: 'TODO: Add a description.'
+    isContextful: false
+    default: 'true'
+  - name: Filters
+    type: Filter
+    description: 'TODO: Add a description.'
+    isContextful: false
+    default: 'null'
+  - name: Background
+    type: unknown
+    description: 'TODO: Add a description.'
+    isContextful: false
+    default: null
+  - name: Blend Mode
+    type: unknown
+    description: 'TODO: Add a description.'
+    isContextful: false
+    default: Enums.BlendMode.Normal
+  - name: Mask
+    type: unknown
+    description: 'TODO: Add a description.'
+    isContextful: false
+    default: null
+  outputs:
+  - name: Shape
+    type: ShapeVectorData
+    description: 'TODO: Add a description.'
+    isContextful: false
+    default: 'null'
+  - name: Matrix
+    type: Matrix3X3
+    description: 'TODO: Add a description.'
+    isContextful: false
+    default: Matrix3X3.Identity
+  - name: Canvas Position
+    type: VecD
+    description: 'TODO: Add a description.'
+    isContextful: false
+    default: VecD.Zero
+  - name: Center Position
+    type: VecD
+    description: 'TODO: Add a description.'
+    isContextful: false
+    default: VecD.Zero
+  - name: Size
+    type: VecD
+    description: 'TODO: Add a description.'
+    isContextful: false
+    default: VecD.Zero
+  - name: Without Filters
+    type: unknown
+    description: 'TODO: Add a description.'
+    isContextful: false
+    default: (
+  - name: Raw Layer Output
+    type: unknown
+    description: 'TODO: Add a description.'
+    isContextful: false
+    default: (
+  - name: Output
+    type: unknown
+    description: 'TODO: Add a description.'
+    isContextful: false
+    default: (
+  description: 'TODO: Add a description.'
+---

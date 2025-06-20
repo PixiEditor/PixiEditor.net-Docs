@@ -1,0 +1,45 @@
+---
+title: 'Combine Color'
+node:
+  name: 'Combine Color'
+  category: Color
+  icon: icon-itemslot
+  isPair: false
+  hasPreview: false
+  inputs:
+  - name: R
+    type: Double
+    description: 'R channel value of the color'
+    isContextful: true
+    default: "0"
+    min: "0.0"
+    max: "CPU context: 255, GPU context: 1.0"
+  - name: G
+    type: Double
+    description: 'G channel value of the color'
+    isContextful: true
+    default: "0"
+    min: "0.0"
+    max: "CPU context: 255, GPU context: 1.0"
+  - name: B
+    type: Double
+    description: 'B channel value of the color'
+    isContextful: true
+    default: "0"
+    min: "0.0"
+    max: "CPU context: 255, GPU context: 1.0"
+  - name: A
+    type: Double
+    description: 'A channel value of the color. If not provided, the output will be opaque.'
+    isContextful: true
+    default: "1 (or 255 in CPU context)"
+  - name: Mode
+    type: CombineSeparateColorMode (Enum)
+    description: 'TODO: Add a description.'
+    isContextful: false
+    default: RGB
+  outputs: null
+  description: 'The Combine Color Node is used to create a color from its separate RGB(A) components. It can be used to create colors in both CPU and GPU contexts, with different value ranges for each context.'
+---
+
+## CombineSeparateColorMode Enum

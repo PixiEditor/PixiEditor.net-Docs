@@ -19,6 +19,8 @@ export const collections = {
 						name: z.string(),
 						type: z.string(),
 						typeLink: z.string().optional(),
+						min: z.string().optional(),
+						max: z.string().optional(),
 						hideSocket: z.boolean().optional().default(false),
 						isContextful: z.boolean().optional().default(false),
 						description: z.string().optional(),
@@ -27,6 +29,8 @@ export const collections = {
 				outputs: z.array(z.object({
 						name: z.string(),
 						type: z.string(),
+						min: z.string().optional(),
+						max: z.string().optional(),
 						typeLink: z.string().optional(),
 						hideSocket: z.boolean().optional().default(false),
 						default: z.any().optional(),

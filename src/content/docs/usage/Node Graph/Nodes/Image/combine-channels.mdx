@@ -1,0 +1,43 @@
+---
+title: 'Combine Channels '
+node:
+  name: 'Combine Channels '
+  category: Image
+  icon: icon-insertitem
+  isPair: false
+  hasPreview: true
+  inputs:
+  - name: Red
+    type: Painter
+    description: 'Source for the red channel of the output image.'
+    isContextful: false
+    default: null
+  - name: Green
+    type: Painter
+    description: 'Souce for the green channel of the output image.'
+    isContextful: false
+    default: null
+  - name: Blue
+    type: Painter
+    description: 'Souce for the blue channel of the output image.'
+    isContextful: false
+    default: null
+  - name: Alpha
+    type: Painter
+    description: 'Souce for the alpha channel of the output image. If not provided, the output will be opaque.'
+    isContextful: false
+    default: null
+  - name: Grayscale
+    type: Boolean
+    description: 'If true, the output will be a grayscale image. Alpha grayscale color matrix will be used (maps alpha to the red, green and blue channels. Sets alpha to 1)'
+    isContextful: false
+    default: 'false'
+  outputs:
+  - name: Output
+    type: Painter
+    description: 'Paint instruction to render the image with the combined channels.'
+    isContextful: false
+    default: null
+  description: 'Combine Channels Node creates an image out of Red, Green, Blue and Alpha channels.'
+---
+

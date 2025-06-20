@@ -35,9 +35,11 @@ const data = Astro.props;
         text={data.isPair ? "Yes" : "No"}
     />
 
+    <hr />
 
     <p>
-    {data.description}
+        {data.description}
+        <slot/>
     </p>
 </p>
 
@@ -63,6 +65,11 @@ const data = Astro.props;
                 {input.min ? (
                     <span>
                         <strong>Min:</strong> <code>{input.min}</code>
+                    </span>
+                ) : null}
+                {input.max ? (
+                    <span>
+                        <strong>Max:</strong> <code>{input.max}</code>
                     </span>
                 ) : null}
             </p>

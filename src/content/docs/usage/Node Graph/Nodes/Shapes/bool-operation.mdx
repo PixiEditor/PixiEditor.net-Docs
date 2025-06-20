@@ -28,16 +28,16 @@ node:
   outputs:
   - name: Result
     type: ShapeVectorData
-    description: 'TODO: Add a description.'
+    description: 'Resulting vector shape after performing the boolean operation on the two input shapes. The resulting shape will have the visual data (fill, stroke) from the first shape.'
     isContextful: false
     default: 'null'
-  description: 'TODO: Add a description.'
+  description: 'The Bool Operation Node is used to perform boolean operations on two vector shapes. It allows you to combine, intersect, or subtract shapes to create complex vector graphics. The resulting shape will inherit the visual properties (like fill and stroke) from the first shape input. This node is useful for creating intricate designs and manipulating vector data in a non-destructive way.'
 ---
 
 
 ### VectorPathOp
 
-The `VectorPathOp` is an enumeration that defines the different boolean operations that can be performed on vector shapes. The available operations are:
+The `VectorPathOp` is a enum type that defines the different boolean operations that can be performed on vector shapes. The available operations are:
 - **Difference**: Subtracts the second shape from the first.
 - **Intersect**: Keeps only the overlapping area of the two shapes.
 - **Union**: Combines the two shapes into one.

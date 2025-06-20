@@ -1,0 +1,22 @@
+---
+title: 'Color '
+node:
+  name: 'Color '
+  category: Color
+  icon: icon-color-palette
+  isPair: false
+  hasPreview: false
+  inputs:
+  - name: Color
+    type: Color
+    description: 'sRGB color value to adjust to the working color space.'
+    isContextful: true
+    default: White
+  outputs:
+  - name: Color
+    type: Color
+    description: 'Color-space adjusted color value.'
+    isContextful: true
+    default: null
+  description: 'The purpose of this node is to easily set sRGB color values and have them automatically adjusted to the color space that is used in a shader.'
+---
