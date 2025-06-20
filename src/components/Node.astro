@@ -1,0 +1,101 @@
+---
+import { categoryColors } from "./categoryColors.js";
+import { socketColors } from "./socketColors.js";
+
+const getSocketDot = (type) => {
+    const color = socketColors[type] ?? "#999";
+    return `<div style="
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: ${color};
+  "></div>`;
+};
+
+const checkerboard = `background-image:
+  linear-gradient(45deg, #444 25%, transparent 25%),
+  linear-gradient(-45deg, #444 25%, transparent 25%),
+  linear-gradient(45deg, transparent 75%, #444 75%),
+  linear-gradient(-45deg, transparent 75%, #444 75%);
+background-size: 16px 16px;
+background-position: 0 0, 0 8px, 8px -8px, -8px 0px;`;
+
+const { data } = Astro.props;
+---
+
+<div
+    style={`
+  width: 256px;
+  border: 1px solid #333;
+  border-radius: 8px;
+  font-family: sans-serif;
+  background-color: #1e1e1e;
+  color: white;
+  overflow: hidden;
+  box-shadow: 0 0 8px rgba(0,0,0,0.5);
+`}
+>
+    <div
+        style={`
+    background-color: ${categoryColors[data.category] || "#3a3a3a"};
+    padding: 4px 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    font-size: 14px;
+  `}
+    >
+        <span
+            ><span
+                class=`pixi-icon small ${data.icon}`
+                style="vertical-align: middle;"></span>
+            {data.name}</span
+        >
+    </div>
+
+    <div style="padding: 0px">
+        {
+            data.outputs?.map((output) => (
+                <div style="margin: 0px;" key={output.name}>
+                    <div style="display: flex; justify-content: end; flex-direction: row; align-items: baseline; gap: 8px;">
+                        <span style="font-size: 12px;">{output.name}</span>
+                        <div set:html={getSocketDot(output.type)} />
+                    </div>
+                </div>
+            ))
+        }
+    </div>
+
+    <div style="margin: 0px 0px 0px 0px; padding: 0px;">
+        {
+            data.inputs?.map((input) => (
+                <div style="margin: 4px 0;" key={input.name}>
+                    <div style="display: flex; flex-direction: row; align-items: baseline; gap: 8px;">
+                        <div set:html={getSocketDot(input.type)} />
+                        <span style="font-size: 12px;">{input.name}</span>
+                        {input.default ? (
+                            <div
+                                style={`
+              background: #2c2c2c;
+              border-radius: 4px;
+              display: inline-block;
+              padding: 2px 6px;
+              font-size: 12px;
+              color: #ccc;
+              margin-top: 2px;
+            `}
+                            >
+                                {input.default}
+                            </div>
+                        ) : null}
+                    </div>
+                </div>
+            ))
+        }
+    </div>
+
+    {data.hasPreview ? <div
+        style={`height: 256px; border-radius: 4px; margin-top: 8px; ${checkerboard}`}>
+    </div> : null}
+</div>

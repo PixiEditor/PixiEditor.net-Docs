@@ -1,7 +1,15 @@
 ---
-import Default from '@astrojs/starlight/components/MarkdownContent.astro'
 import ImageZoom from 'starlight-image-zoom/components/ImageZoom.astro'
+import StarlightVideosMarkdownContent from 'starlight-videos/components/MarkdownContent.astro'
+import NodeDoc from '../NodeDoc.astro'
+import Default from '@astrojs/starlight/components/MarkdownContent.astro'
+
+const isNodeDoc = Astro.locals.starlightRoute.id.startsWith('usage/node-graph/nodes/');
+const nodeData = Astro.locals.starlightRoute.entry.data.node;
+
 ---
 
 <ImageZoom />
-<Default><slot /></Default>
+{isNodeDoc ? <Default><NodeDoc {...nodeData}></NodeDoc> <slot/> </Default>:
+<StarlightVideosMarkdownContent><slot/></StarlightVideosMarkdownContent>
+}

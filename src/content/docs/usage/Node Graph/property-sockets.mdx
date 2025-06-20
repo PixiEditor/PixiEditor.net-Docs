@@ -13,6 +13,7 @@ import gpuContext from './assets/gpu-context.png';
 import painter from './assets/Painter.png';
 import diamond from './assets/diamond.png';
 import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Quiz, QuizOption } from 'starlight-videos/components'
 
 Property sockets are part of a Node Graph system. If you are not familiar with the Node Graph, we recommend you to read the [Getting Started with Nodes](/docs/usage/node-graph/getting-started-with-node-graph) guide first.
 
@@ -92,15 +93,17 @@ A 32-bit ARGB unpremultiplied color value.
 
 Paintable is a type that describes fill/brush. Color is a paintable, it describes a solid color fill. Another type of paintable is a Gradient, which describes a gradient fill.
 
-### <span style={{color: "#c984ca"}}>⬤</span> VecD (Vector 2 of double precision numbers)
+### <span style={{color: "#c984ca"}}>⬤</span> VecD
+
+ (Vector 2 of double precision numbers)
 
 A vector with 2 double precision numbers.
 
-### <span style={{color: "#597513"}}>⬤</span> Vec3D (Vector 3 of double precision numbers)
+### <span style={{color: "#597513"}}>⬤</span> Vec3D
 
 A vector with 3 double precision numbers.
 
-### <span style={{color: "#c9b4ca"}}>⬤</span> VecI (Vector 2 of integers)
+### <span style={{color: "#c9b4ca"}}>⬤</span> VecI
 
 A vector with 2 integers.
 
@@ -112,18 +115,23 @@ An integer value, which can be used to represent whole numbers. It occupies 4 by
 
 A string value, which can be used to represent text.
 
-### <span style={{color: "#a473a5"}}>⬤</span> Ellipse Data (Vector Shape)
+### <span style={{color: "#a473a5"}}>⬤</span> Ellipse Data
+ (Vector Shape)
 
 An ellipse data type, which can be used to represent an ellipse shape.
 Properties of the ellipse data type are:
 - `Center` (VecD)
 - `Radius` (VecD)
 
-### <span style={{color: "#e1d0e1"}}>⬤</span> Points Data (Vector Shape)
+### <span style={{color: "#e1d0e1"}}>⬤</span> Points Data
+
+(Vector Shape)
 
 A list of points (VecD).
 
-### <span style={{color: "#f2f2f2"}}>⬤</span> Text Data (Vector Shape)
+### <span style={{color: "#f2f2f2"}}>⬤</span> Text Data
+
+(Vector Shape)
 
 A text shape data type, which can be used to represent a text shape.
 
@@ -250,3 +258,19 @@ For VecD to Vec3D conversion, the Z value is set to Y value (X, Y, Y).
 (10) -> (10, 10, 10) (Double -> Vec3D)
 (10, 20) -> (10, 20, 20) (VecD -> Vec3D)
 ```
+
+## Test your knowledge!
+
+<Quiz title="Can you connect diamond socket to a circular socket?" variant="tip">
+<QuizOption>Yes, always</QuizOption>
+<QuizOption correct>Yes, but only if diamond socket is on CPU context</QuizOption>
+<QuizOption>Yes, but only if the circular socket is in GPU context</QuizOption>
+<QuizOption>No</QuizOption>
+</Quiz>
+
+<Quiz title="What is the value of a integer input, when you connect VecD (12.44, 77.2) output to it?" variant="tip">
+<QuizOption>12.44</QuizOption>
+<QuizOption>77.2</QuizOption>
+<QuizOption correct>12</QuizOption>
+<QuizOption>77</QuizOption>
+</Quiz>
