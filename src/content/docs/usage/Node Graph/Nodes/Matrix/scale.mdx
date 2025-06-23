@@ -1,0 +1,42 @@
+---
+title: 'Scale'
+node:
+  name: 'Scale'
+  category: Matrix
+  icon: icon-minimize
+  isPair: false
+  hasPreview: true
+  inputs:
+  - name: Scale
+    type: VecD
+    description: 'The scale factor to apply to the matrix. This determines how much the matrix is scaled in both the x and y dimensions, affecting the size of the resulting image or transformation.'
+    isContextful: false
+    default: (1, 1)
+  - name: Center
+    type: VecD
+    description: 'The center point around which the scaling is applied. This point serves as the pivot for the scaling transformation.'
+    isContextful: false
+    default: (0, 0)
+  - name: Image
+    type: Painter
+    description: 'The image to apply the scaling to.'
+    isContextful: false
+    default: null
+  - name: Input Matrix
+    type: Matrix3x3
+    description: 'Matrix to concatenate with the scaling. This allows for combining multiple transformations into a single matrix, enabling complex transformations.'
+    isContextful: false
+    default: Identity
+  outputs:
+  - name: Output Matrix
+    type: Matrix3x3
+    description: 'The resulting matrix after applying the scaling. This matrix can be used for further transformations or rendering operations.'
+    isContextful: false
+    default: Identity
+  - name: Output
+    type: Painter
+    description: 'Painter instruction with the applied scaling. This output can be used to render the transformed image with the specified scaling.'
+    isContextful: false
+    default: null
+  description: 'Creates a scaling matrix that can be applied to images or other transformations.'
+---

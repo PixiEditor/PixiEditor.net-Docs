@@ -1,0 +1,42 @@
+---
+title: 'Separate Channels'
+node:
+  name: 'Separate Channels'
+  category: Image
+  icon: icon-take-item
+  isPair: false
+  hasPreview: true
+  inputs:
+  - name: Image
+    type: Painter
+    description: 'The image to separate into individual color channels (Red, Green, Blue, and Alpha).'
+    isContextful: false
+    default: null
+  - name: Grayscale
+    type: Boolean
+    description: 'If true, the image will be converted to grayscale before separating channels.'
+    isContextful: false
+    default: 'false'
+  outputs:
+  - name: Red
+    type: Painter
+    description: 'The red channel of the separated image. This output contains only the red color information from the original image.'
+    isContextful: false
+    default: null
+  - name: Green
+    type: Painter
+    description: 'The green channel of the separated image. This output contains only the green color information from the original image.'
+    isContextful: false
+    default: null
+  - name: Blue
+    type: Painter
+    description: 'The blue channel of the separated image. This output contains only the blue color information from the original image.'
+    isContextful: false
+    default: null
+  - name: Alpha
+    type: Painter
+    description: 'The alpha channel of the separated image. This output contains only the transparency information from the original image.'
+    isContextful: false
+    default: null
+  description: 'Separates an image into its individual color channels (Red, Green, Blue, and Alpha).'
+---

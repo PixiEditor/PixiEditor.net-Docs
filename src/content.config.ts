@@ -13,6 +13,7 @@ export const collections = {
 					category: z.string(),
 					description: z.string(),
 					isPair: z.boolean().optional().default(false),
+					pairNode: z.string().optional(),
 					hasPreview: z.boolean().optional().default(false),
 					icon: z.string().optional(),
 					inputs: z.array(z.object({

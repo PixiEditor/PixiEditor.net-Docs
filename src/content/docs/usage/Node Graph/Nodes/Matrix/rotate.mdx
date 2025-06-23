@@ -1,0 +1,55 @@
+---
+title: 'Rotate'
+node:
+  name: 'Rotate'
+  category: Matrix
+  icon: icon-rotate-view
+  isPair: false
+  hasPreview: true
+  inputs:
+  - name: Unit
+    type: Rotation Type (Enum)
+    typeLink: /docs/usage/node-graph/nodes/matrix/rotate#rotation-types
+    hideSocket: true
+    description: 'The unit of the angle used for rotation. This determines how the angle is interpreted, whether in degrees or radians.'
+    isContextful: false
+    default: Degrees
+  - name: Angle
+    type: Double
+    description: 'The angle to rotate the matrix. This is the amount of rotation applied to the matrix, specified in the unit defined above.'
+    isContextful: false
+    default: '0.0'
+  - name: Center
+    type: VecD
+    description: 'The center point around which the rotation is applied. This point serves as the pivot for the rotation, determining how the matrix is transformed.'
+    isContextful: false
+    default: (0, 0)
+  - name: Image
+    type: Painter
+    description: 'The image to apply the rotation to. This is the base image that will be transformed by the rotation matrix.'
+    isContextful: false
+    default: null
+  - name: Input Matrix
+    type: Matrix3x3
+    description: 'Matrix to concatenate with the rotation. This allows for combining multiple transformations into a single matrix, enabling complex transformations.'
+    isContextful: false
+    default: Identity
+  outputs:
+  - name: Output Matrix
+    type: Matrix3x3
+    description: 'The resulting matrix after applying the rotation. This matrix can be used for further transformations or rendering operations.'
+    isContextful: false
+    default: Identity
+  - name: Output
+    type: Painter
+    description: 'Painter instruction with the applied rotation. This output can be used to render the transformed image with the specified rotation.'
+    isContextful: false
+    default: null
+  description: 'Applies a rotation to the matrix, allowing for transformations around a specified center point. Images can be rotated directly or combined with other matrices for complex transformations.'
+---
+
+## Rotation Types
+The rotation can be specified in different units, each affecting how the angle is interpreted. The available rotation types are:
+
+- **Degrees**: The angle is specified in degrees, a common unit for measuring angles in geometry. One full rotation is 360 degrees.
+- **Radians**: The angle is specified in radians, a unit of angular measure used in mathematics and physics. One full rotation is 2π radians, which is equivalent to 360 degrees.

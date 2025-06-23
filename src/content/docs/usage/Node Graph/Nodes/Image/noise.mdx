@@ -1,0 +1,59 @@
+---
+title: 'Noise'
+node:
+  name: 'Noise'
+  category: Image
+  icon: icon-noise
+  isPair: false
+  hasPreview: true
+  inputs:
+  - name: Noise Type
+    type: Noise Type (Enum)
+    typeLink: /docs/usage/node-graph/nodes/image/noise#noise-type
+    hideSocket: true
+    description: 'The type of noise to generate. This determines the algorithm used to create the noise pattern.'
+    isContextful: false
+    default: Perlin
+  - name: Offset
+    type: VecD
+    description: 'The offset to apply to the noise. This is used to shift the noise pattern in space, allowing for variations in the generated noise.'
+    isContextful: false
+    default: (0, 0)
+  - name: Scale
+    type: Double
+    description: 'The scale of the noise. This determines the frequency of the noise pattern, affecting how tightly packed the noise features are.'
+    isContextful: false
+    default: 10
+  - name: Octaves
+    type: Integer
+    description: 'The number of octaves to use in the noise generation. This controls the complexity of the noise pattern, with more octaves resulting in a more detailed and varied noise texture. Using more octaves can create a richer noise texture, but may also increase computational cost.'
+    isContextful: false
+    default: '1'
+  - name: Seed
+    type: Double
+    description: 'The seed value for the noise generation. This is used to initialize the random number generator, allowing for reproducible noise patterns. Changing the seed will produce a different noise pattern, while keeping other parameters constant.'
+    isContextful: false
+    default: 0
+  outputs:
+  - name: Output
+    type: Painter
+    description: 'Generated noise painter instruction'
+    isContextful: false
+    default: null
+  description: 'Generates a noise texture based on the specified parameters.'
+---
+
+import perlinImage from '../../assets/Nodes/Perlin.png';
+import turbulenceImage from '../../assets/Nodes/Turbulence.png';
+import { Image } from 'astro:assets';
+
+## Noise Types
+Noise can be generated using different algorithms, each producing a unique pattern. The available noise types are:
+
+### Perlin
+
+<Image src={perlinImage} alt="Perlin Noise" width={256} />
+
+### Turbulence
+
+<Image src={turbulenceImage} alt="Turbulence Noise" width={256} />

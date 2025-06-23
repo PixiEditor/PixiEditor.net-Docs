@@ -1,0 +1,29 @@
+---
+title: 'Invert Filter' 
+node:
+  name: 'Invert Filter'
+  category: Filters
+  icon: icon-invert
+  isPair: false
+  hasPreview: false
+  inputs:
+  - name: Intensity
+    type: Double
+    description: 'The intensity of the invert effect. A value of 1 means full inversion, while a value of 0 means no effect.'
+    isContextful: false
+    default: '1.0'
+    min: "0"
+    max: "1"
+  - name: Previous
+    type: Filter
+    description: 'Previous filter in the chain. It will be applied before the invert filter.'
+    isContextful: false
+    default: 'null'
+  outputs:
+  - name: Filters
+    type: Filter
+    description: 'Invert filter that can be applied to the image'
+    isContextful: false
+    default: 'null'
+  description: 'Creates an invert filter that can be applied to an image. The filter inverts the colors of the input image based on the specified intensity.'
+---

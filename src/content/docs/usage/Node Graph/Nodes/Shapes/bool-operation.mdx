@@ -8,12 +8,12 @@ node:
   hasPreview: false
   inputs:
   - name: First Shape
-    type: ShapeVectorData
+    type: Vector Shape
     description: 'First vector shape to perform the boolean operation on. Any visual data like fill or stroke will be tansferred to the result from this input.'
     isContextful: false
     default: 'null'
   - name: Second Shape
-    type: ShapeVectorData
+    type: Vector Shape
     description: 'Second vector shape to perform the boolean operation on.'
     isContextful: false
     default: 'null'
@@ -27,7 +27,7 @@ node:
     default: Union
   outputs:
   - name: Result
-    type: ShapeVectorData
+    type: Vector Shape
     description: 'Resulting vector shape after performing the boolean operation on the two input shapes. The resulting shape will have the visual data (fill, stroke) from the first shape.'
     isContextful: false
     default: 'null'

@@ -1,0 +1,52 @@
+---
+title: 'Easing '
+node:
+  name: 'Easing '
+  category: Animation
+  icon: icon-spline-chart
+  isPair: false
+  hasPreview: false
+  inputs:
+  - name: Value
+    type: Double
+    description: 'The input value to be eased. This value should be between 0 and 1.'
+    isContextful: true
+    default: '0.0'
+  - name: Easing Type
+    type: EasingType (Enum)
+    hideSocket: true
+    typeLink: /docs/usage/node-graph/nodes/animation/easing#easing-types
+    description: 'The type of easing function to apply to the input value. This determines how the value transitions over time.'
+    isContextful: false
+    default: Linear
+  outputs:
+  - name: Output
+    type: Double
+    description: 'The eased output value, which is the result of applying the selected easing function to the input value.'
+    isContextful: true
+    default: '0.0'
+  description: 'Applies an easing function to a value, transforming it based on the selected easing type. This is useful for creating smooth transitions in animations.'
+---
+
+## Easing Types
+
+The `Easing Type` input allows you to select from various easing functions that define how the value transitions over time. Each easing type has 3 variations (except for `Linear`):
+
+- `In` easing functions start slowly and accelerate towards the end.
+- `Out` easing functions start quickly and decelerate towards the end.
+- `In Out` easing functions start slowly, accelerate in the middle, and decelerate towards the end.
+
+You can preview available easing types on https://easings.net/
+
+There are a few common easing types available:
+- **Linear**: A constant speed transition.
+- **Sine**: A smooth transition that follows a sine wave.
+- **Quad**: A quadratic easing function. 
+- **Cubic**: A cubic easing function.
+- **Quart**: A quartic easing function.
+- **Quint**: A quintic easing function.
+- **Expo**: An exponential easing function.
+- **Circ**: A circular easing function.
+- **Back**: An easing function that overshoots the target value.
+- **Elastic**: An easing function that oscillates around the target value. Like a rubber band.
+- **Bounce**: An easing function that simulates a bouncing effect.

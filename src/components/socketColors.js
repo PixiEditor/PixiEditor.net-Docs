@@ -15,7 +15,7 @@ export const socketColors = {
   "Ellipse Data": "#a473a5",
   "Points Data": "#e1d0e1",
   "Text Data": "#f2f2f2",
-  "ShapeVectorData": "conic-gradient(#a473a5 0% 33%, #f2f2f2 33% 66%, #e1d0e1 66% 100%)",
+  "Vector Shape": "conic-gradient(#a473a5 0% 33%, #f2f2f2 33% 66%, #e1d0e1 66% 100%)",
   Matrix3x3: "#ffea4f",
   Default: "#ff00ff"
 };

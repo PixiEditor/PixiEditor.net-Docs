@@ -1,0 +1,38 @@
+---
+title: 'Merge'
+node:
+  name: 'Merge'
+  category: Image
+  icon: icon-duplicate-image
+  isPair: false
+  hasPreview: true
+  inputs:
+  - name: Blend Mode
+    type: Blend Mode (Enum)
+    typeLink: /docs/usage/layers/blend-modes
+    hideSocket: true
+    description: 'The blend mode to use when merging the images. This determines how the pixels of the input images are combined.'
+    isContextful: false
+    default: Normal
+  - name: Top
+    type: Painter
+    description: 'Top image to merge. This is the image that will be placed on top of the bottom image in the final output.'
+    isContextful: false
+    default: null
+  - name: Bottom
+    type: Painter
+    description: 'Bottom image to merge. This is the image that will be placed below the top image in the final output.'
+    isContextful: false
+    default: null
+  outputs:
+  - name: Output
+    type: Painter
+    description: 'Merged image painter instruction.'
+    isContextful: false
+    default: null
+  description: 'Merges two images using a specified blend mode. The top image is combined with the bottom image to produce a new image output. The blend mode determines how the pixels of the two images interact with each other, allowing for various visual effects.'
+---
+
+## Blend Modes
+
+For more information on the available blend modes, see the [Blend Modes](/docs/usage/layers/blend-modes) documentation.

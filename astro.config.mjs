@@ -33,17 +33,6 @@ export default defineConfig({
           './src/styles/global.css'
       ],
       sidebar: [
-          // {
-          // 	label: 'Guides',
-          // 	items: [
-          // 		// Each item here is one entry in the navigation menu.
-          // 		{ label: 'Example Guide', slug: 'guides/example' },
-          // 	],
-          // },
-          // {
-          // 	label: 'Reference',
-          // 	autogenerate: { directory: 'reference' },
-          // },
           {
               label: 'Open Beta',
               autogenerate: { directory: 'open-beta' },
@@ -51,6 +40,7 @@ export default defineConfig({
           {
               label: 'Usage',
               autogenerate: { directory: 'usage' },
+              collapsed: true,
           },
           {
               label: 'Contributing',

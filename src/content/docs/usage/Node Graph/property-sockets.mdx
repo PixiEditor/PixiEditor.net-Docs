@@ -71,7 +71,7 @@ A texture with defined width and height. For example [Create Image Node](/docs/u
 
 ### <span style={{color: "#cc5c5c"}}>⬤</span> Filter
 
-Filter object that can be applied via the [Apply Filter Node](/docs/usage/node-graph/nodes/apply-filter) or directly to the layer. Filters can be used to modify the appearance of the texture, such as applying a blur or a color adjustment.
+Filter object that can be applied via the [Apply Filter Node](/docs/usage/node-graph/nodes/filter/apply-filter) or directly to the layer. Filters can be used to modify the appearance of the texture, such as applying a blur or a color adjustment.
 
 ### <span style={{color: "#68abdf"}}>⬤</span> Boolean
 
@@ -175,7 +175,7 @@ A default context (CPU), which is the only context for circular sockets. A prope
 
 ### GPU Context
 
-Some Nodes such as [Modify Image Node](/docs/usage/node-graph/nodes/modify-image) expose a GPU context. In GPU context, the property socket with diamond shape work **per pixel**. This means that there is no a single value for the property,
+Some Nodes such as [Modify Image Node](/docs/usage/node-graph/nodes/image/begin-modify-image) expose a GPU context. In GPU context, the property socket with diamond shape work **per pixel**. This means that there is no a single value for the property,
 but rather a formula that is applied to the pixel that is being processed.
 
 Let's take a look at this example:
@@ -185,13 +185,13 @@ Let's take a look at this example:
 <figcaption>_click to zoom_</figcaption>
 </figure>
 
-In this example, we're modifying the Mona Lisa image with [Modify Image Node](/docs/usage/node-graph/nodes/modify-image). This node exposes 2 diamond-shaped sockets:
+In this example, we're modifying the Mona Lisa image with [Modify Image Node](/docs/usage/node-graph/nodes/image/begin-modify-image). This node exposes 2 diamond-shaped sockets:
 - `UV`
 - `Color`
 
-Notice how [Modify Image Node](/docs/usage/node-graph/nodes/modify-image) consists of 2 parts: Begin and End with blue zone between them.
+Notice how [Modify Image Node](/docs/usage/node-graph/nodes/image/begin-modify-image) consists of 2 parts: Begin and End with blue zone between them.
 
-There are also 2 Nodes connected to Modify Image: [Separate Color](/docs/usage/node-graph/nodes/separate-color) and [Combine Color](/docs/usage/node-graph/nodes/combine-color). Essentially, in this example, we are swapping red with green channel of the image.
+There are also 2 Nodes connected to Modify Image: [Separate Color](/docs/usage/node-graph/nodes/color/separate-color) and [Combine Color](/docs/usage/node-graph/nodes/color/combine-color). Essentially, in this example, we are swapping red with green channel of the image.
 
 A `Color` is not a single value, but **it points to a color of currently processed pixel**. The `UV` is a coordinate of the pixel in the texture, which is being processed. It's essentially a one big loop.
 

@@ -1,0 +1,27 @@
+---
+title: 'Combine VecD'
+node:
+  name: 'Combine VecD'
+  category: Numbers
+  icon: icon-up-vector
+  isPair: false
+  hasPreview: false
+  inputs:
+  - name: X
+    type: Double
+    description: 'First component of the vector.'
+    isContextful: true
+    default: '0'
+  - name: Y
+    type: Double
+    description: 'Second component of the vector.'
+    isContextful: true
+    default: '0'
+  outputs:
+  - name: Vector
+    type: VecD
+    description: 'The resulting 2D vector constructed from the X and Y components.'
+    isContextful: true
+    default: '(0, 0)'
+  description: 'Constructs a 2D vector from its X and Y components.'
+---

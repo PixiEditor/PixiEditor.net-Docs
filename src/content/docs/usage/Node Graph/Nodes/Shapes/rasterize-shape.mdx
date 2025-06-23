@@ -1,0 +1,27 @@
+---
+title: Rasterize Shape
+node:
+  name: Rasterize Shape
+  category: Shape
+  icon: icon-paint-brush
+  isPair: false
+  hasPreview: true
+  inputs:
+  - name: Shape
+    type: Vector Shape
+    description: 'The vector shape to rasterize.'
+    isContextful: false
+    default: 'null'
+  - name: High Dpi Rendering
+    type: Boolean
+    description: 'If true, shape will be rasterized at viewing resolution, making edges crisp at any zoom level. If false, rasterization will be forced to document resolution.'
+    isContextful: false
+    default: 'true'
+  outputs:
+  - name: Output
+    type: Painter
+    description: 'Painting instruction to draw the shape.'
+    isContextful: false
+    default: null
+  description: Paints a vector shape.
+---
