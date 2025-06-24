@@ -7,7 +7,17 @@ node:
   isPair: true
   pairNode: 'image/begin-modify-image'
   hasPreview: true
-  inputs: null
+  inputs:
+  - name: UV
+    type: VecD
+    description: 'UV coordinates to sample image at'
+    isContextful: true
+    default: (0, 0)
+  - name: Color
+    type: Color
+    description: 'Color to apply to the image at the specified UV coordinates'
+    isContextful: true
+    default: (0, 0, 0, 0)
   outputs:
   - name: Output
     type: Painter
