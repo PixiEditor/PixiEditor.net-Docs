@@ -1,0 +1,41 @@
+---
+title: Blend Modes
+---
+
+import blendModeSwitch from 'assets/blend-mode-switch.png';
+import { Image } from 'astro:assets';
+
+## Introduction
+
+Blend modes define how a layer blends with the layers beneath it. It is a mathematical formula that takes a color above and below and combines them to produce a new color.
+
+## Available Blend Modes
+
+There are 17 blend modes available in PixiEditor, each with its own unique effect:
+
+- Normal
+- Erase
+- Darken
+- Multiply
+- Color Burn
+- Lighten
+- Screen
+- Color Dodge
+- Linear Dodge (Add)
+- Overlay
+- Soft Light
+- Hard Light
+- Difference
+- Exclusion
+- Hue
+- Saturation
+- Luminosity
+- Color
+
+## Changing Blend Mode
+
+To change the blend mode of a layer, select your target layer in the Layers panel, then find the **Blend Mode** dropdown and select the desired blend mode from the list.
+
+<Image src={blendModeSwitch} alt="Blend Mode Switch" />
+
+You can also use Node View to change the blend mode of a layer.

@@ -1,0 +1,67 @@
+---
+title: 'Outline'
+node:
+  name: 'Outline'
+  category: Effects
+  icon: icon-outline
+  isPair: false
+  hasPreview: true
+  inputs:
+  - name: Background
+    type: Painter
+    description: 'Image to apply the outline effect to. This is the base image that will be processed to create the outline.'
+    isContextful: false
+    default: null
+  - name: Type
+    type: OutlineType (Enum)
+    typeLink: /docs/usage/node-graph/nodes/effects/outline#outline-types
+    hideSocket: true
+    description: 'The type of outline to apply. This determines the algorithm used to create the outline effect.'
+    isContextful: false
+    default: Simple
+  - name: Thickness
+    type: Double
+    description: 'The thickness of the outline. This controls how wide the outline will be drawn around the edges of the image.'
+    isContextful: false
+    default: '1.0'
+  - name: Color
+    type: Color
+    description: 'The color of the outline. This sets the color that will be used to draw the outline around the edges of the image.'
+    isContextful: false
+    default: Black
+  outputs:
+  - name: Output
+    type: Painter  
+    description: 'Painter instruction with the applied outline effect.'
+    isContextful: false
+    default: null
+  description: 'Applies a raster outline effect to the image.'
+---
+
+import outlineImage from '../../assets/Nodes/Simple.png';
+import gaussianImage from '../../assets/Nodes/Gaussian.png';
+import pixelPerfect from '../../assets/Nodes/Pixel Perfect.png';
+
+import { Image } from 'astro:assets';
+
+## Outline Types
+
+The outline effect can be applied using different algorithms, each producing a unique style of outline. The available outline types are:
+
+### Simple
+
+More efficient than Gaussian, but may look worse in some cases, such as big thicknesses.
+
+<Image src={outlineImage} style={{backgroundColor: "white"}} alt="Simple Outline" width={256} />
+
+### Gaussian
+
+More expensive than Simple, but produces a better result for larger thicknesses and has softer edges.
+
+<Image src={gaussianImage} style={{backgroundColor: "white"}} alt="Gaussian Outline" width={256} />
+
+### Pixel Perfect
+
+No blur, no anti-aliasing. Ideal for pixel art and low-resolution images. It produces a sharp outline that follows the pixel grid.
+
+<Image src={pixelPerfect} style={{backgroundColor: "white"}} alt="Pixel Perfect Outline" width={256} />

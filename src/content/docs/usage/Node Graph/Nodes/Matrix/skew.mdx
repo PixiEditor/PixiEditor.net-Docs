@@ -1,0 +1,37 @@
+---
+title: 'Skew'
+node:
+  name: 'Skew'
+  category: Matrix
+  icon: icon-italic
+  isPair: false
+  hasPreview: true
+  inputs:
+  - name: Skew
+    type: VecD
+    description: 'The skew vector that defines the skew transformation.'
+    isContextful: false
+    default: (0, 0)
+  - name: Image
+    type: Painter 
+    description: 'Image to apply the skew transformation to.'
+    isContextful: false
+    default: null
+  - name: Input Matrix
+    type: Matrix3x3
+    description: 'The input matrix to concatenate with the skew transformation. This allows for combining multiple transformations.'
+    isContextful: false
+    default: Identity
+  outputs:
+  - name: Output Matrix
+    type: Matrix3x3
+    description: 'The resulting matrix after applying the skew transformation. This matrix can be used for further transformations or rendering operations.'
+    isContextful: false
+    default: Identity
+  - name: Output
+    type: Painter
+    description: 'The painter instruction that paints skewed image.'
+    isContextful: false
+    default: null
+  description: 'Creates a skew transformation matrix and skews the input image by the specific vector.'
+---

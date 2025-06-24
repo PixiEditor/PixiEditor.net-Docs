@@ -1,0 +1,96 @@
+---
+title: Vector Layer
+node:
+  name: Vector Layer
+  category: Structure
+  icon: icon-vector-pen
+  isPair: false
+  hasPreview: true
+  inputs:
+  - name: Input
+    type: Vector Shape
+    description: 'The optional input for setting the data of the vector layer. Note: setting this disallows any modifications to the layer data with vector tools. Use only to include procedurally generated vector data in the layer.'
+    isContextful: false
+    default: 'null'
+  - name: Opacity
+    type: Float
+    description: 'The opacity of the vector layer, ranging from 0.0 (fully transparent) to 1.0 (fully opaque).'
+    isContextful: false
+    default: '1'
+    min: "0"
+    max: "1"
+  - name: Is Visible
+    type: Boolean
+    description: 'Indicates whether the vector layer is visible in the canvas. If set to false, the layer will not be rendered.'
+    isContextful: false
+    default: 'true'
+  - name: Mask Is Visible
+    type: bool
+    description: 'Indicates whether the mask of the vector layer is visible in the canvas. If set to false, the mask will not be rendered.'
+    isContextful: false
+    default: 'true'
+  - name: Filters
+    type: Filter
+    description: 'The filter to apply to the layer.'
+    isContextful: false
+    default: 'null'
+  - name: Background
+    type: Painter
+    description: 'The paint instruction to draw before drawing the vector layer.'
+    isContextful: false
+    default: null
+  - name: Blend Mode
+    type: Blend Mode (Enum)
+    typeLink: /docs/usage/layers/blend-modes
+    hideSocket: true
+    description: 'The blend mode to use for the vector layer. This determines how the layer interacts with the background and other layers.'
+    isContextful: false
+    default: Normal
+  - name: Mask
+    type: Painter
+    description: 'The paint instruction to use as a mask for the vector layer. This allows for masking parts of the layer based on the mask colors' 
+    isContextful: false
+    default: null
+  outputs:
+  - name: Output
+    type: Painter
+    description: 'The painter instruction that paints the vector layer on the canvas, including all filters and background.'
+    isContextful: false
+    default: null
+  - name: Without Filters
+    type: Painter
+    description: 'The paint instruction that paints the vector layer without any filters applied.'
+    isContextful: false
+    default: null
+  - name: Raw Layer Output
+    type: Painter
+    description: 'The raw paint instruction that paints the vector layer, without any filters and background applied.'
+    isContextful: false
+    default: null
+  - name: Shape
+    type: Vector Shape
+    description: 'Internal vector shape data of the layer.'
+    isContextful: false
+    default: 'null'
+  - name: Matrix
+    type: Matrix3x3
+    description: 'The transformation matrix of the vector layer.'
+    isContextful: false
+    default: Identity
+  - name: Canvas Position
+    type: VecD
+    description: 'The position of the vector layer in the canvas. This is the top-left corner of the bounding box of the layer.'
+    isContextful: false
+    default: (0, 0)
+  - name: Center Position
+    type: VecD
+    description: 'The center position of the vector layer in the canvas. This is the center point of the bounding box of the layer.'
+    isContextful: false
+    default: (0, 0)
+  - name: Size
+    type: VecD
+    description: 'The size of the vector layer in the canvas. This is the width and height of the bounding box of the layer.'
+    isContextful: false
+    default: (0, 0)
+  description: 'Layer capable of rendering and manipulating vector shapes.'
+---

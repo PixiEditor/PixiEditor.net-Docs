@@ -1,0 +1,53 @@
+---
+title: 'Grayscale Filter'
+node:
+  name: 'Grayscale Filter'
+  category: Filters
+  icon: icon-ghost
+  isPair: false
+  hasPreview: false
+  inputs:
+  - name: Mode
+    type: Grayscale Mode (Enum)
+    typeLink: /docs/usage/node-graph/nodes/filters/grayscale#grayscale-mode
+    hideSocket: true
+    description: 'The mode of the grayscale filter. This determines how the grayscale effect is calculated and applied to the input image.'
+    isContextful: false
+    default: Weighted
+  - name: Factor
+    type: Double
+    description: 'The factor by which the grayscale effect is applied. A value of 1 means full grayscale, while a value of 0 means no effect.'
+    isContextful: false
+    default: '1'
+    min: "0"
+    max: "1"
+  - name: Normalize
+    type: Boolean
+    description: 'Whether to normalize the grayscale values. If true, the grayscale values will be adjusted to fit within the range of 0 to 1.'
+    isContextful: false
+    default: 'true'
+  - name: Weight Factor
+    type: Vec3D
+    description: 'The weight factor for each channel in the grayscale calculation. This is used when the mode is set to Custom. The values represent the contribution of red, green, and blue channels respectively.'
+    isContextful: false
+    default: (1, 1, 1)
+  - name: Previous
+    type: Filter
+    description: 'The previous filter in the chain. It will be applied before the grayscale filter.'
+    isContextful: false
+    default: 'null'
+  outputs:
+  - name: Filters
+    type: Filter
+    description: 'Grayscale filter that can be applied to the image'
+    isContextful: false
+    default: 'null'
+  description: 'Creates a grayscale filter that can be applied to an image. The filter can be customized with different modes and factors to achieve various grayscale effects.'
+---
+
+## Grayscale Mode
+
+The `Grayscale Mode` input allows you to choose how the grayscale effect is calculated. The available modes are:
+- **Weighted**: This mode applies a weighted average to the RGB channels, giving more importance to the green channel, which is more sensitive to human vision. (R: 0.299, G: 0.587, B: 0.114, A: 0)
+- **Average**: This mode calculates the average of the RGB channels, treating all channels equally. (R: 1/3, G: 1/3, B: 1/3, A: 0)
+- **Custom**: This mode allows you to specify custom weights for each channel using the `Weight Factor` input. The values represent the contribution of red, green, and blue channels respectively.

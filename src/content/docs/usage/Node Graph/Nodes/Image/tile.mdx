@@ -1,0 +1,41 @@
+---
+title: 'Tile'
+node:
+  name: 'Tile'
+  category: Image
+  icon: icon-grid
+  isPair: false
+  hasPreview: true
+  inputs:
+  - name: Image
+    type: Texture
+    description: 'The image to tile. This is the source image that will be repeated across the output area.'
+    isContextful: false
+    default: 'null'
+  - name: Tile Mode X
+    type: Tile Mode
+    typeLink: /docs/usage/node-graph/nodes/filters/kernel-filter#tile-mode
+    hideSocket: true
+    description: 'Mode for tiling the image horizontally.'
+    isContextful: false
+    default: Repeat
+  - name: Tile Mode Y
+    type: Tile Mode
+    typeLink: /docs/usage/node-graph/nodes/image/tile-mode#tile-mode
+    hideSocket: true
+    description: 'Mode for tiling the image vertically.'
+    isContextful: false
+    default: Repeat
+  - name: Matrix
+    type: Matrix3x3
+    description: 'The transformation matrix to apply to the tiled image. This allows for scaling, rotating, or translating the image before tiling.'
+    isContextful: false
+    default: Identity
+  outputs:
+  - name: Output
+    type: Painter
+    description: 'The painter instruction that paints the tiled image.'
+    isContextful: false
+    default: null
+  description: 'Creates a tiled image by repeating the input image across the specified area. The tiling can be controlled by the tile modes and a transformation matrix.'
+---

@@ -1,0 +1,45 @@
+---
+title: 'Text'
+node:
+  name: 'Text'
+  category: Shape
+  icon: icon-text-round
+  isPair: false
+  hasPreview: false
+  inputs:
+  - name: Text
+    type: String
+    description: 'Text to display.'
+    isContextful: false
+    default: null
+  - name: Position
+    type: VecD
+    description: 'Position of the text in the canvas. This determines where the text will be rendered.'
+    isContextful: false
+    default: (0, 0)
+  - name: Font Family
+    type: Font Family Name
+    typeLink: /docs/usage/node-graph/nodes/shapes/text#font-family-name
+    hideSocket: true
+    description: 'The font family to use for the text. This determines the style of the text, such as Arial, Times New Roman, etc.'
+    isContextful: false
+    default: 'Arial'
+  - name: Font Size
+    type: Double
+    description: 'The size of the text in pixels. This controls how large the text appears on the canvas.'
+    isContextful: false
+    default: 12
+  outputs:
+  - name: Output
+    type: Text Data
+    description: 'Vector text data that can be further processed or rendered.'
+    isContextful: false
+    default: 'null'
+  description: 'Creates a text vector that can be rendered on the canvas. This node allows you to display text with specific properties such as position, font family, and size.'
+---
+
+## Font Family Name
+
+The **Font Family Name** is a type that specifies the font family to use for rendering the text. It can be any valid font family available in the system or custom font imported into the document.
+
+To set a font family, use a built-in picker.

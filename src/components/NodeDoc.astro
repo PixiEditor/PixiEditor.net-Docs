@@ -1,0 +1,123 @@
+---
+import { Badge } from "@astrojs/starlight/components";
+import AnchorHeading from "@astrojs/starlight/components/AnchorHeading.astro";
+import { categoryColors } from "./categoryColors.js";
+import Node from "./Node.astro";
+
+const data = Astro.props;
+---
+
+<div
+    style={{ display: "flex", alignItems: "center", justifyContent: "center" }}
+>
+    <Node data={data} />
+</div>
+
+<AnchorHeading level="2" id={data.name?.toLowerCase() ?? "node-doc"}>
+    {data.name}</AnchorHeading
+>
+
+<p>
+    <strong>Category</strong>
+    <Badge
+        style={{
+            background: categoryColors[data.category] || "transparent",
+            borderWidth: 0,
+        }}
+        text={data.category || "Misc"}
+    />
+
+    <br />
+
+    <strong>Is Pair Node:</strong>
+    <Badge
+        variant={data.isPair ? "success" : "danger"}
+        text={data.isPair ? "Yes" : "No"}
+    />
+
+    {
+        data.isPair ? (
+            <>
+                <br />
+                <strong>Pair Node:</strong>
+                <a href={`/docs/usage/node-graph/nodes/${data.pairNode}`}>
+                    {data.pairNode}
+                </a>
+            </>
+        ) : null
+    }
+
+    <hr />
+
+    <p>
+        {data.description}
+        <slot/>
+    </p>
+</p>
+
+<AnchorHeading id="inputs" level={2}>Inputs</AnchorHeading>
+<br/>
+{
+    data.inputs?.map((input) => (
+        <div key={input.name}>
+            <AnchorHeading level="3" id={input.name.toLowerCase()}>
+                <code>{input.name}</code>
+            </AnchorHeading>
+            <p>
+                <strong>Type:</strong>{" "}
+                <a
+                    href={input.typeLink ?? `/docs/usage/node-graph/property-sockets/#-${input.type.toLowerCase().replace(" ", "-")}`}
+                >
+                    {input.type}
+                </a>
+                <br />
+                <strong>Default:</strong>{" "}
+                <code>{input.default ?? `unset`}</code>
+                <br />
+                {input.min ? (
+                    <span>
+                        <strong>Min:</strong> <code>{input.min}</code>
+                    </span>
+                ) : null}
+                {input.max ? (
+                    <span>
+                        <strong>Max:</strong> <code>{input.max}</code>
+                    </span>
+                ) : null}
+            </p>
+            <p>{input.description}</p>
+        </div>
+    ))
+}
+
+<AnchorHeading id="outputs" level={2}>Outputs</AnchorHeading>
+<br/>
+{
+    data.outputs?.map((output) => (
+        <div key={output.name}>
+            <AnchorHeading level="3" id={output.name.toLowerCase()}>
+                <code>{output.name}</code>
+            </AnchorHeading>
+            <p>
+                <strong>Type:</strong>{" "}
+                <a
+                    href={output.typeLink ?? `/docs/usage/node-graph/property-sockets/#-${output.type.toLowerCase()}`}
+                >
+                    {output.type}
+                </a>
+                <br />
+                <strong>Default:</strong>{" "}
+                <code>{output.default ?? `unset`}</code>
+                <br />
+                {output.min ? (
+                    <span>
+                        <strong>Min:</strong> <code>{output.min}</code>
+                    </span>
+                ) : null}
+            </p>
+            <p>{output.description}</p>
+        </div>
+    ))
+}
+
+<hr/>

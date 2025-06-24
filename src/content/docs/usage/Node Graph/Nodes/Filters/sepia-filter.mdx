@@ -1,0 +1,29 @@
+---
+title: 'Sepia Filter'
+node:
+  name: 'Sepia Filter'
+  category: Filters
+  icon: icon-camera
+  isPair: false
+  hasPreview: false
+  inputs:
+  - name: Intensity
+    type: Double 
+    description: 'Strength of sepia effect, 0 - no effect, 1 - full effect.'
+    isContextful: false
+    default: 1
+    min: "0"
+    max: "1"
+  - name: Previous
+    type: Filter
+    description: 'First filter to apply before sepia.'
+    isContextful: false
+    default: 'null'
+  outputs:
+  - name: Filters
+    type: Filter
+    description: 'Sepia filter with previous filter chained if present.'
+    isContextful: false
+    default: 'null'
+  description: 'Creates a sepia effect filter'
+---

@@ -1,0 +1,42 @@
+---
+title: 'Remap'
+node:
+  name: 'Remap'
+  category: Numbers
+  icon: icon-map
+  isPair: false
+  hasPreview: false
+  inputs:
+  - name: Old Min
+    type: Double
+    description: 'Minimum value of the old range. This is the lower bound of the input range that will be remapped.'
+    isContextful: true
+    default: '0.0'
+  - name: Old Max
+    type: Double
+    description: 'Maximum value of the old range. This is the upper bound of the input range that will be remapped.'
+    isContextful: true
+    default: '1.0'
+  - name: New Min
+    type: Double
+    description: 'Minimum value of the new range. This is the lower bound of the output range to which the input will be remapped.'
+    isContextful: true
+    default: '0.0'
+  - name: New Max
+    type: Double
+    description: 'Maximum value of the new range. This is the upper bound of the output range to which the input will be remapped.'
+    isContextful: true
+    default: '1.0'
+  - name: Value
+    type: Double
+    description: 'Value to remap. This is the input value that will be transformed from the old range to the new range.'
+    isContextful: true
+    default: '0.5'
+  outputs:
+  - name: Result
+    type: Double
+    description: 'Remapped value. This is the output value after applying the remapping transformation from the old range to the new range.'
+    isContextful: true
+    default: Remap
+  description: 'Remaps a value from one range to another.'
+---

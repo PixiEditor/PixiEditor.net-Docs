@@ -1,0 +1,18 @@
+---
+title: 'End Modify Image'
+node:
+  name: 'End Modify Image'
+  category: Image
+  icon: icon-null
+  isPair: true
+  pairNode: 'image/begin-modify-image'
+  hasPreview: true
+  inputs: null
+  outputs:
+  - name: Output
+    type: Painter
+    description: 'Output image painter instruction.'
+    isContextful: false
+    default: null
+  description: 'This node is used to modify an image in the Node Graph. It is paired with the "Begin Modify Image" node, which sets up the context for the modifications. The output of this node is a painter instruction that can be used to render the modified image.'
+---

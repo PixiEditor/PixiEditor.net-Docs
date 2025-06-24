@@ -1,0 +1,45 @@
+---
+title: 'Bool Operation '
+node:
+  name: 'Bool Operation '
+  category: Shape
+  icon: icon-intersect
+  isPair: false
+  hasPreview: false
+  inputs:
+  - name: First Shape
+    type: Vector Shape
+    description: 'First vector shape to perform the boolean operation on. Any visual data like fill or stroke will be tansferred to the result from this input.'
+    isContextful: false
+    default: 'null'
+  - name: Second Shape
+    type: Vector Shape
+    description: 'Second vector shape to perform the boolean operation on.'
+    isContextful: false
+    default: 'null'
+  - name: Operation
+    type: VectorPathOp (Enum)
+    typeLink: /docs/usage/node-graph/nodes/bool-operation#vectorpathop
+    hideSocket: true
+    options:
+    description: 'The boolean operation to perform on the two shapes. The available operations are Union, Intersect, and Subtract. Union combines the two shapes, Intersect keeps only the overlapping area, and Subtract removes the second shape from the first.'
+    isContextful: false
+    default: Union
+  outputs:
+  - name: Result
+    type: Vector Shape
+    description: 'Resulting vector shape after performing the boolean operation on the two input shapes. The resulting shape will have the visual data (fill, stroke) from the first shape.'
+    isContextful: false
+    default: 'null'
+  description: 'The Bool Operation Node is used to perform boolean operations on two vector shapes. It allows you to combine, intersect, or subtract shapes to create complex vector graphics. The resulting shape will inherit the visual properties (like fill and stroke) from the first shape input. This node is useful for creating intricate designs and manipulating vector data in a non-destructive way.'
+---
+
+
+### VectorPathOp
+
+The `VectorPathOp` is a enum type that defines the different boolean operations that can be performed on vector shapes. The available operations are:
+- **Difference**: Subtracts the second shape from the first.
+- **Intersect**: Keeps only the overlapping area of the two shapes.
+- **Union**: Combines the two shapes into one.
+- **Xor**: Combines the two shapes, excluding the overlapping area.
+- **ReverseDifference**: Subtracts the first shape from the second.

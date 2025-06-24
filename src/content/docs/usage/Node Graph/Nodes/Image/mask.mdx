@@ -1,0 +1,31 @@
+---
+title: 'Mask'
+node:
+  name: 'Mask'
+  category: Image
+  icon: icon-create-mask
+  isPair: false
+  hasPreview: true
+  inputs:
+  - name: Input
+    type: Painter
+    description: 'The input painter instruction to apply the mask to. This is the image that will be masked.'
+    isContextful: false
+    default: null
+  - name: Mask
+    type: Painter
+    description: 'The mask painter instruction to apply to the input. This mask will define the areas of the input that will be visible or hidden.'
+    isContextful: false
+    default: null
+  outputs:
+  - name: Output
+    type: Painter
+    description: 'The output painter instruction after applying the mask to the input. This will render the input image with the mask applied, showing only the areas defined by the mask.'
+    isContextful: false
+    default: null
+  description: 'Applies a mask to an input painter instruction. The mask defines which parts of the input will be visible or hidden. This is useful for creating complex compositions where only certain areas of an image should be displayed based on the mask shape.'
+---
+
+## Masks
+
+For more information about masks, see the [Masking](/docs/usage/layers/masking) docuementation.

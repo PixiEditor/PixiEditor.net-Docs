@@ -1,5 +1,6 @@
 @layer base, starlight, theme, components, utilities;
 
+@import "./iconfont.css";
 @import '@astrojs/starlight-tailwind';
 @import 'tailwindcss/theme.css' layer(theme);
 @import 'tailwindcss/utilities.css' layer(utilities);
@@ -21,4 +22,34 @@
 --color-gray-700: #383838;
 --color-gray-800: #272727;
 --color-gray-900: #181818;
+}
+
+@font-face {
+    font-family: 'pixiperfect';
+    src: url(/docs/PixiPerfect.ttf) format('truetype');
+}
+
+.pixi-icon{
+    font-family: pixiperfect;
+    font-size: 1.5rem;
+    vertical-align: middle;
+}
+
+.pixi-icon.small{
+    font-size: 1rem;
+    vertical-align: baseline;
+}
+
+img[data-image-component="true"] {
+    border-radius: 5px;
+}
+
+kbd{
+    background-color: #303030;
+    border-color: #3f3f46;
+    border-width: 1px;
+    border-radius: 5px;
+    padding: 0.2rem 0.4rem;
+    font-size: 0.8rem;
+    font-family: monospace;
 }

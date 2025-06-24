@@ -1,0 +1,65 @@
+---
+title: 'Kernel Filter'
+node:
+  name: 'Kernel Filter'
+  category: Filters
+  icon: icon-closed-grid
+  isPair: false
+  hasPreview: false
+  inputs:
+  - name: Kernel
+    type: Kernel
+    typeLink: /docs/usage/node-graph/nodes/filters/kernel#kernel
+    hideSocket: true
+    description: 'The kernel to apply to the image. This is a matrix that defines how the filter will affect the pixels in the image. The kernel size must be odd (e.g., 3x3, 5x5).'
+    isContextful: false
+    default: Identity
+  - name: Gain
+    type: Double
+    description: 'A scale factor applied to each pixel after convolution. This can be used to normalize the kernel, if it does not sum to 1. '
+    isContextful: false
+    default: 1
+  - name: Bias
+    type: Double
+    description: 'A bias factor added to each pixel after convolution. '
+    isContextful: false
+    default: 0
+  - name: Tile Mode
+    type: Tile Mode (Enum)
+    typeLink: /docs/usage/node-graph/nodes/filters/kernel#tile-mode
+    hideSocket: true
+    description: 'The tile mode to use when the kernel is applied to the image. This determines how the edges of the image are handled when the kernel is applied.'
+    isContextful: false
+    default: Clamp
+  - name: On Alpha
+    type: Boolean
+    description: 'Whether to apply the kernel to the alpha channel of the image. If true, the kernel will be applied to the alpha channel as well as the RGB channels.'
+    isContextful: false
+    default: 'false'
+  - name: Previous
+    type: Filter
+    description: 'Previous filter in the chain. It will be applied before the kernel filter.'
+    isContextful: false
+    default: 'null'
+  outputs:
+  - name: Filters
+    type: Filter
+    description: 'Kernel filter that can be applied to the image.'
+    isContextful: false
+    default: 'null'
+  description: 'Creates a kernel filter that can be applied to an image. The filter applies a convolution operation using the specified kernel, which is a matrix that defines how the filter will affect the pixels in the image. The kernel size must be odd (e.g., 3x3, 5x5). The filter can also apply a gain and bias to the resulting pixel values, and it can be configured to apply to the alpha channel as well.'
+---
+
+## Kernel
+
+The `Kernel` input is a matrix that defines how the filter will affect the pixels in the image. The kernel size must be odd (e.g., 3x3, 5x5). The kernel is applied to each pixel in the image by performing a convolution operation, which involves multiplying the kernel values with the corresponding pixel values in the neighborhood of each pixel.
+
+Use built-in UI to change the kernel and it's size.
+
+## Tile Mode
+
+The `Tile Mode` input determines how the edges of the image are handled when the kernel is applied. The available modes are:
+- **Clamp**: The edges of the image are clamped, meaning that the pixels will be replicated at the edges.
+- **Repeat**: The image is repeated, meaning that the pixels will wrap around the edges.
+- **Mirror**: The image is mirrored, meaning that the pixels will be reflected at the edges.
+- **Decal**: Render the image pixels only within its original bounds.  

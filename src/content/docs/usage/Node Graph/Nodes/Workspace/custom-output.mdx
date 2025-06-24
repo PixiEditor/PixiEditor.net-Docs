@@ -1,0 +1,29 @@
+---
+title: 'Custom Output'
+node:
+  name: 'Custom Output '
+  category: Workspace
+  icon: icon-surveillance
+  isPair: false
+  hasPreview: true
+  inputs:
+  - name: Output Name
+    type: String
+    description: 'The name of the custom output. This name will be used in export and viewport settings.'
+    isContextful: false
+    default: null
+  - name: Is Default Export
+    type: Boolean
+    description: 'Whether this output should be picked by default when exporting the image.'
+    isContextful: false
+    default: 'false'
+  - name: Size
+    type: VecI
+    description: 'The size of the output in pixels. This determines the resolution of the output.'
+    isContextful: false
+    default: (0, 0)
+  outputs: null
+  description: 'Creates a custom output with a specified name, size, and export settings. You can use this node to build custom workspaces with multiple outputs.'
+---
+
+Check out [Custom Workspaces](/docs/usage/node-graph/custom-workspaces) for more information.

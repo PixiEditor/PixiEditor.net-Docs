@@ -1,0 +1,29 @@
+---
+title: Distribute Points
+node:
+  name: Distribute Points
+  category: Shape
+  icon: icon-spray
+  isPair: false
+  hasPreview: false
+  inputs:
+  - name: Max Points
+    type: Integer
+    description: 'The maximum number of points to distribute.'
+    isContextful: false
+    default: '10'
+  - name: Seed
+    type: Integer
+    description: 'The seed value for random distribution. Use the same seed to get the same distribution each time.'
+    isContextful: false
+    default: '0'
+  outputs:
+  - name: Output
+    type: Points Data
+    description: 'The distributed points (vector) data.'
+    isContextful: false
+    default: 'null'
+  description: 'Distributes a specified number of points randomly within the defined space. The distribution is controlled by a seed value, allowing for reproducible results.'
+---
+
+The Output is a vector data type, that can be rasterized with the [Rasterize Shape](/docs/usage/node-graph/nodes/shapes/rasterize-shape) node.

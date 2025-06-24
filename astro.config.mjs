@@ -3,6 +3,8 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
 import tailwindcss from '@tailwindcss/vite';
+import starlightVideos from 'starlight-videos';
+import starlightImageZoom from 'starlight-image-zoom';
 
 // https://astro.build/config
 export default defineConfig({
@@ -11,6 +13,10 @@ export default defineConfig({
 
   integrations: [starlight({
       title: 'PixiEditor Docs',
+      plugins: [starlightVideos(), starlightImageZoom()],
+      components: {
+            MarkdownContent: './src/components/overrides/MarkdownContent.astro',
+      },
       editLink: {
           baseUrl: "https://github.com/PixiEditor/PixiEditor.net-Docs/tree/main",
       },
@@ -27,17 +33,6 @@ export default defineConfig({
           './src/styles/global.css'
       ],
       sidebar: [
-          // {
-          // 	label: 'Guides',
-          // 	items: [
-          // 		// Each item here is one entry in the navigation menu.
-          // 		{ label: 'Example Guide', slug: 'guides/example' },
-          // 	],
-          // },
-          // {
-          // 	label: 'Reference',
-          // 	autogenerate: { directory: 'reference' },
-          // },
           {
               label: 'Open Beta',
               autogenerate: { directory: 'open-beta' },
@@ -45,18 +40,22 @@ export default defineConfig({
           {
               label: 'Usage',
               autogenerate: { directory: 'usage' },
+              collapsed: true,
           },
           {
               label: 'Contributing',
               autogenerate: { directory: 'contribution' },
+              collapsed: true,
           },
           {
               label: 'Color Picker',
               autogenerate: { directory: 'color-picker' },
+              collapsed: true,
           },
           {
               label: 'Other',
               autogenerate: { directory: 'other' },
+              collapsed: true,
           },
       ],
       })],

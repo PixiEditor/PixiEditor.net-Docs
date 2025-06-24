@@ -1,0 +1,81 @@
+---
+title: 'Math'
+node:
+  name: 'Math'
+  category: Numbers
+  icon: icon-plus-minus
+  isPair: false
+  hasPreview: false
+  inputs:
+  - name: X
+    type: Double
+    description: 'First operand for the math operation. This is the first number to be used in the calculation.'
+    isContextful: true
+    default: 0
+  - name: Y
+    type: Double
+    description: 'Second operand for the math operation. This is the second number to be used in the calculation. This is an optional second number to be used in the calculation, depending on the selected math mode.'
+    isContextful: true
+    default: 0
+  - name: Z
+    type: Double
+    description: 'Third operand for the math operation. This is an optional third number to be used in the calculation, depending on the selected math mode.'
+    isContextful: true
+    default: 0
+  - name: Math Mode
+    type: Math Mode (Enum)
+    typeLink: /docs/usage/node-graph/nodes/numbers/math#math-modes
+    hideSocket: true
+    description: 'The mode of the math operation. This determines how the inputs X, Y, and Z are combined to produce the result.'
+    isContextful: false
+    default: Add
+  - name: Clamp
+    type: Boolean
+    description: 'Whether to clamp the result of the math operation. If true, the result will be clamped to the range of 0 to 1. If false, the result can be any value.'
+    isContextful: false
+    default: 'false'
+  outputs:
+  - name: Result
+    type: Double
+    description: 'The result of the math operation based on the selected mode and inputs. This is the final output of the node, which can be used in further calculations or as an input to other nodes.'
+    isContextful: true
+    default: 0
+  description: 'Performs various mathematical operations on the input numbers. The operation is determined by the selected math mode, which can include addition, subtraction, multiplication, division, and more. The node can also clamp the result to a specified range if desired.'
+---
+
+## Math Modes
+
+The `Math Mode` input allows you to choose the type of mathematical operation to perform on the inputs. The available modes are:
+
+## Math Modes
+
+| Mode                  | X | Y | Z |
+|-----------------------|---|---|---|
+| Add                   | ✅ | ✅ |   |
+| Subtract              | ✅ | ✅ |   |
+| Multiply              | ✅ | ✅ |   |
+| Divide                | ✅ | ✅ |   |
+| Sin                   | ✅ |   |   |
+| Cos                   | ✅ |   |   |
+| Tan                   | ✅ |   |   |
+| Greater Than           | ✅ | ✅ |   |
+| Greater Than Or Equal    | ✅ | ✅ |   |
+| Less Than              | ✅ | ✅ |   |
+| Less Than Or Equal       | ✅ | ✅ |   |
+| Compare               | ✅ | ✅ |   |
+| Power                 | ✅ | ✅ |   |
+| Logarithm             | ✅ | ✅ |   |
+| Natural Logarithm      | ✅ |   |   |
+| Root                  | ✅ | ✅ |   |
+| Inverse Root           | ✅ |   |   |
+| Fraction              | ✅ |   |   |
+| Absolute              | ✅ |   |   |
+| Negate                | ✅ |   |   |
+| Floor                 | ✅ |   |   |
+| Ceil                  | ✅ |   |   |
+| Round                 | ✅ |   |   |
+| Modulo                | ✅ | ✅ |   |
+| Min                   | ✅ | ✅ |   |
+| Max                   | ✅ | ✅ |   |
+| Step                  | ✅ | ✅ |   |
+| SmoothStep            | ✅ | ✅ | ✅ |

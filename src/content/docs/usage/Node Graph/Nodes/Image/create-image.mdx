@@ -1,0 +1,39 @@
+---
+title: Create Image Node
+node: 
+  name: Create Image
+  category: Image
+  isPair: false
+  icon: icon-create-image
+  hasPreview: true
+  description: |
+    The Create Image Node is used to create a new Texture with defined width and height.
+
+  inputs:
+      - name: Size
+        type: VecI
+        description: The size of the image to create.
+        default: "(32, 32)"
+        min: "(1, 1)"
+      - name: Fill
+        type: Paintable
+        description: The Paintable to fill the image with.
+        default: "Transparent"
+      - name: Content
+        type: Painter
+        description: Content to paint on the image.
+        default: "null"
+      - name: Content Matrix
+        type: Matrix3x3
+        description: Matrix to transform the content before painting onto the image. Use to scale, rotate, or translate the content.
+        default: "Identity"
+  outputs:
+      - name: Image
+        type: Texture
+        description: Created image texture.
+        default: "null"
+      - name: Render Output
+        type: Painter
+        description: Paint instruction to render the image
+---
+

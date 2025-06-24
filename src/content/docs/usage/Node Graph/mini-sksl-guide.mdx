@@ -1,0 +1,93 @@
+---
+title: 'Mini SKSL Guide'
+sidebar:
+  order: 5
+---
+
+## Introduction
+
+SKSL is a shading language developed by Google for use in their Skia graphics library, which is the foundation for rendering in many applications, including PixiEditor. It allows developers to write custom shaders that can manipulate images and graphics at a low level.
+
+SKSL is similar to GLSL and HLSL, most of the syntax is the same, although there are some differences you should be aware of.
+
+PixiEditor uses SKSL in the Node Graph's [Shader](/docs/usage/node-graph/nodes/effects/shader) node, allowing you to create custom shader effects by writing SKSL code directly.
+
+## Other references
+For a more comprehensive understanding of SKSL, you can refer to the following resources:
+- [Skia's SKSL documentation](https://skia.org/docs/user/sksl)
+- [SKSL playground/examples](https://shaders.skia.org/)
+- [SKSL's GitHub readme](https://github.com/google/skia/blob/main/src/sksl/README.md)
+
+## Prerequisites
+
+To effectively use SKSL, you should have a basic understanding of programming concepts and optimally some familiarity with graphics programming. 
+
+Knowledge of vector mathematics, color spaces, and how shaders work will be beneficial.
+
+## Basic Structure
+
+A basic SKSL shader consists of a `main` function that takes in vector2 coordinates and produces an output color. The `main` function is the entry point for the shader.
+
+```glsl
+half4 main(vec2 coords) { // coords are not normalized
+    return half4(1.0, 0.0, 0.0, 1.0); // Returns a red color
+}
+```
+
+:::tip
+You can pass `float2` instead of `vec2` as a input coordinates parameter type
+:::
+
+## Declaring Uniforms
+
+Uniforms allow you to pass arbitrary data to the shader from the CPU. They are declared at the top of the shader code and can be of various types, such as `float`, `vec2`, `half4`, etc.
+
+```glsl
+uniform vec2 iResolution;
+uniform double someValue;
+```
+
+### Basic Types
+SKSL supports several basic types, such as:
+
+| Type        | Description                                  |
+|-------------|----------------------------------------------|
+| `float`     | high precision floating-point scalar                 |
+| `half`      | medium precision floating-point scalar                 |
+| `vec2`      | 2-component float vector              |
+| `vec3`      | 3-component float vector              |
+| `vec4`      | 4-component float vector              |
+| `float2x2`  | 2×2 matrix of floats                  |
+| `float3x3`  | 3×3 matrix of floats                  |
+| `half2`     | 2-component medium precision float vector              |
+| `half3`     | 3-component medium precision float vector              |
+| `half4`     | 4-component medium precision float vector              |
+| `int`       | high precision integer scalar                        |
+| `int2`      | 2-component integer vector                   |
+| `int3`      | 3-component integer vector                   |
+| `int4`      | 4-component integer vector                   |
+| `shader`    | SkSL shader object for runtime composition   |
+
+
+### layout(color)
+
+Skia automatically handles color spaces and color conversion, but passing `half4` uniform as a color is not enough. Skia doesn't know your `half4` is a color, so you need to specify it explicitly using `layout(color)`.
+
+```glsl
+layout(color) uniform half4 iColor;
+``` 
+
+`iColor` will be automatically converted to the correct color space and will be recognized as a color by PixiEditor as well.
+
+## Sampling Textures
+
+One of the main differences between SKSL and other shading languages is how textures are sampled. In SKSL, you use the `eval` function on `shader` variable type.
+
+Sampling is done in **local** coordinates. For more information about coordinate spaces in Skia, check out the [Skia documentation](https://skia.org/docs/user/coordinates).
+
+```glsl
+uniform shader iImage;
+half4 main(vec2 coords) {
+    return iImage.eval(coords);
+}
+```

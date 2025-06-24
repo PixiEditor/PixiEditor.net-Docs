@@ -1,0 +1,28 @@
+---
+title: 'Color Matrix Transform Filter'
+node:
+  name: 'Color Matrix Transform Filter'
+  category: Filters
+  icon: icon-numbers-binary-down
+  isPair: false
+  hasPreview: false
+  inputs:
+  - name: Matrix
+    type: ColorMatrix
+    hideSocket: true
+    description: 'The color matrix to apply to the input image. The matrix is a 5x4 matrix that transforms the color of each pixel in the input image.'
+    isContextful: false
+    default: ColorMatrix.Identity
+  - name: Previous
+    type: Filter
+    description: 'The previous filter to apply. This is used to chain multiple filters together.'
+    isContextful: false
+    default: 'null'
+  outputs:
+  - name: Filters
+    type: Filter
+    description: 'The output filter that applies the color matrix transformation to the input image. If provided, the previous filter will be applied before the color matrix transformation.'
+    isContextful: false
+    default: 'null'
+  description: 'Transforms the color of each pixel in the input image using a 5x4 color matrix. This filter can be used to apply complex color transformations, such as adjusting brightness, contrast, saturation, and hue, or to create custom color effects.'
+---

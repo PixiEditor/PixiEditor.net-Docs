@@ -1,0 +1,60 @@
+---
+title: 'Shader'
+node:
+  name: 'Shader'
+  category: Effects
+  icon: icon-terminal
+  isPair: false
+  hasPreview: true
+  inputs:
+  - name: Background
+    type: Painter
+    description: 'Painting instruction to draw first, before shader.'
+    isContextful: false
+    default: null
+  - name: Color Space
+    type: Color Space Type
+    typeLink: /docs/usage/node-graph/nodes/effects/shader#color-space-type
+    description: 'The color space in which the shader operates. This determines how color values are interpreted and processed within the shader.'
+    isContextful: false
+    default: Inherit
+  - name: Shader Code
+    type: String
+    description: 'The SKSL shader code to execute. This code defines the operations performed by the shader on the input image.'
+    isContextful: false
+    default: null
+  outputs:
+  - name: Output
+    type: Painter
+    description: 'Painter instruction to draw the shader.'
+    isContextful: false
+    default: null
+  description: 'Creates a custom shader effect using SKSL Shader Language.'
+---
+
+## Using the Shader Node
+
+Shader node is the most flexible and powerful node in the Node Graph, but it is the most advanced as well.
+
+Check out our [Mini SKSL Guide](/docs/usage/node-graph/mini-sksl-guide) for a quick introduction to the SKSL Shader Language.
+
+## Uniforms
+
+Uniforms are variables that can be passed from Node Graph to the shader. They can be used to control various aspects of the shader's behavior, such as colors or parameters.
+By default, any uniform written in a shader code will be automatically detected and added to the node's inputs.
+
+### Built-in Uniforms
+
+There are some uniforms that are automatically handled by PixiEditor and are not exposed.
+
+- **iResolution**: The resolution of current render output. It is usually a document size.
+- **iNormalizedTime**: The normalized animation time, ranging from 0 to 1.
+- **iFrame**: The current animation frame number.
+- **iImage**: Refers to the `Background` input.
+
+## Color Space Type
+
+The **Color Space Type** determines how the shader interprets color values. The available options are:
+- **Inherit**: The shader will use the color space of the input image or context.
+- **sRGB**: The shader will interpret color values in the sRGB color space.
+- **Linear**: The shader will interpret color values in the linear color space.

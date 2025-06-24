@@ -1,0 +1,84 @@
+---
+title: 'Folder '
+node:
+  name: 'Folder '
+  category: Structure
+  icon: icon-folder
+  isPair: false
+  hasPreview: true
+  inputs:
+  - name: Content
+    type: Painter
+    description: 'The content of the folder. Other structure nodes connected to this input will be displayed as a child of this folder in layers view.'
+    isContextful: false
+    default: null
+  - name: Opacity
+    type: Float
+    description: 'The opacity of the folder. This value is applied to the content of the folder.'
+    isContextful: false
+    default: '1'
+  - name: Is Visible
+    type: Boolean
+    description: 'The visibility of the folder. If set to false, the content of the folder will not be rendered.'
+    isContextful: false
+    default: 'true'
+  - name: Mask Is Visible
+    type: Boolean
+    description: 'The visibility of the mask applied to the folder. If set to false, the mask will not be rendered.'
+    isContextful: false
+    default: 'true'
+  - name: Filters
+    type: Filter
+    description: 'Optional filters to apply to the folder content. These filters will be applied to the content of the folder before rendering.'
+    isContextful: false
+    default: 'null'
+  - name: Background
+    type: Painter
+    description: 'Painter instruction to draw before the content of the folder.'
+    isContextful: false
+    default: null
+  - name: Blend Mode
+    type: Blend Mode (Enum)
+    typeLink: /docs/usage/layers/blend-modes
+    hideSocket: true
+    description: 'The blend mode between the folder content and the background. This blend mode will be applied to the content as a whole, not individually to each node inside the folder.'
+    isContextful: false
+    default: Normal
+  - name: Mask
+    type: Painter
+    description: 'The mask to apply to the folder content. This mask will be applied to the content of the folder before rendering.'
+    isContextful: false
+    default: null
+  outputs:
+  - name: Output
+    type: Painter
+    description: 'Painting instruction to render the content of the folder with all applied options, including filters and background.'
+    isContextful: false
+    default: null
+  - name: Without Filters
+    type: Painter
+    description: 'The content of the folder without any filters applied. This output can be used to render the content of the folder without any filters.'
+    isContextful: false
+    default: null
+  - name: Raw Layer Output
+    type: Painter
+    description: 'Painting instruction to render the content of the folder as is, without filters or background.'
+    isContextful: false
+    default: null
+  - name: Canvas Position
+    type: VecD
+    description: 'Top-left position of the content of the folder in the document canvas. Tight bounding box is used to calculate this position.'
+    isContextful: false
+    default: VecD.Zero
+  - name: Center Position
+    type: VecD
+    description: 'The center position of the content of the folder in the document canvas. Tight bounding box is used to calculate this position.'
+    isContextful: false
+    default: VecD.Zero
+  - name: Size
+    type: VecD
+    description: 'The size of the content of the folder in the document canvas. Tight bounding box is used to calculate this size.'
+    isContextful: false
+    default: (0, 0)
+  description: 'The Folder node is used to group multiple nodes together in the Node Graph. It allows you to organize your nodes and create a hierarchy of nodes. The folder can contain other structure nodes, and it can be used to apply filters and masks to the content of the folder. The folder can also be used to control the visibility and opacity of the content.'
+---

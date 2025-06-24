@@ -1,0 +1,34 @@
+---
+title: Sample Image
+node:
+  name: Sample Image
+  category: Image
+  icon: icon-pipette-outline
+  isPair: false
+  hasPreview: false
+  inputs:
+  - name: Image
+    type: Texture
+    description: 'The image to sample from.'
+    isContextful: false
+    default: 'null'
+  - name: UV
+    type: VecD
+    description: 'The UV coordinates to sample the image at. This determines the specific point in the image from which the color will be sampled, using absolute coordinates where (0,0) is the top-left corner.'
+    isContextful: true
+    default: (0, 0)
+  - name: Color Sample Mode
+    type: Color Sample Mode (Enum)
+    typeLink: /docs/usage/node-graph/nodes/image/begin-modify-image/#color-sample-mode
+    hideSocket: true
+    description: 'The mode used to sample the color from the image.'
+    isContextful: false
+    default: Color Managed
+  outputs: 
+  - name: Color
+    type: Color
+    description: 'The sampled color from the image at the specified UV coordinates. This output provides the color information extracted from the image based on the UV input.'
+    isContextful: true
+    default: (0, 0, 0, 1) in GPU, (0, 0, 0, 255) in CPU
+  description: 'Samples a color from an image at specified UV coordinates. This node allows you to extract color information from an image both in CPU and GPU contexts.'
+---

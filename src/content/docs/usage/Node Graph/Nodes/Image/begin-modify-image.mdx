@@ -1,0 +1,78 @@
+---
+title: 'Begin Modify Image'
+node:
+  name: 'Begin Modify Image'
+  category: Image
+  icon: icon-put-image
+  isPair: true
+  pairNode: 'image/end-modify-image'
+  hasPreview: true
+  inputs:
+  - name: Image
+    type: Texture
+    description: 'The texture to modify. This is the image that will be modified by the subsequent nodes in the Node Graph.'
+    isContextful: false
+    default: 'null'
+  - name: Color Sample Mode
+    type: Color Sample Mode (Enum)
+    typeLink: /docs/usage/node-graph/nodes/image/begin-modify-image#color-sample-mode
+    description: 'The color sample mode to use when sampling colors from the image. This determines how colors are sampled from the texture, which can affect the final output of the image modifications.'
+    isContextful: false
+    default: Color Managed
+  outputs:
+  - name: UV
+    type: VecD
+    isContextful: true
+    description: 'UV coordinates for sampling the image. This is used to sample colors from the image based on the UV coordinates provided by the subsequent nodes in the Node Graph. Values are in the range [0, 1] for both U and V axes.'
+    default: 'null'
+  - name: Color
+    type: Color
+    isContextful: true
+    default: 'null'
+  description: 'This node is used to begin modifying an image in the Node Graph. It sets up the context for the modifications that will be applied to the image. The output of this node is a painter instruction that can be used to render the modified image.'
+---
+
+## Concept
+
+Modify image pair is used to modify an image in a complex way. This pair of nodes sets up a GPU context for image modifications. Unlike filters, which uniformly applies an effect to the entire image, modify image allows for more complex and dynamic modifications. Such as sampling colors from the image and applying custom logic to modify the image based on those sampled colors.
+
+It is a visual equivalent of [Shader Node](/docs/usage/node-graph/nodes/effects/shader).
+
+### How is the image sampled?
+
+As you may've noticed, there are 2 inputs and 2 outputs in `Begin Modify Image` and `End Modify Image` nodes:
+
+#### UV Pass
+
+Firstly, UV for color sampling must be determined. It is done in UV pass.
+
+Output UV (Begin Modify Image) outputs **Currently processing UV coordinates**. This is a vector that represents the current position in the image being processed.
+
+Input UV (End Modify Image) sets **UV coordinates for sampling the image**. This is used to sample the colors from the image based on the UV coordinates provided by the subsequent nodes in the Node Graph. Values are in the range [0, 1] for both U and V axes.
+
+#### Color Pass
+
+Output Color (Begin Modify Image) outputs a color sampled from the image using the UV from the previous pass. This is a color that will be used to render the image at the current UV coordinates.
+
+You can modify the color any way you want, when you plug it into the Input `Color` of [End Modify Image](/docs/usage/node-graph/nodes/image/end-modify-image), you'll set the final color at the current UV coordinates (not modified ones, but active in GPU context).
+
+
+:::note
+
+Images may be sampled twice, with currently processing UV and UV from **UV pass**. If the color is used in the UV pass, image will be sampled twice, once for UV calculation (using currently processing UV) and once for color (with modified UV). If the color is used in the Color pass, image will be sampled only once, using the UV from the UV pass.
+
+:::
+
+
+:::tip
+
+Check out [GPU Context](/docs/usage/node-graph/property-sockets#gpu-context) documentation to learn more about how GPU context works. There is an example of how to use Modify Image pair.
+
+:::
+
+
+## Color Sample Mode
+
+The `Color Sample Mode` input determines how colors are sampled from the image texture.
+- **Color Managed**: Sampled colors will be converted to the proper color space inside the GPU context. This is the default mode and is recommended for most use cases.
+- **Raw**: Sample colors will be sample as they are, without any color space conversion. This mode is useful when you want to work with raw pixel data or when you are applying custom color transformations.

@@ -1,0 +1,42 @@
+---
+title: 'Ellipse'
+node:
+  name: 'Ellipse'
+  category: Shape
+  icon: icon-circle
+  isPair: false
+  hasPreview: false
+  inputs:
+  - name: Position
+    type: VecD
+    description: 'The position of the center of the ellipse.'
+    isContextful: false
+    default: (0, 0)
+  - name: Radius
+    type: VecD
+    description: 'The radius of the ellipse, defining its width and height. The first value is the horizontal radius, and the second value is the vertical radius.'
+    isContextful: false
+    default: (32, 32)
+  - name: Stroke Color
+    type: Paintable
+    description: 'A paintable that defines the visual appearance of the stroke. This can be a solid color or gradient.'
+    isContextful: false
+    default: Black
+  - name: Fill Color
+    type: Paintable
+    description: 'A paintable that defines the visual appearance of the fill. This can be a solid color or gradient.'
+    isContextful: false
+    default: Black
+  - name: Stroke Width
+    type: Double
+    description: 'The width of the stroke around the ellipse. A value of 0 means no stroke will be drawn.'
+    isContextful: false
+    default: '1'
+  outputs:
+  - name: Output
+    type: Vector Shape
+    description: 'The vector shape representing the ellipse.'
+    isContextful: false
+    default: 'null'
+  description: 'Creates an ellipse shape defined by its center position, radii, stroke color, fill color, and stroke width.'
+---

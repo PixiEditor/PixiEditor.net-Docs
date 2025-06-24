@@ -1,0 +1,79 @@
+---
+title: 'Image Layer'
+node:
+  name: 'Image Layer'
+  category: Structure
+  icon: icon-layers-double
+  isPair: false
+  hasPreview: true
+  inputs:
+  - name: Opacity
+    type: Float
+    description: 'The opacity of the image.'
+    isContextful: false
+    default: '1'
+  - name: Is Visible
+    type: Boolean
+    description: 'Whether the image layer is visible or not. If set to false, the image will not be rendered.'
+    isContextful: false
+    default: 'true'
+  - name: Mask Is Visible
+    type: Boolean
+    description: 'Whether the mask applied to the image layer is visible or not. If set to false, the mask will not be rendered.'
+    isContextful: false
+    default: 'true'
+  - name: Filters
+    type: Filter
+    description: 'Optional filters to apply to the image layer. These filters will be applied to the image before rendering.'
+    isContextful: false
+    default: 'null'
+  - name: Background
+    type: Painter
+    description: 'Painter instruction to draw before the image layer.'
+    isContextful: false
+    default: null
+  - name: Blend Mode
+    type: Blend Mode (Enum)
+    typeLink: /docs/usage/layers/blend-modes
+    hideSocket: true
+    description: 'The blend mode between the image layer and the background.'
+    isContextful: false
+    default: Normal
+  - name: Mask
+    type: Painter
+    description: 'The mask to apply to the image layer. This mask will be applied to the image before rendering.'
+    isContextful: false
+    default: null
+  outputs:
+  - name: Output
+    type: Painter
+    description: 'Painting instruction to render the image layer with all applied options, including filters and background.'
+    isContextful: false
+    default: null
+  - name: Without Filters
+    type: Painter
+    description: 'Painting instruction to render the image without any filters applied.'
+    isContextful: false
+    default: null
+  - name: Raw Layer Output
+    type: Painter
+    description:  'Painting instruction to render the raw image layer without the background and filters applied.'
+    isContextful: false
+    default: null
+  - name: Canvas Position
+    type: VecD
+    description: 'The position of the image layer on the canvas. This is the top-left corner of the image layer in canvas coordinates.'
+    isContextful: false
+    default: VecD.Zero
+  - name: Center Position
+    type: VecD
+    description: 'The center position of the image layer on the canvas. This is the center point of the image layer in canvas coordinates.'
+    isContextful: false
+    default: VecD.Zero
+  - name: Size
+    type: VecD
+    description: 'The size of the image layer. This is the width and height of the image layer in canvas coordinates.'
+    isContextful: false
+    default: VecD.Zero
+  description: 'The basic type of layer that you can draw on.'
+---

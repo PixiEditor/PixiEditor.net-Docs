@@ -1,0 +1,44 @@
+---
+title: 'Evaluate Path'
+node:
+  name: 'Evaluate Path'
+  category: Shape
+  icon: icon-train
+  isPair: false
+  hasPreview: false
+  inputs:
+  - name: Shape
+    type: Vector Shape
+    description: 'The vector shape to evaluate.'
+    isContextful: false
+    default: 'null'
+  - name: Offset
+    type: Double
+    description: 'The "probing" value along the path. If Normalize Offset is true, 0 is the start of the path, and 1 is the end of the path. If Normalize Offset is false, it is a distance along the path.'
+    isContextful: false
+    default: '0.0'
+  - name: Normalize Offset
+    type: Boolean
+    description: 'If true, the Offset is normalized to the range [0, 1], where 0 is the start of the path and 1 is the end of the path. If false, the Offset is treated as a distance along the path.'
+    isContextful: false
+    default: 'true'
+  outputs:
+  - name: Position
+    type: VecD
+    description: 'An absolute position on canvas of the evaluated point on the path.'
+    isContextful: false
+    default: (0, 0)
+  - name: Tangent
+    type: VecD
+    description: 'The tangent vector at the evaluated point on the path, indicating the direction of the path at that point.'
+    isContextful: false
+    default: (0, 0)
+  - name: Matrix
+    type: Matrix3x3
+    description: 'A transformation matrix with position and tangent. You can use this matrix to place an object at the evaluated point on the path.'
+    isContextful: false
+    default: Identity
+  description: 'Evaluates a point on a vector path at a specified offset, returning the position, tangent, and transformation matrix for that point. This is useful for placing objects along paths or extracting information about the path geometry.'
+---
+
+

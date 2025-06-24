@@ -1,0 +1,37 @@
+---
+title: 'Shadow Filter'
+node:
+  name: 'Shadow Filter'
+  category: Filters
+  icon: icon-cone
+  isPair: false
+  hasPreview: false
+  inputs:
+  - name: Offset
+    type: VecD
+    description: 'The offset of the shadow from the original image. This determines how far the shadow is cast from the object.'
+    isContextful: false
+    default: (5, 5)
+  - name: Radius
+    type: VecD
+    description: 'The radius of the shadow blur. This controls how soft or sharp the edges of the shadow appear.'
+    isContextful: false
+    default: (5, 5)
+  - name: Color
+    type: Color
+    description: 'The color of the shadow.'
+    isContextful: false
+    default: Black
+  - name: Previous
+    type: Filter
+    description: 'The previous filter to apply before the shadow. This allows you to chain multiple filters together.'
+    isContextful: false
+    default: 'null'
+  outputs:
+  - name: Filters
+    type: Filter
+    description: 'The filter that applies the shadow effect to the image.'
+    isContextful: false
+    default: 'null'
+  description: 'Creates a shadow filter that can be applied to an image.'
+---

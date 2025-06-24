@@ -1,0 +1,81 @@
+---
+title: Getting Started with Nodes
+description: Learn how to create and use nodes in your application.
+sidebar:
+  order: 1
+  badge:
+    text: Start Here
+    variant: tip
+---
+
+import { Image } from 'astro:assets';
+import nodeImage from 'node.png';
+import graphImage from 'graph.png';
+import openGraphImage from 'open-graph.png';
+import { Quiz, QuizOption } from 'starlight-videos/components'
+
+## Intorduction
+
+Nodes are an essential part of PixiEditor, while they might look scary, they follow very simple rules. The goal of this guide is to help you understand not only how to use nodes, but also give you a deep understanding of how PixiEditor works.
+
+## What are Nodes?
+
+Nodes are the individual elements that make up your scene in PixiEditor. Meaning that, they are blocks that you can connect together to create complex visuals and animations. Each node has it's own inputs and outputs.
+
+This is how the node looks like:
+
+<Image src={nodeImage} width="200" alt="Node image"/>
+
+
+In fact, that's a Vector Layer Node. **Each Layer in PixiEditor is represented by a node**.
+
+## Node Graph
+
+The Node Graph is a combination of all nodes in your file/document. As the name suggests, it is a graph, where nodes are connected together.
+
+Here's an example of the simplest Node Graph:
+
+<Image src={graphImage} alt="Node graph image"/>
+
+This graph consists of two nodes: a Vector Layer Node and a Output Node. All it does it displays the contents of the Vector Layer Node in the viewport.
+
+Anything you connect to the Output Node will be displayed in the viewport. You can think of it as a "final output" of your scene.
+
+<details>
+
+<summary>Can I have more outputs than one?</summary>
+
+Yes, PixiEditor allows you to have multiple Output Nodes in your Node Graph. This means you can display different parts of your scene in different viewports or even in the same viewport at the same time.
+For more information, check out [Custom Workspaces](/docs/usage/node-graph/custom-workspaces).
+
+</details>
+
+### How to access the Node Graph?
+
+Each document in PixiEditor has its own Node Graph. You can access it by pressing <span class="pixi-icon"></span> (open Node Graph) button, right next to the green play button in the top center of the window.
+
+<Image src={openGraphImage} alt="Open Node Graph button"/>
+
+or by accessing the `View -> Open Tab -> Graph View` menu.
+
+## Check your understanding
+
+<Quiz title="What are Nodes?" variant='tip'>
+  <QuizOption correct>Individual elements that make up your scene</QuizOption>
+  <QuizOption>Tools to edit the properties of a single layer</QuizOption>
+  <QuizOption>Components that export your scene to an image</QuizOption>
+  <QuizOption>A group of cats</QuizOption>
+</Quiz>
+
+<Quiz title="What is a Node Graph?" variant='tip'>
+  <QuizOption>A single node that represents the whole scene</QuizOption>
+  <QuizOption correct>It is a combination of all nodes in your file/document</QuizOption>
+  <QuizOption>A graph that displays statistics of your image</QuizOption>
+  <QuizOption>Pictures of a single cat</QuizOption>
+</Quiz>
+
+<Quiz title="What is the purpose of the Output Node?" variant='tip'>
+  <QuizOption>To confuse</QuizOption>
+  <QuizOption>It is a tool that views the properties of a single node.</QuizOption>
+  <QuizOption correct>It displays the result of the connected nodes in the viewport.</QuizOption>
+</Quiz>

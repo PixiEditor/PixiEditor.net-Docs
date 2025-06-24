@@ -1,0 +1,32 @@
+---
+title: Remove Close Points
+node:
+  name: Remove Close Points
+  category: Shape
+  icon: icon-points-crossed
+  isPair: false
+  hasPreview: false
+  inputs:
+  - name: Points
+    type: Points Data
+    description: 'The points to process. This is the input data containing the points that will be filtered based on their proximity to each other.'
+    isContextful: false
+    default: 'null'
+  - name: Min Distance
+    type: Double
+    description: 'The minimum distance between points. This value determines how close points can be to each other before one of them is removed. If two points are closer than this distance, one will be discarded.'
+    isContextful: false
+    default: 0
+  - name: Seed
+    type: Integer
+    description: 'The seed for random selection. This is used to ensure that the process of removing close points is deterministic, allowing for reproducible results. Points are selected randomly during the filtering process, and the seed controls this randomness.'
+    isContextful: false
+    default: '0'
+  outputs:
+  - name: Output
+    type: Points Data
+    description: 'Filtered points data.'
+    isContextful: false
+    default: 'null'
+  description: 'Removes points that are too close to each other based on a specified minimum distance.'
+---
