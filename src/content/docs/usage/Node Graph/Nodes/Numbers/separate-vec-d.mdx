@@ -1,0 +1,27 @@
+---
+title: 'Separate VecD'
+node:
+  name: 'Separate VecD'
+  category: Numbers
+  icon: icon-separate-vector
+  isPair: false
+  hasPreview: false
+  inputs:
+  - name: Vector
+    type: VecD
+    description: 'The vector to separate into its individual components.'
+    isContextful: true
+    default: (0, 0)
+  outputs:
+  - name: X
+    type: Double
+    description: 'First component of the vector.'
+    isContextful: true
+    default: 0
+  - name: Y
+    type: Double
+    description: 'Second component of the vector.'
+    isContextful: true
+    default: 0
+  description: 'Separates a vector into two individual components: X and Y.'
+---

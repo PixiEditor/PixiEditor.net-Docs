@@ -1,0 +1,58 @@
+---
+title: 'Separate Color'
+node:
+  name: 'Separate Color'
+  category: Color
+  icon: icon-item-slot-out
+  isPair: false
+  hasPreview: false
+  inputs:
+  - name: Color
+    type: Color
+    description: 'The color to separate into its individual components (Red, Green, Blue, and Alpha).'
+    isContextful: true
+    default: (0, 0, 0, 0)
+  - name: Mode
+    type: Combine Separate Color Mode
+    typeLink: /docs/usage/node-graph/nodes/color/separate-color#combine-separate-color-mode
+    description: 'The mode to use for separating the color. This determines how the color components are extracted.'
+    isContextful: false
+    default: RGB
+  outputs:
+  - name: V1 (R, H)
+    type: Double
+    description: 'First component of the color. (e.g., Red in RGB mode, or the first channel in other modes).'
+    isContextful: true
+    default: 0
+    min: "0"
+    max: "1 (GPU Context), 255 (CPU Context)"
+  - name: V2 (G, S)
+    type: Double
+    description: 'Green component of the color. (e.g., Green in RGB mode, or the second channel in other modes).'
+    isContextful: true
+    default: 0
+    min: "0"
+    max: "1 (GPU Context), 255 (CPU Context)"
+  - name: V3 (B, V, L)
+    type: Double
+    description: 'Blue component of the color. (e.g., Blue in RGB mode, or the third channel in other modes).'
+    isContextful: true
+    default: 0
+    min: "0"
+    max: "1 (GPU Context), 255 (CPU Context)"
+  - name: A
+    type: Double
+    description: 'Alpha component of the color. This represents the transparency level of the color.'
+    isContextful: true
+    default: 0
+    min: "0"
+    max: "1 (GPU Context), 255 (CPU Context)"
+  description: 'Separates a color into its individual components (Red, Green, Blue, and Alpha). This node allows you to extract specific color channels for further processing or analysis.'
+---
+
+## Combine Separate Color Mode
+
+The **Combine Separate Color Mode** determines how the color components are extracted from the input color. The available modes are:
+- **RGB**: Extracts the Red, Green, and Blue components of the color.
+- **HSV**: Extracts the Hue, Saturation, and Value components of the color.
+- **HSL**: Extracts the Hue, Saturation, and Lightness components of the color.
