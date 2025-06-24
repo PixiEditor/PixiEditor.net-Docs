@@ -2,3 +2,47 @@
 title: 'Masking'
 ---
 
+import masked from 'assets/masked.png';
+import  mask  from 'assets/mask.png';
+import  maskResult  from 'assets/mask-result.png';
+import { Image } from 'astro:assets';
+import { Steps } from '@astrojs/starlight/components';
+
+Masking allows you to control which parts of an image are visible and which are not with the use of a mask image.
+
+## How masks work
+
+In PixiEditor, masks define opacity based on lightness. 
+
+In other words, the brighter the pixel in the mask, the more visible the corresponding pixel in the image will be. The darker the pixel in the mask, the more transparent the corresponding pixel in the image will be.
+
+Black pixel = 0% opacity (fully transparent)
+White pixel = 100% opacity (fully opaque)
+
+Anything in between will be a percentage of opacity based on the lightness value of the pixel in the mask.
+
+## Example of a mask
+
+For an image like this:
+<Image src={masked} alt="Masked Image" width={256} />
+
+We can use a mask like this:
+
+<Image src={mask} alt="Mask Image" width={256} />
+
+And the result will be:
+
+<Image src={maskResult} alt="Masked Result" width={256}/>
+
+## How to create a mask
+
+To create a mask in PixiEditor 
+
+<Steps>
+
+1. Open <span class="pixi-icon small icon-layers-double"/> Layer's panel
+2. Select the layer you want to mask
+3. Click on the <span class="pixi-icon small icon-create-mask"/> Mask button in the Layer's panel top bar
+4. Click on the newly created mask, next to your layer preview
+
+</Steps>

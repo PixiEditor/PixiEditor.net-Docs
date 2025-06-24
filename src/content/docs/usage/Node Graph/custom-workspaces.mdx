@@ -5,3 +5,102 @@ sidebar:
   order: 4
 ---
 
+import texturingImg from 'assets/3Dtexturing.png';
+import noises from 'assets/noises.png';
+import noisesGraph from 'assets/noise-graph.png';
+import { Image } from 'astro:assets';
+import { Steps } from '@astrojs/starlight/components';
+import { Quiz, QuizOption } from 'starlight-videos/components'
+
+## Introduction
+
+PixiEditor's Node Graph not only allows for advanced rendering and image manipulation, but also allows you to configure the editor itself.
+
+You can create custom workspaces, define custom exports and previews.
+
+## What is a workspace?
+
+A workspace is a vague term, but in essence, you can define a workspace "A setup of the editor that speeds up a certain workflow/process". A workspace can be a set of viewports displaying different things.
+
+Let's say you want to texture a cube. The usual workflow might look like this:
+
+1. Edit a texture in 2D drawing software.
+2. Export the texture.
+3. Import the texture into a 3D software.
+4. Preview changes
+5. Repeat steps 1-4 until satisfied.
+
+With PixiEditor, we can speed up this process into a single step.
+
+## Cube texturing workspace example
+
+Let's look at a Cube Texturing workspace that is available in [Founder's Pack]() <sup>(coming soon)</sup>
+
+This workspace consists of two viewports:
+1. **Texture Editor**: A viewport that allows you to edit the texture of the cube.
+2. **Cube Preview**: A viewport that displays the cube with the texture applied.
+
+<Image src={texturingImg} alt="Cube Texturing Workspace" />
+
+This is a single document with 2 viewports. One displays main output, and another displays a custom output (3D preview).
+
+Note that the document has size 64x48, which is the size of the texture we are editing. However the Cube Preview is much larger.
+
+This is possible thanks to the [Custom Output](/docs/usage/node-graph/nodes/workspace/custom-output) node, which allows you to define a custom output with a specific size and export settings.
+
+## Creating a custom workspace
+
+Before we start creating a custom workspace. Let's learn how to open two viewports for the same document.
+
+<Steps>
+
+1. Open the document you want to edit.
+2. Click **View** -> <span class="pixi-icon small icon-plus-square"></span> **New window for current image**.
+
+</Steps>
+
+New tab will open with the same document. You can now arrange the viewports as you like.
+
+### Creating a custom output
+
+:::caution
+If you are not familiar with the Node Graph, we recommend reading the [Node Graph Guide](/docs/usage/node-graph/getting-started-with-node-graph) first.
+:::
+
+<Steps>
+
+1. Head to the Graph View and create [Custom Output](/docs/usage/node-graph/nodes/workspace/custom-output) node.
+2. Set the **Output Name** to something meaningful, like "My output 2".
+3. Set the **Size** to the desired output size, for example (1024, 1024) for a large texture.
+
+</Steps>
+
+If you now go to the viewport settings (<span class="pixi-icon icon-tool"></span> icon in top-right of the viewport), you will see that the custom output is available for selection under "Render preview" dropdown.
+
+Now if you connect something like a [Noise Node](/docs/usage/node-graph/nodes/image/noise) to the `Output` and `Custom Output`, you will see that both outputs have different resolutions.
+
+<Image src={noises} alt="Noises" />
+<Image src={noisesGraph} alt="Noises Graph" />
+
+Your custom output is also available in export menu.
+
+<Quiz title='Can you have different resolutions for different outputs?'>
+
+  <QuizOption correct>Yes, you can set different resolutions for each custom output.</QuizOption>
+  <QuizOption>No, all outputs must have the same resolution.</QuizOption>
+  <QuizOption>Only the main output can have a different resolution.</QuizOption>
+
+</Quiz>
+
+<Quiz title='Can you have multiple custom outputs?'>
+
+  <QuizOption correct>Yes, you can create as many custom outputs as you want.</QuizOption>
+  <QuizOption>No, you can only have one additional custom output.</QuizOption>
+  <QuizOption>Only the main output can be customized.</QuizOption>
+</Quiz>
+
+<Quiz title='Are custom outputs available in export menu?'>
+
+  <QuizOption>No, only the main output is available in export menu.</QuizOption>
+  <QuizOption correct>Yes, custom outputs are available in export menu.</QuizOption>
+</Quiz>
