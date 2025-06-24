@@ -1,0 +1,32 @@
+---
+title: 'Text On Path'
+node:
+  name: 'Text On Path'
+  category: Shape
+  icon: icon-text-underline
+  isPair: false
+  hasPreview: false
+  inputs:
+  - name: Text
+    type: Text Data
+    description: 'Text vector to put on the path.'
+    isContextful: false
+    default: 'null'
+  - name: Shape Label
+    type: Vector Shape
+    description: 'Path to put the text on.'
+    isContextful: false
+    default: 'null'
+  - name: Offset
+    type: VecD
+    description: 'Offset of the text along the path. This determines how far the text is positioned from the start of the path and the vertical distance from the path.'
+    isContextful: false
+    default: (0, 0)
+  outputs:
+  - name: Text
+    type: Text Data
+    description: 'The text vector positioned along the specified path.'
+    isContextful: false
+    default: 'null'
+  description: 'Positions text along a specified vector path.'
+---

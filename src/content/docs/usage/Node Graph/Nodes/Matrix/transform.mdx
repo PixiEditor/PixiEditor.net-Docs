@@ -1,0 +1,32 @@
+---
+title: 'Transform'
+node:
+  name: 'Transform'
+  category: Matrix
+  icon: icon-canvas-resize
+  isPair: false
+  hasPreview: true
+  inputs:
+  - name: Image
+    type: Painter
+    description: 'The image to apply the transformation to.'
+    isContextful: false
+    default: null
+  - name: Input Matrix
+    type: Matrix3x3
+    description: 'The input matrix to concatenate with the transformation. This allows for combining multiple transformations.'
+    isContextful: false
+    default: Identity
+  outputs:
+  - name: Output Matrix
+    type: Matrix3x3
+    description: 'The resulting matrix after applying the transformation. This matrix can be used for further transformations or rendering operations.'
+    isContextful: false
+    default: Identity
+  - name: Output
+    type: Painter
+    description: 'The painter instruction that paints the transformed image.'
+    isContextful: false
+    default: null
+  description: 'Creates a transformation matrix and/or applies it to the input image.'
+---
