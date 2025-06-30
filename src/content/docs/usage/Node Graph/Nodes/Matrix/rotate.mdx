@@ -17,12 +17,12 @@ node:
   - name: Angle
     type: Double
     description: 'The angle to rotate the matrix. This is the amount of rotation applied to the matrix, specified in the unit defined above.'
-    isContextful: false
+    isContextful: true
     default: '0.0'
   - name: Center
     type: VecD
     description: 'The center point around which the rotation is applied. This point serves as the pivot for the rotation, determining how the matrix is transformed.'
-    isContextful: false
+    isContextful: true
     default: (0, 0)
   - name: Image
     type: Painter
@@ -32,13 +32,13 @@ node:
   - name: Input Matrix
     type: Matrix3x3
     description: 'Matrix to concatenate with the rotation. This allows for combining multiple transformations into a single matrix, enabling complex transformations.'
-    isContextful: false
+    isContextful: true
     default: Identity
   outputs:
   - name: Output Matrix
     type: Matrix3x3
     description: 'The resulting matrix after applying the rotation. This matrix can be used for further transformations or rendering operations.'
-    isContextful: false
+    isContextful: true
     default: Identity
   - name: Output
     type: Painter

@@ -10,12 +10,12 @@ node:
   - name: Scale
     type: VecD
     description: 'The scale factor to apply to the matrix. This determines how much the matrix is scaled in both the x and y dimensions, affecting the size of the resulting image or transformation.'
-    isContextful: false
+    isContextful: true
     default: (1, 1)
   - name: Center
     type: VecD
     description: 'The center point around which the scaling is applied. This point serves as the pivot for the scaling transformation.'
-    isContextful: false
+    isContextful: true
     default: (0, 0)
   - name: Image
     type: Painter
@@ -25,13 +25,13 @@ node:
   - name: Input Matrix
     type: Matrix3x3
     description: 'Matrix to concatenate with the scaling. This allows for combining multiple transformations into a single matrix, enabling complex transformations.'
-    isContextful: false
+    isContextful: true
     default: Identity
   outputs:
   - name: Output Matrix
     type: Matrix3x3
     description: 'The resulting matrix after applying the scaling. This matrix can be used for further transformations or rendering operations.'
-    isContextful: false
+    isContextful: true
     default: Identity
   - name: Output
     type: Painter

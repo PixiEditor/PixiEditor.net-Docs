@@ -15,18 +15,28 @@ node:
   - name: Input Matrix
     type: Matrix3x3
     description: 'The input matrix to concatenate with the transformation. This allows for combining multiple transformations.'
-    isContextful: false
+    isContextful: true
     default: Identity
+  - name: Position
+    type: VecD
+    description: 'Point to transform (map) with provided matrix.'
+    isContextful: true
+    default: (0, 0)
   outputs:
   - name: Output Matrix
     type: Matrix3x3
     description: 'The resulting matrix after applying the transformation. This matrix can be used for further transformations or rendering operations.'
-    isContextful: false
+    isContextful: true
     default: Identity
   - name: Output
     type: Painter
     description: 'The painter instruction that paints the transformed image.'
     isContextful: false
     default: null
+  - name: Transformed Position
+    type: VecD
+    description: 'The position after applying the transformation matrix. This is the result of mapping the input position through the transformation matrix.'
+    isContextful: true
+    default: (0, 0)
   description: 'Creates a transformation matrix and/or applies it to the input image.'
 ---

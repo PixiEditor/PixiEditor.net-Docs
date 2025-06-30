@@ -1,0 +1,62 @@
+---
+title: Decompose Matrix
+node:
+  name: Decompose Matrix
+  category: Matrix
+  icon: icon-leafy-green
+  isPair: false
+  hasPreview: false
+  inputs:
+  - name: Matrix
+    type: Matrix3x3
+    description: 'Matrix to decompose'
+    isContextful: true
+    default: Identity
+  outputs:
+  - name: Scale X
+    type: Double
+    description: 'Scale X component of the matrix (M11)'
+    isContextful: true
+    default: 1
+  - name: Scale Y
+    type: Double
+    description: 'Scale Y component of the matrix (M22)'
+    isContextful: true
+    default: 1
+  - name: Skew X
+    type: Double
+    description: 'Skew X component of the matrix (M12)'
+    isContextful: true
+    default: 0
+  - name: Skew Y
+    type: Double
+    description: 'Skew Y component of the matrix (M21)'
+    isContextful: true
+    default: 0
+  - name: Translate X
+    type: Double
+    description: 'Horizontal offset of the matrix (M13)'
+    isContextful: true
+    default: 0
+  - name: Translate Y
+    type: Double
+    description: 'Vertical offset of the matrix (M23)'
+    isContextful: true
+    default: 0
+  - name: Perspective 0
+    type: Double
+    description: 'First perspective component of the matrix (M31)'
+    isContextful: true
+    default: 0
+  - name: Perspective 1
+    type: Double
+    description: 'Second perspective component of the matrix (M32)'
+    isContextful: true
+    default: 0
+  - name: Perspective 2
+    type: Double
+    description: 'Third perspective component of the matrix (M33)'
+    isContextful: true
+    default: 1
+  description: 'Decomposes a matrix into its individual components.'
+---

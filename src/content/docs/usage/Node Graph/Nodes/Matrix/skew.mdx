@@ -10,7 +10,7 @@ node:
   - name: Skew
     type: VecD
     description: 'The skew vector that defines the skew transformation.'
-    isContextful: false
+    isContextful: true
     default: (0, 0)
   - name: Image
     type: Painter 
@@ -20,13 +20,13 @@ node:
   - name: Input Matrix
     type: Matrix3x3
     description: 'The input matrix to concatenate with the skew transformation. This allows for combining multiple transformations.'
-    isContextful: false
+    isContextful: true
     default: Identity
   outputs:
   - name: Output Matrix
     type: Matrix3x3
     description: 'The resulting matrix after applying the skew transformation. This matrix can be used for further transformations or rendering operations.'
-    isContextful: false
+    isContextful: true
     default: Identity
   - name: Output
     type: Painter
