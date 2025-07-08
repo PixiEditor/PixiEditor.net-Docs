@@ -1,0 +1,84 @@
+---
+title: Getting Started with Animations
+description: Learn animation basics in PixiEditor.
+
+sidebar:
+  order: 1
+  badge:
+    text: Start Here
+    variant: tip
+---
+
+import timelineImg from 'assets/timeline.png';
+import { Image } from 'astro:assets';
+
+
+PixiEditor offers two main ways to animate your projects: **Frame by Frame** and **Procedurally**.
+Both methods can be used together freely.
+
+## Timeline
+
+The timeline is the most important component of animation in PixiEditor. Everyting related to animation is managed there.
+
+You can access the timeline by pressing <span className="pixi-icon icon-timeline"/> button on top of the screen.
+
+or by going to `View -> Open Tab -> Timeline` menu.
+
+<Image src={timelineImg} alt="An image of timeline UI"/>
+
+1. **Frames per second setting** - how fast timeline should play the animation. Higher values require more frames for the same amount of time, but produces smoother result.
+
+    The usual values are:
+    - 60 - for smooth animation, usually used in games
+    - 24 - movie industry standard
+
+2. <span className="pixi-icon icon-settings"/> **Settings** - opens a menu with timeline related-settings
+3. **Action buttons**
+
+- <span className="pixi-icon icon-plus-square"/> - Add an empty cel to the currently selected layer
+- <span className="pixi-icon icon-duplicate"/> - Creates a duplicated cel to the currently selected layer. Duplicates the content under active frame.
+- <span className="pixi-icon icon-onion"/> - Toggles on/off onion skinning
+- <span className="pixi-icon icon-trash"/> - Deletes all selected cels
+
+4. **Layer**
+
+    From the left to the right:
+
+- <span className="pixi-icon icon-eye"/> - Disable whole animation for layer.
+- Image Preview - It displays the layer's **base** image.
+- Layer Name
+- <span className="pixi-icon icon-chevron-down"/> Collapse button, it squishes whole layer animation row, so it takes minimal space.
+
+5. **Playback buttons**
+
+- <span className="pixi-icon icon-step-start"/> - Moves the frame cursor back to the edge of the closest cel.
+- <span className="pixi-icon icon-step-back"/> - Moves the frame cursor back one frame.
+- <span className="pixi-icon icon-play" style={{color: "#6fac6f"}}/> - Plays the animation
+- <span className="pixi-icon icon-step-forward"/> - Moves the frame cursor forward one frame.
+- <span className="pixi-icon icon-step-end"/> - Moves the frame cursor forward to the edge of the closest cel.
+- `00:00.08/00:01.75` - `current time` / `end time` in `mm:ss.ff` format where `mm` - minutes, `ss` - seconds, `ff` - hundredths of a second
+
+6. **Frame Bar** 
+
+    The frame bar is the top part of the timeline viewport. It displays frame cursor, frame ticks and frame numbers. It is essentially a slider. You can click and drag to change active frame. You can zoom in our out by scrolling over it.
+
+7. **Cel Row**
+
+    Cel row displays all cels within the layer. One cel consists of a preview image and cel length rectangle (how many frames a cel should occupy) that can be shortened or lengthened by dragging the edges. You can also drag the whole cel to move it around.
+
+## Frame by Frame Animations
+
+Frame by frame animation is a traditional method of animating. It involves drawing each frame by hand.
+
+For more information, check out a [dedicated guide](/docs/usage/animating/frame-by-frame)
+
+## Procedural Animations
+
+PixiEditor gives full freedom over animations, meaning you can animate almost any property within the [Node Graph](/docs/usage/node-graph/getting-started-with-node-graph). 
+It does not involve any manual drawing, unlike frame by frame animations, but is rather a result of combining operations and parameters.
+
+Think of it as a set of instructions.
+
+`Move to the right by 10 pixels over 1 second`
+
+For more information, check out a [dedicated guide](/docs/usage/animating/procedural)
