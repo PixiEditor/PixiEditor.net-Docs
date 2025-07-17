@@ -2,3 +2,53 @@
 title: Frame by frame Animations
 ---
 
+import { Image } from 'astro:assets';
+import animImg from 'assets/anim.png';
+import layerImg from 'assets/layer.png';
+import cel from 'assets/cel.png';
+
+Welcome to the comperhensive guide on frame-by-Frame animations in PixiEditor!
+
+## Concepts
+
+This form of animation is one of the oldest, studios like Disney used to create masterpieces like Mickey Mouse or Snow White with this technique.
+But it's not dead today! Even though big studios dropped frame by frame animations in favor of Computer Graphics, it's still widely used in video games or indie movies.
+
+Frame by frame animations as the name suggests, conists of multiple frames.
+
+A singular frame is just an image. When you create multiple images, that are just slightly different from the previous and display them one after another fast enough, they'll create a illusion of motion. So called "animation".
+
+### Terminology
+
+I'll be using specific terms to describe various things, below is a small glossary:
+
+- `Cel` - a singular image within the animation. Animation consists of multiple cels,
+- `Onion skinning` - a technique that is used to preview previous and next frames in semi-transparent fashion
+
+## Creating animations in PixiEditor
+
+:::tip
+Before you continue, make sure to read <a href="/docs/usage/animating/getting-started">getting started guide</a>.
+:::
+
+### Most important concept in PixiEditor
+
+#### **Layers and cels are inseparable**
+
+Think of it this way: layer is an animation with a single cel, you can just add more cels to it by using the <a href="/docs/usage/animating/getting-started#timeline">Timeline</a>
+
+If you delete the layer, you'll delete all cels, that are related to it.
+
+<Image src={animImg} alt="anim img"/>
+<Image src={layerImg} alt="layers img"/>
+
+Marked elements with red outline are the same thing. Order of the layers inside the <a href="/docs/usage/animating/getting-started#timeline">Timeline</a> is also exactly the same as in the Layers panel.
+
+Layer will not show in the <a href="/docs/usage/animating/getting-started#timeline">Timeline</a> unless you create a cel for it. Hit 
+<span className="pixi-icon icon-plus-square"/> or <span className="pixi-icon icon-duplicate"/> to add a cel to the selected layer.
+
+### Changing duration of a cel
+
+Grab an edge of the cel and drag it to prolong or shorten the duration of the cel.
+
+<Image src={cel} alt="cel grab img"/>

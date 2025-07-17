@@ -1,3 +1,133 @@
 ---
 title: Intro to Procedural Animations
 ---
+
+import Node from '../../../../components/Node.astro';
+import {Image} from 'astro:assets';
+import simpleGraphImg from 'assets/opacitygraph.png';
+import sophGraphImg from 'assets/bopGraph.png';
+import resVideo from 'assets/opacity.webm';
+import bopVideo from 'assets/bop.webm';
+
+Ah, I see you want to make some cool stuff. Splendid! Don't be scared, procedural animations are easier than they sound.
+
+:::tip
+I recommend checking out <a href="/docs/usage/node-graph/getting-started-with-node-graph">node docs</a> and <a href="/docs/usage/animating/getting-started">animating basics</a> first, as it will make understading stuff easier.
+:::
+
+## What is a procedural animation
+
+It's an animation that is generated based on ~~prompts~~, ha, no it's not.
+
+Do not confuse procedural animation with generative AI. The effect is 100% based on logic and input parameters, not a black box.
+
+## Crucial animation nodes
+
+Without these, you'll have a hard time animating.
+
+<br/>
+
+<a style={{textDecoration: "none"}} href="/docs/usage/node-graph/nodes/animation/time"><Node data={{
+    name: 'Time',
+  category: "Animation",
+  icon: "icon-clock",
+  isPair: false,
+  hasPreview: false,
+  inputs: null,
+  outputs: [
+        {
+        name: "Active Frame",
+        type: "Integer",
+        description: 'The current active frame in the timeline.',
+        isContextful: false,
+        default: '0'
+        },
+   { 
+    name: "Normalized Time",
+    type: "Double",
+    description: 'The normalized time value, ranging from 0.0 to 1.0, representing the current position in the timeline relative to the total duration.',
+    isContextful: false,
+    default: '0.0'}],
+  description: 'Provides the current time in the animation timeline, including the active frame and normalized time.'
+}}/></a>
+
+<br/>
+
+<a style={{textDecoration: "none"}} href="/docs/usage/node-graph/nodes/animation/easing"><Node data={{
+  name: "Easing ",
+  category: "Animation",
+  icon: "icon-spline-chart",
+  isPair: false,
+  hasPreview: false,
+  inputs: [
+    {
+      name: "Value",
+      type: "Double",
+      description: "The input value to be eased. This value should be between 0 and 1.",
+      isContextful: true,
+      default: "0.0"
+    },
+    {
+      name: "Easing Type",
+      type: "EasingType (Enum)",
+      hideSocket: true,
+      typeLink: "/docs/usage/node-graph/nodes/animation/easing#easing-types",
+      description: "The type of easing function to apply to the input value. This determines how the value transitions over time.",
+      isContextful: false,
+      default: "Linear"
+    }
+  ],
+  outputs: [
+    {
+      name: "Output",
+      type: "Double",
+      description: "The eased output value, which is the result of applying the selected easing function to the input value.",
+      isContextful: true,
+      default: "0.0"
+    }
+  ],
+  description: "Applies an easing function to a value, transforming it based on the selected easing type. This is useful for creating smooth transitions in animations."
+}}/></a>
+
+<br/>
+
+Time node is essential to get the active frame or normalized time of the animation, while easing provides tons of built-in smoothing operations.
+Don't worry, we'll get to that soon.
+
+Basically all nodes in `Animation` category are your friends.
+
+## The simplest procedural animation
+
+<Image src={simpleGraphImg} alt="Simple graph that connects Normalized Time of Time Node to Layer's Opacity input"/>
+
+Will produce 
+
+<video src={resVideo} muted autoplay loop/>
+
+<br/>
+
+Neat, isn't it?
+
+Let's break down what happens here.
+
+1. Time Node exposes <a href="/docs/usage/node-graph/nodes/animation/time#normalized-time">Normalized Time</a> - which is a value between 0 and 1. Where 0 is start of the animation and 1 is end of it. For 2 second animation, normalized time at 1 second will equal `0.5`.
+2. We are connecting Normalized Time to Image's Opacity. So at the beginning of the animation, the image will be transparent (`0` opacity) and fully opaque at the end (`1` opacity).
+
+## Let's make something slightly more sophisticated.
+
+<Image src={sophGraphImg} alt="Simple graph that connects Normalized Time of Time Node to Layer's Opacity input"/>
+
+The core concept in this graph is:
+
+1. Get the time of the animation (0 - 1 range)
+2. Create a smoothing effect (elastic in that case) by plugging our time to Easing node. Read more about <a href="/docs/usage/node-graph/nodes/animation/easing">easings here</a>.
+3. Create a rotation + scale effect by combining two nodes with "Matrix Input" and "Matrix Output"
+    - Scale can be directly connected with easing, because we want it to go from invisible (0 scale) to full size (1 scale)
+    - Rotation must be in 0 - 360 range to make image rotate in a full circle. This is done by multiplying eased time by 360.
+4. At last, we are plugging our source image to the Scale Node. In our case Scale Node not only scales but also rotates, because we plugged in the result of rotation to it. You can combine multiple effects into one with yellow (<a href="/docs/usage/node-graph/property-sockets/#-matrix3x3">Matrix</a>) inputs.
+
+And the effect:
+
+<video src={bopVideo} muted autoplay loop/>
+
+The possibilities are truly endless. Take your time, play around with nodes and just have fun, this is the best way to learn.
