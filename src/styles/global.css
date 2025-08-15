@@ -44,11 +44,10 @@ img[data-image-component="true"] {
     border-radius: 5px;
 }
 
-kbd{
-    background-color: #303030;
-    border-color: #3f3f46;
-    border-width: 1px;
-    border-radius: 5px;
+kbd {
+    @apply border rounded;
+    @apply bg-neutral-100 dark:bg-neutral-800;
+    @apply border-neutral-300 dark:border-neutral-700;
     padding: 0.2rem 0.4rem;
     font-size: 0.8rem;
     font-family: monospace;
