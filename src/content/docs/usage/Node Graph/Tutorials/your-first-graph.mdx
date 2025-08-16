@@ -1,0 +1,79 @@
+---
+title: Your First Graph
+description: Learn how to create your first Node Graph in PixiEditor.
+sidebar:
+  order: 6
+---
+
+import { List } from 'starlight-videos/components'
+import { Aside } from '@astrojs/starlight/components';
+import { Steps } from '@astrojs/starlight/components';
+import { Image } from 'astro:assets';
+import ctxMenuImage from './assets/ctx-menu.png';
+import { Quiz, QuizOption } from 'starlight-videos/components'
+
+First of all, congratulations on deciding to learn about Node Graphs in PixiEditor! It's a fascinating and powerful system, you won't regret it.
+
+<Aside type="caution">
+
+Node Graph is a feature only present in PixiEditor 2.0 and later versions.
+
+</Aside>
+
+## Creating Your First Node Graph
+
+If you didn't read the [Getting Started with Nodes](/docs/usage/node-graph/getting-started-with-node-graph) guide, we recommend you to do so first. It will help you understand the basics of nodes and how they work.
+
+Without further ado, let's create your first Node Graph!
+
+<Steps>
+
+1. Create a new document in PixiEditor by going to `File -> New`.
+2. Open the Node Graph by clicking the <span class="pixi-icon icon-nodes"/> button in the top center of the window or by going to `View -> Open Tab -> Graph View`.
+3. You will see a Node Graph with a single layer connected to the Output Node. This is the starting point of your Node Graph.
+
+</Steps>
+
+## Adding Nodes
+
+Now that you have your first Node Graph, let's add some nodes to it.
+
+<kbd>Right click</kbd> or hit <kbd>Space</kbd> on the empty area, this will open a context menu with a list of available nodes. You can type the name of the node you want to add in the search bar.
+
+<Image src={ctxMenuImage} alt="Context menu with nodes" width="400"/>
+
+<details>
+
+<summary>Node Types</summary>
+
+In version 2.0.0.97, there are several types of nodes available:
+
+- **Color** - Nodes such as Separate Color into RGB, HSV, and HSL, which allow you to manipulate colors in various ways.
+- **Image** - It's a big category with various nodes, such as Create Image, Mask, Noise, and more, which allow you to work with images.
+- **Structure** - "Structure" in PixiEditor refers to the elements in a layer tree. This includes Image Layers, Vector Layers and Folders.
+- **Numbers** - Various numerical related nodes, most notably the Math node, which allows you to perform mathematical operations on numbers.
+- **Effects** - Standalone effects such as Raster Outline or custom Shader
+- **Workspace** - Nodes that allow for workspace cusomization - multiple outputs and export zones.
+- **Shape** - Nodes that allow you to create and manipulate shapes
+- **Matrix** - Matrix related nodes, such as Transform, which allow you to manipulate the position, rotation, and scale of nodes.
+- **Filters** - Nodes that contain various filters - for example, Blur, Shadow, and Color Correction.
+- **Animation** - Nodes that allow you to create procedural animations.
+- **Misc** - Miscellaneous nodes that don't fit into any other category, such as Document Info.
+
+</details>
+
+
+<Steps>
+
+4. Let's add a <span class="pixi-icon small icon-cone"/> **Shadow Filter** node. You can find it in the **Filters** category. Click on it to add it to the Node Graph.
+
+5. Click on the red-ish circle <span style={{color: "#cc5c5c"}}>⬤</span>, next to the "Filter" label, on the right side of the <span class="pixi-icon small icon-cone"/> **Shadow Filter** node, and drag it to the "Filter" socket with the same color in the **<span class="pixi-icon small icon-layers-double"/> Base Layer** node (on the **left** side of the node). 
+
+6. Now go back to your document (make sure Base Layer is selected in the Layers panel) and try drawing something. You should see a shadow effect applied to your drawing!
+
+</Steps>
+
+### Sockets
+
+You may have noticed that the nodes have different colored circles and diamonds on their sides. These are called **sockets**. They are used to connect nodes together and transfer data between them.
+To learn more about sockets, check out the [Sockets](/docs/usage/node-graph/property-sockets) guide.
