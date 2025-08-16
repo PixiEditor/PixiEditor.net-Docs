@@ -3,6 +3,7 @@ title: Channel Packing
 description: Learn how to quickly do Channel Packing using nodes in PixiEditor.
 ---
 import { Image, Picture } from 'astro:assets';
+import { Steps } from '@astrojs/starlight/components';
 import ExampleAmbientOcclusion from './assets/dartboard_ao_4k.png';
 import ExampleMetal from './assets/dartboard_metal_4k.png';
 import ExampleRough from './assets/dartboard_rough_4k.png';
@@ -36,24 +37,26 @@ by a single color channel (the source must be grayscale or have meaningful data 
 
 Packing can be done very quickly using Nodes in PixiEditor.
 
+<Steps>
+
 1. Open one of your maps in PixiEditor.
 
-:::caution
-Saving will write directly to the original map file. <br /> To avoid accidentally overwriting it, first save the image as a .pixi file using `File -> Save as`.
-:::
+    :::caution
+    Saving will write directly to the original map file. <br /> To avoid accidentally overwriting it, first save the image as a .pixi file using `File -> Save as`.
+    :::
 
 2. Paste your other maps into the opened document and keep them on separate layers.
-1. Open the Node Graph by clicking the <span class="pixi-icon icon-nodes"/> button at the top center
-of the window or by going to `View -> Open Tab -> Graph View`. <br />
-You should see a Node Graph like this:
+3. Open the Node Graph by clicking the <span class="pixi-icon icon-nodes"/> button at the top center of the window or by going to `View -> Open Tab -> Graph View`. <br />You should see a Node Graph like this:
 
-![](./assets/packingBaseGraph.png)
+    ![](./assets/packingBaseGraph.png)
 
-3. For each Layer node, disconnect the Background input so the layers are not put together.
-1. Open the Node Picker (right-click or press Space) and add a [<span class="pixi-icon icon-insert-item"/> **Combine Channels**](../../nodes/image/combine-channels) node.
-1. Connect the Combine Channels node to the Output node.
-1. Connect each layer to its respective channel on the Combine Channels node. <br />
+4. For each Layer node, disconnect the Background input so the layers are not put together.
+5. Open the Node Picker (right-click or press Space) and add a [<span class="pixi-icon icon-insert-item"/> **Combine Channels**](../../nodes/image/combine-channels) node.
+6. Connect the Combine Channels node to the Output node.
+7. Connect each layer to its respective channel on the Combine Channels node. <br />
 Your graph should end up looking like this:
+
+</Steps>
 
 ![](./assets/packingFinalGraph.png)
 
@@ -63,19 +66,21 @@ That's it. You can now export your packed map using `File -> Export` and use it 
 
 You can also unpack a packed map using Nodes.
 
+<Steps>
+
 1. Open your packed map in PixiEditor.
 
-:::caution
-Saving will write directly to the original map file. <br /> To avoid accidentally overwriting it, first save the image as a .pixi file using `File -> Save as`.
-:::
+    :::caution
+    Saving will write directly to the original map file. <br /> To avoid accidentally overwriting it, first save the image as a .pixi file using `File -> Save as`.
+    :::
 
-2. Open the Node Graph by clicking the <span class="pixi-icon icon-nodes"/> button at the top center
-of the window or by going to `View -> Open Tab -> Graph View`.
-1. Open the Node Picker (right-click or press Space) and add a [<span class="pixi-icon icon-take-item"/> **Separate Channels**](../../nodes/image/separate-channels) node, and enable the **Grayscale** option (otherwise, each map will be tinted red, green, or blue).
-1. Connect the Layers output to the Image input of the Separate Channels node.
-1. Create a [<span class="pixi-icon icon-surveillance"/> **Custom Output**](../../nodes/workspace/custom-output) node for each channel you want to extract.
-1. Name each output accordingly. <br />
-Your graph should end up looking like this:
+2. Open the Node Graph by clicking the <span class="pixi-icon icon-nodes"/> button at the top center of the window or by going to `View -> Open Tab -> Graph View`.
+3. Open the Node Picker (right-click or press Space) and add a [<span class="pixi-icon icon-take-item"/> **Separate Channels**](../../nodes/image/separate-channels) node, and enable the **Grayscale** option (otherwise, each map will be tinted red, green, or blue).
+4. Connect the Layers output to the Image input of the Separate Channels node.
+5. Create a [<span class="pixi-icon icon-surveillance"/> **Custom Output**](../../nodes/workspace/custom-output) node for each channel you want to extract.
+6. Name each output accordingly. <br />Your graph should end up looking like this:
+
+</Steps>
 
 <Image class="min-md:max-w-2/3" src={UnpackedGraph} alt="Unpacked Graph" />
 
