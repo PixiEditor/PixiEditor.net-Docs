@@ -27,7 +27,7 @@ mouse events to control the pen.
 
 ### ActionAccumulator
 
-Now we leave the UI layer and start to descend into `ChangeableDocument` which is part of PixiEditor's Core. When UsePenTool() is called, `ActiveDocument` 
+Now we leave the UI layer and start to descend into `ChangeableDocument` which is part of PixiEditor's Core. When `UsePenTool()` is called, `ActiveDocument` 
 creates a new `LineBasedPen_Action` which contains all the drawing settings (color, stroke width, ...) as well as the initial position on the canvas. 
 As you draw, it creates more `LineBasedPen_Action`s with updated positions. Once you finally stop drawing, an `EndLineBasedPen_Action` is created. 
 All of these actions are passed to this document's  `ActionAccumulator`. `ActionAccumulator` passes all of these actions to `ChangeableDocument`, which 
