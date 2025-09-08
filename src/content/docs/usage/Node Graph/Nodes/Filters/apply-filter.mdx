@@ -16,6 +16,14 @@ node:
     type: Filter
     description: 'Filter to apply to the image.'
     default: 'null'
+  - name: Mask
+    type: Painter
+    description: 'Mask that defines an area of the image to apply the filter to.'
+    default: null
+  - name: Invert Mask
+    type: Boolean
+    description: 'Whether to invert the mask. If true, the areas defined by the mask will not have the filter applied, and the rest of the image will.'
+    default: 'False'
   outputs:
   - name: Output
     type: Painter

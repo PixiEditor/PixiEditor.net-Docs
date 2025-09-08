@@ -1,0 +1,47 @@
+---
+title: 'Rectangle'
+node:
+  name: 'Rectangle '
+  category: Shape
+  icon: icon-square
+  isPair: false
+  hasPreview: false
+  inputs:
+  - name: Position
+    type: VecD
+    description: 'Top left position of the rectangle'
+    isContextful: false
+    default: (0, 0)
+  - name: Size
+    type: VecD
+    description: 'Width and height of the rectangle'
+    isContextful: false
+    default: (32, 32)
+  - name: Radius
+    type: double
+    description: 'Corner radius of the rectangle'
+    isContextful: false
+    default: '0'
+  - name: Stroke Color
+    type: Paintable
+    description: 'Color of the stroke. Can be color or any other paintable'
+    isContextful: false
+    default: Black
+  - name: Fill Color
+    type: Paintable
+    description: 'Fill of the rectangle. Can be color or any other paintable'
+    isContextful: false
+    default: Black
+  - name: Stroke Width
+    type: double
+    description: 'Width of the stroke.'
+    isContextful: false
+    default: '1'
+  outputs:
+  - name: Output
+    type: Vector Shape
+    description: 'Rectangle vector shape'
+    isContextful: false
+    default: 'null'
+  description: 'Creates a rectangle vector shape'
+---
