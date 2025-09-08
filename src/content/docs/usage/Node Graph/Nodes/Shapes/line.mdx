@@ -1,0 +1,37 @@
+---
+title: 'Line'
+node:
+  name: 'Line '
+  category: Shape
+  icon: icon-line
+  isPair: false
+  hasPreview: false
+  inputs:
+  - name: Line Start
+    type: VecD
+    description: 'Start point of the line'
+    isContextful: false
+    default: VecD.Zero
+  - name: Line End
+    type: VecD
+    description: 'End point of the line'
+    isContextful: false
+    default: (32, 32)
+  - name: Stroke Color
+    type: Paintable
+    description: 'Color/Gradient of the stroke'
+    isContextful: false
+    default: Black
+  - name: Stroke Width
+    type: double
+    description: 'Width of the line'
+    isContextful: false
+    default: '1'
+  outputs:
+  - name: Output
+    type: Vector Shape
+    description: 'Line vector data'
+    isContextful: false
+    default: 'null'
+  description: 'Creates a line vector shape'
+---

@@ -34,6 +34,24 @@ node:
     description: 'The seed value for the noise generation. This is used to initialize the random number generator, allowing for reproducible noise patterns. Changing the seed will produce a different noise pattern, while keeping other parameters constant.'
     isContextful: false
     default: 0
+  - name: Feature
+    type: Voronoi Feature (Enum)
+    typeLink: /docs/usage/node-graph/nodes/image/noise#feature
+    hideSocket: true
+    default: 'F1'
+    description: 'The feature to use for the Voronoi noise generation. This determines the specific characteristics of the generated noise pattern.'
+  - name: Randomness
+    type: Double
+    description: 'The randomness value for the Voronoi noise generation. 0 creates uniform grid pattern, 1 maximally randomizes cell positions.'
+    isContextful: false
+    default: 1
+    min: "0"
+    max: "1"
+  - name: Angle Offset
+    type: Double
+    description: 'The angle offset for the Voronoi noise generation. This controls the rotation of the cells.'
+    default: 0
+    isContextful: false
   outputs:
   - name: Output
     type: Painter
@@ -45,6 +63,7 @@ node:
 
 import perlinImage from '../../assets/Nodes/Perlin.png';
 import turbulenceImage from '../../assets/Nodes/Turbulence.png';
+import voronoiImage from '../../assets/Nodes/Voronoi.png';
 import { Image } from 'astro:assets';
 
 ## Noise Types
@@ -57,3 +76,23 @@ Noise can be generated using different algorithms, each producing a unique patte
 ### Turbulence
 
 <Image src={turbulenceImage} alt="Turbulence Noise" width={256} />
+
+### Voronoi
+
+<Image src={voronoiImage} alt="Voronoi Noise" width={256} />
+
+## Feature
+
+**Voronoi only parameter**
+
+### F1
+
+Distance to the closest feature point
+
+## F2
+
+Distance to the second-closest feature point
+
+## F2 - F1 
+
+Distance to the second-closest feature point minus distance to the closest feature point.

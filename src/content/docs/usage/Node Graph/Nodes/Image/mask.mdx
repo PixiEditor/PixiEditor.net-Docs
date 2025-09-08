@@ -17,6 +17,11 @@ node:
     description: 'The mask painter instruction to apply to the input. This mask will define the areas of the input that will be visible or hidden.'
     isContextful: false
     default: null
+  - name: Invert
+    type: Boolean
+    description: 'Whether to invert the mask. If true, the areas defined by the mask will be hidden and the rest will be visible.'
+    default: 'False'
+    isContextful: false
   outputs:
   - name: Output
     type: Painter

@@ -34,7 +34,7 @@ export default defineConfig({
       ],
       sidebar: [
           {
-              label: 'Open Beta',
+              label: 'Development Channel',
               autogenerate: { directory: 'open-beta' },
           },
           {
