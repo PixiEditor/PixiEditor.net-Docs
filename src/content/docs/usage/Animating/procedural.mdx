@@ -9,125 +9,156 @@ import sophGraphImg from 'assets/bopGraph.png';
 import resVideo from 'assets/opacity.webm';
 import bopVideo from 'assets/bop.webm';
 
-Ah, I see you want to make some cool stuff. Splendid! Don't be scared, procedural animations are easier than they sound.
+This guide introduces procedural animations, explains why they matter, and how to create both simple and complex animations using nodes.
 
 :::tip
-I recommend checking out <a href="/docs/usage/node-graph/getting-started-with-node-graph">node docs</a> and <a href="/docs/usage/animating/getting-started">animating basics</a> first, as it will make understading stuff easier.
+Before diving in, you may find it helpful to review the <a href="/docs/usage/animating/getting-started">Basics of Animations</a> and <a href="/docs/usage/node-graph/getting-started-with-node-graph">Getting Started with Node Graphs</a> pages first.
 :::
 
-## What is a procedural animation
-
-It's an animation that is generated based on ~~prompts~~, ha, no it's not.
-
-Do not confuse procedural animation with generative AI. The effect is 100% based on logic and input parameters, not a black box.
-
-## Crucial animation nodes
-
-Without these, you'll have a hard time animating.
-
 <br/>
 
-<a style={{textDecoration: "none"}} href="/docs/usage/node-graph/nodes/animation/time"><Node data={{
-    name: 'Time',
-  category: "Animation",
-  icon: "icon-clock",
-  isPair: false,
-  hasPreview: false,
-  inputs: null,
-  outputs: [
-        {
-        name: "Active Frame",
-        type: "Integer",
-        description: 'The current active frame in the timeline.',
-        isContextful: false,
-        default: '0'
-        },
-   { 
-    name: "Normalized Time",
-    type: "Double",
-    description: 'The normalized time value, ranging from 0.0 to 1.0, representing the current position in the timeline relative to the total duration.',
-    isContextful: false,
-    default: '0.0'}],
-  description: 'Provides the current time in the animation timeline, including the active frame and normalized time.'
-}}/></a>
+## What is Procedural animation
+
+Procedural animation refers to animations that are generated based on logic and input parameters. It's important to not confuse this with generative AI (such as ChatGPT), as those make use of prompts instead. 
 
 <br/>
+## Key animation nodes 
 
-<a style={{textDecoration: "none"}} href="/docs/usage/node-graph/nodes/animation/easing"><Node data={{
-  name: "Easing ",
-  category: "Animation",
-  icon: "icon-spline-chart",
-  isPair: false,
-  hasPreview: false,
-  inputs: [
-    {
-      name: "Value",
+The following nodes are essential when working with procedural animations:
+- **Time node:** Provides the current position in the animation timeline. It exposes:
+  - **Active Frame:** The current frame being displayed.
+  - **Normalized Time;** A value between `0.0` (start of animation) and `1.0` (end of animation).  
+
+  
+  <a style={{textDecoration: "none"}} href="/docs/usage/node-graph/nodes/animation/time"><Node data={{
+      name: 'Time',
+    category: "Animation",
+    icon: "icon-clock",
+    isPair: false,
+    hasPreview: false,
+    inputs: null,
+    outputs: [
+          {
+          name: "Active Frame",
+          type: "Integer",
+          description: 'The current active frame in the timeline.',
+          isContextful: false,
+          default: '0'
+          },
+    { 
+      name: "Normalized Time",
       type: "Double",
-      description: "The input value to be eased. This value should be between 0 and 1.",
-      isContextful: true,
-      default: "0.0"
-    },
-    {
-      name: "Easing Type",
-      type: "EasingType (Enum)",
-      hideSocket: true,
-      typeLink: "/docs/usage/node-graph/nodes/animation/easing#easing-types",
-      description: "The type of easing function to apply to the input value. This determines how the value transitions over time.",
+      description: 'The normalized time value, ranging from 0.0 to 1.0, representing the current position in the timeline relative to the total duration.',
       isContextful: false,
-      default: "Linear"
-    }
-  ],
-  outputs: [
-    {
-      name: "Output",
-      type: "Double",
-      description: "The eased output value, which is the result of applying the selected easing function to the input value.",
-      isContextful: true,
-      default: "0.0"
-    }
-  ],
-  description: "Applies an easing function to a value, transforming it based on the selected easing type. This is useful for creating smooth transitions in animations."
-}}/></a>
+      default: '0.0'}],
+    description: 'Provides the current time in the animation timeline, including the active frame and normalized time.'
+  }}/></a>
+  
+<br/>
+
+- **Easing node** - Easing applies smooth transitions to animations, such as ease-in, ease-out, or elastic effects.
+
+  <a style={{textDecoration: "none"}} href="/docs/usage/node-graph/nodes/animation/easing"><Node data={{
+    name: "Easing ",
+    category: "Animation",
+    icon: "icon-spline-chart",
+    isPair: false,
+    hasPreview: false,
+    inputs: [
+      {
+        name: "Value",
+        type: "Double",
+        description: "The input value to be eased. This value should be between 0 and 1.",
+        isContextful: true,
+        default: "0.0"
+      },
+      {
+        name: "Easing Type",
+        type: "EasingType (Enum)",
+        hideSocket: true,
+        typeLink: "/docs/usage/node-graph/nodes/animation/easing#easing-types",
+        description: "The type of easing function to apply to the input value. This determines how the value transitions over time.",
+        isContextful: false,
+        default: "Linear"
+      }
+    ],
+    outputs: [
+      {
+        name: "Output",
+        type: "Double",
+        description: "The eased output value, which is the result of applying the selected easing function to the input value.",
+        isContextful: true,
+        default: "0.0"
+      }
+    ],
+    description: "Applies an easing function to a value, transforming it based on the selected easing type. This is useful for creating smooth transitions in animations."
+  }}/></a>
 
 <br/>
 
-Time node is essential to get the active frame or normalized time of the animation, while easing provides tons of built-in smoothing operations.
-Don't worry, we'll get to that soon.
-
-Basically all nodes in `Animation` category are your friends.
-
-## The simplest procedural animation
-
-<Image src={simpleGraphImg} alt="Simple graph that connects Normalized Time of Time Node to Layer's Opacity input"/>
-
-Will produce 
-
-<video src={resVideo} muted autoplay loop/>
+:::note  
+Other nodes in the Animation category are also useful and can be combined to create unique effects.  
+:::
 
 <br/>
 
-Neat, isn't it?
+## Create a basic procedural animation
 
-Let's break down what happens here.
+Follow these steps to create a simple opacity animation:
 
-1. Time Node exposes <a href="/docs/usage/node-graph/nodes/animation/time#normalized-time">Normalized Time</a> - which is a value between 0 and 1. Where 0 is start of the animation and 1 is end of it. For 2 second animation, normalized time at 1 second will equal `0.5`.
-2. We are connecting Normalized Time to Image's Opacity. So at the beginning of the animation, the image will be transparent (`0` opacity) and fully opaque at the end (`1` opacity).
+1. Connect the **Normalized Time** node to **Output** under the image node. 
 
-## Let's make something slightly more sophisticated.
+  <Image src={simpleGraphImg} alt="Simple graph that connects Normalized Time of Time Node to Layer's Opacity input"/>
 
-<Image src={sophGraphImg} alt="Simple graph that connects Normalized Time of Time Node to Layer's Opacity input"/>
+2. Use the **Normalized Time** output to track animation progress. For example, in a 2-second animation, the normalized time at 1 second is **0.5**. 
 
-The core concept in this graph is:
+<br/>
 
-1. Get the time of the animation (0 - 1 range)
-2. Create a smoothing effect (elastic in that case) by plugging our time to Easing node. Read more about <a href="/docs/usage/node-graph/nodes/animation/easing">easings here</a>.
-3. Create a rotation + scale effect by combining two nodes with "Matrix Input" and "Matrix Output"
-    - Scale can be directly connected with easing, because we want it to go from invisible (0 scale) to full size (1 scale)
-    - Rotation must be in 0 - 360 range to make image rotate in a full circle. This is done by multiplying eased time by 360.
-4. At last, we are plugging our source image to the Scale Node. In our case Scale Node not only scales but also rotates, because we plugged in the result of rotation to it. You can combine multiple effects into one with yellow (<a href="/docs/usage/node-graph/property-sockets/#-matrix3x3">Matrix</a>) inputs.
+### The result
+This produces a smooth fade-in effect over the duration of the animation.
+  - At the beginning (0), the image is fully transparent.
+  - At the end (1), the image is fully opaque.
 
-And the effect:
+  <video src={resVideo} muted autoplay loop/>
 
-<video src={bopVideo} muted autoplay loop/>
+<br/>
 
-The possibilities are truly endless. Take your time, play around with nodes and just have fun, this is the best way to learn.
+
+## Creating a more complex procedural animation
+You can chain multiple nodes together to create advanced effects. Here’s a breakdown of a Rotation and Scale animation workflow:
+
+1. Get the animation time (0 to 1 range) using the tiem node.
+
+2. Create a smoothing effect by connecting the time to Easing node. For example, use Elastic easing for a bounce effect.
+
+3. Combine rotation and scaling:
+    - Scale: Connect the eased time directly. This makes the object grow from invisible (0) to full size (1).
+    - Rotation: Multiply the eased time by 360 so the object rotates one full turn.
+
+4. Combine effects using a Matrix Input Node. This allows scale and rotation to be applied together.
+Your node connection should look like the ones in the image below
+  <Image src={sophGraphImg} alt="Simple graph that connects Normalized Time of Time Node to Layer's Opacity input"/>
+
+<br/>
+
+The result is a smooth, rotating, and scaling animation, perfect for attention-grabbing effects.
+
+  <video src={bopVideo} muted autoplay loop/>
+
+
+<br/>
+
+## Key takeaways
+
+- Procedural animations give you fine control over timing and transitions.
+- Experimentation is key. Try combining nodes in creative ways.
+- The more comfortable you get with nodes, the faster you can create unique, dynamic effects.
+
+<br/>
+
+## Further learning
+To learn more:
+- (<a href="/docs/usage/node-graph/nodes/animation/easing">Easing</a>) 
+- (<a href="/docs/usage/node-graph/nodes/animation/time#normalized-time">Normalized time</a>)  
+- (<a href="/docs/usage/node-graph/property-sockets/#-matrix3x3">Matrix</a>) 
+
