@@ -1,5 +1,5 @@
 ---
-title: Intro to Procedural Animations
+title: Intro to procedural animations
 ---
 
 import Node from '../../../../components/Node.astro';
@@ -15,13 +15,12 @@ This guide introduces procedural animations, explains why they matter, and how t
 Before diving in, you may find it helpful to review the <a href="/docs/usage/animating/getting-started">Basics of Animations</a> and <a href="/docs/usage/node-graph/getting-started-with-node-graph">Getting Started with Node Graphs</a> pages first.
 :::
 
-<br/>
 
-## What is Procedural animation
+## What is procedural animation
 
 Procedural animation refers to animations that are generated based on logic and input parameters. It's important to not confuse this with generative AI (such as ChatGPT), as those make use of prompts instead. 
 
-<br/>
+
 ## Key animation nodes 
 
 The following nodes are essential when working with procedural animations:
@@ -29,8 +28,7 @@ The following nodes are essential when working with procedural animations:
   - **Active Frame:** The current frame being displayed.
   - **Normalized Time;** A value between `0.0` (start of animation) and `1.0` (end of animation).  
 
-  
-  <a style={{textDecoration: "none"}} href="/docs/usage/node-graph/nodes/animation/time"><Node data={{
+    <a style={{textDecoration: "none"}} href="/docs/usage/node-graph/nodes/animation/time"><Node data={{
       name: 'Time',
     category: "Animation",
     icon: "icon-clock",
@@ -52,47 +50,47 @@ The following nodes are essential when working with procedural animations:
       isContextful: false,
       default: '0.0'}],
     description: 'Provides the current time in the animation timeline, including the active frame and normalized time.'
-  }}/></a>
+    }}/></a>
   
 <br/>
 
 - **Easing node** - Easing applies smooth transitions to animations, such as ease-in, ease-out, or elastic effects.
 
-  <a style={{textDecoration: "none"}} href="/docs/usage/node-graph/nodes/animation/easing"><Node data={{
-    name: "Easing ",
-    category: "Animation",
-    icon: "icon-spline-chart",
-    isPair: false,
-    hasPreview: false,
-    inputs: [
-      {
-        name: "Value",
-        type: "Double",
-        description: "The input value to be eased. This value should be between 0 and 1.",
-        isContextful: true,
-        default: "0.0"
-      },
-      {
-        name: "Easing Type",
-        type: "EasingType (Enum)",
-        hideSocket: true,
-        typeLink: "/docs/usage/node-graph/nodes/animation/easing#easing-types",
-        description: "The type of easing function to apply to the input value. This determines how the value transitions over time.",
-        isContextful: false,
-        default: "Linear"
-      }
-    ],
-    outputs: [
-      {
-        name: "Output",
-        type: "Double",
-        description: "The eased output value, which is the result of applying the selected easing function to the input value.",
-        isContextful: true,
-        default: "0.0"
-      }
-    ],
-    description: "Applies an easing function to a value, transforming it based on the selected easing type. This is useful for creating smooth transitions in animations."
-  }}/></a>
+    <a style={{textDecoration: "none"}} href="/docs/usage/node-graph/nodes/animation/easing"><Node data={{
+      name: "Easing ",
+      category: "Animation",
+      icon: "icon-spline-chart",
+      isPair: false,
+      hasPreview: false,
+      inputs: [
+        {
+          name: "Value",
+          type: "Double",
+          description: "The input value to be eased. This value should be between 0 and 1.",
+          isContextful: true,
+          default: "0.0"
+        },
+        {
+          name: "Easing Type",
+          type: "EasingType (Enum)",
+          hideSocket: true,
+          typeLink: "/docs/usage/node-graph/nodes/animation/easing#easing-types",
+          description: "The type of easing function to apply to the input value. This determines how the value transitions over time.",
+          isContextful: false,
+          default: "Linear"
+        }
+      ],
+      outputs: [
+        {
+          name: "Output",
+          type: "Double",
+          description: "The eased output value, which is the result of applying the selected easing function to the input value.",
+          isContextful: true,
+          default: "0.0"
+        }
+      ],
+      description: "Applies an easing function to a value, transforming it based on the selected easing type. This is useful for creating smooth transitions in animations."
+    }}/></a>
 
 <br/>
 
@@ -112,7 +110,7 @@ Follow these steps to create a simple opacity animation:
 
 2. Use the **Normalized Time** output to track animation progress. For example, in a 2-second animation, the normalized time at 1 second is **0.5**. 
 
-<br/>
+
 
 ### The result
 This produces a smooth fade-in effect over the duration of the animation.
@@ -124,10 +122,11 @@ This produces a smooth fade-in effect over the duration of the animation.
 <br/>
 
 
-## Creating a more complex procedural animation
+## Create a more complex procedural animation
 You can chain multiple nodes together to create advanced effects. Here’s a breakdown of a Rotation and Scale animation workflow:
 
-1. Get the animation time (0 to 1 range) using the tiem node.
+<Steps>
+1. Get the animation time (0 to 1 range) using the time node.
 
 2. Create a smoothing effect by connecting the time to Easing node. For example, use Elastic easing for a bounce effect.
 
@@ -139,14 +138,14 @@ You can chain multiple nodes together to create advanced effects. Here’s a bre
 Your node connection should look like the ones in the image below
   <Image src={sophGraphImg} alt="Simple graph that connects Normalized Time of Time Node to Layer's Opacity input"/>
 
-<br/>
+</Steps>
 
 The result is a smooth, rotating, and scaling animation, perfect for attention-grabbing effects.
 
   <video src={bopVideo} muted autoplay loop/>
 
 
-<br/>
+
 
 ## Key takeaways
 
@@ -154,11 +153,11 @@ The result is a smooth, rotating, and scaling animation, perfect for attention-g
 - Experimentation is key. Try combining nodes in creative ways.
 - The more comfortable you get with nodes, the faster you can create unique, dynamic effects.
 
-<br/>
+
 
 ## Further learning
 To learn more:
-- (<a href="/docs/usage/node-graph/nodes/animation/easing">Easing</a>) 
-- (<a href="/docs/usage/node-graph/nodes/animation/time#normalized-time">Normalized time</a>)  
-- (<a href="/docs/usage/node-graph/property-sockets/#-matrix3x3">Matrix</a>) 
+- <a href="/docs/usage/node-graph/nodes/animation/easing">Easing</a> 
+- <a href="/docs/usage/node-graph/nodes/animation/time#normalized-time">Normalized time</a>
+- <a href="/docs/usage/node-graph/property-sockets/#-matrix3x3">Matrix</a> 
 
