@@ -14,8 +14,10 @@ const getSocketDot = (type: SocketType, contextful : boolean) => {
     class="w-2.5 h-2.5 ${contextful ? "rounded-xs" : "rounded-full"} rotate-45"></div>`;
 };
 
-const getBooleanDefaultContent = (value: "true" | "false" | any) => {
-
+const getBooleanDefaultContent = (value: "true" | "false" | boolean | any) => {
+    if ((typeof value === "string" && value.toLowerCase() === "true") || value === true) {
+        return `<span class="pixi-icon small icon-check-tick text-red-700"></span>`
+    }
 }
 
 const checkerboard = `background-image:
@@ -85,8 +87,8 @@ const { data } = Astro.props;
                                 />
 
                                 {input.default && input.type === "Boolean" ? (
-                                    <div class="bg-[#1e1e1e] aspect-square h-[22px] rounded-sm inline-block m-0 ms-1 border border-[#3f3f46]">
-                                        
+                                    <div class="bg-[#1e1e1e] aspect-square h-[22px] rounded-sm flex items-center justify-center m-0 ms-1 border border-[#3f3f46]">
+                                        <Fragment set:html={getBooleanDefaultContent(input.default)} />
                                     </div>
                                 ) : null}
 
