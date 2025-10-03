@@ -9,13 +9,9 @@ interface Props {
 
 const getSocketDot = (type: SocketType, contextful : boolean) => {
     const color = socketColors[type] ?? "#999";
-    return `<div style="
-    width: 10px;
-    height: 10px;
-    border-radius: ${contextful ? "10%" : "50%"};
-    ${contextful ? "transform: rotate(45deg);" : ""}
-    background: ${color};
-  "></div>`;
+    return `<div
+    style="background: ${color};"
+    class="w-2.5 h-2.5 ${contextful ? "rounded-xs" : "rounded-full"} rotate-45"></div>`;
 };
 
 const getBooleanDefaultContent = (value: "true" | "false" | any) => {
@@ -33,33 +29,13 @@ background-position: 0 0, 0 8px, 8px -8px, -8px 0px;`;
 const { data } = Astro.props;
 ---
 
-<div
-    class="bg-[#303030]"
-    style={`
-  width: 256px;
-  border: 1px solid #333;
-  border-radius: 8px;
-  font-family: sans-serif;
-  color: white;
-  box-shadow: 0 0 8px rgba(0,0,0,0.5);
-`}
->
-    <div
-        style={`
-    background-color: ${categoryColors[data.category] || "#3a3a3a"};
-    padding: 4px 8px;
-    border-radius: 8px 8px 0 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-weight: bold;
-    font-size: 14px;
-  `}
+<div class="bg-[#303030] w-64 border border-[#333] rounded-lg font-sans text-white shadow-[0_0_8px_rgba(0,0,0,0.5)]">
+    <div class="px-1 py-2 rounded-t-lg flex justify-between items-center font-bold text-sm"
+        style={`background-color: ${categoryColors[data.category] || "#3a3a3a"};`}
     >
         <span>
             <span
-                class=`pixi-icon small ${data.icon}`
-                style="vertical-align: middle;"></span>
+                class=`pixi-icon small ${data.icon} align-middle`></span>
             {data.name}
         </span>
     </div>
@@ -71,7 +47,7 @@ const { data } = Astro.props;
                     <div class="m-0 h-[32px] flex flex-row items-center justify-between">
                             <div></div>
                             <div class="flex flex-row items-center mt-0">
-                                <span style="font-size: 12px;" class="me-2">
+                                <span class="me-2 text-xs">
                                     {output.name}
                                 </span>
                                 <div
@@ -109,24 +85,18 @@ const { data } = Astro.props;
                                 />
 
                                 {input.default && input.type === "Boolean" ? (
-                                    <div
-                                        style="border: 1px solid #333;"
-                                        class="bg-[#1e1e1e] aspect-square h-[22px] rounded-sm inline-block m-0 ms-1"
-                                    >
+                                    <div class="bg-[#1e1e1e] aspect-square h-[22px] rounded-sm inline-block m-0 ms-1 border border-[#3f3f46]">
                                         
                                     </div>
                                 ) : null}
 
-                                <span style="font-size: 12px;" class="ms-1">
+                                <span class="ms-1 text-xs">
                                     {input.name}
                                 </span>
                             </div>
 
                             {input.default && input.type !== "Boolean" ? (
-                                <div
-                                    style="border: 1px solid #333;"
-                                    class="bg-[#1e1e1e] text-[#ccc] w-1/2 rounded-sm inline-block px-1.5 py-1 m-0 me-4 text-sm"
-                                >
+                                <div class="bg-[#1e1e1e] text-[#ccc] w-1/2 rounded-sm inline-block px-1.5 py-1 m-0 me-4 text-sm border border-[#3f3f46]">
                                     {input.default}
                                 </div>
                             ) : null}
