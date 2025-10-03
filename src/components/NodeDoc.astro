@@ -3,7 +3,19 @@ import { Badge } from "@astrojs/starlight/components";
 import AnchorHeading from "@astrojs/starlight/components/AnchorHeading.astro";
 import { categoryColors } from "./categoryColors.js";
 import Node from "./Node.astro";
-import type { Node as NodeType } from "../node-schema.js";
+import type { Node as NodeType, SocketBase } from "../node-schema.js";
+
+const getPropertyTypeUri = (socket: SocketBase) => {
+    if (socket.typeLink) {
+        return socket.typeLink;
+    }
+
+    if (socket.type === "Default" && socket.displayType) {
+        return null;
+    }
+
+    return `/docs/usage/node-graph/property-sockets/#-${socket.type.toLowerCase().replace(" ", "-")}`;
+}
 
 const data = Astro.props as NodeType;
 ---
@@ -67,9 +79,9 @@ const data = Astro.props as NodeType;
             <p>
                 <strong>Type:</strong>{" "}
                 <a
-                    href={input.typeLink ?? `/docs/usage/node-graph/property-sockets/#-${input.type.toLowerCase().replace(" ", "-")}`}
+                    href={getPropertyTypeUri(input)}
                 >
-                    {input.type}
+                    {input.displayType ?? input.type}
                 </a>
                 <br />
                 <strong>Default:</strong>{" "}
@@ -102,9 +114,9 @@ const data = Astro.props as NodeType;
             <p>
                 <strong>Type:</strong>{" "}
                 <a
-                    href={output.typeLink ?? `/docs/usage/node-graph/property-sockets/#-${output.type.toLowerCase()}`}
+                    href={getPropertyTypeUri(output)}
                 >
-                    {output.type}
+                    {output.displayType ?? output.type}
                 </a>
                 <br />
                 <strong>Default:</strong>{" "}
