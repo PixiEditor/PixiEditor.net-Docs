@@ -3,8 +3,9 @@ import { Badge } from "@astrojs/starlight/components";
 import AnchorHeading from "@astrojs/starlight/components/AnchorHeading.astro";
 import { categoryColors } from "./categoryColors.js";
 import Node from "./Node.astro";
+import type { Node as NodeType } from "../node-schema.js";
 
-const data = Astro.props;
+const data = Astro.props as NodeType;
 ---
 
 <div
@@ -59,7 +60,7 @@ const data = Astro.props;
 <br/>
 {
     data.inputs?.map((input) => (
-        <div key={input.name}>
+        <div>
             <AnchorHeading level="3" id={input.name.toLowerCase()}>
                 <code>{input.name}</code>
             </AnchorHeading>
@@ -94,7 +95,7 @@ const data = Astro.props;
 <br/>
 {
     data.outputs?.map((output) => (
-        <div key={output.name}>
+        <div>
             <AnchorHeading level="3" id={output.name.toLowerCase()}>
                 <code>{output.name}</code>
             </AnchorHeading>

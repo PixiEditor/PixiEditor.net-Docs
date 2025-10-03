@@ -1,8 +1,13 @@
 ---
-import { categoryColors } from "./categoryColors.js";
-import { socketColors } from "./socketColors.js";
+import type { Node } from "../node-schema";
+import { categoryColors, type Category } from "./categoryColors";
+import { socketColors, type SocketType } from "./socketColors";
 
-const getSocketDot = (type, contextful) => {
+interface Props {
+    data: Node
+}
+
+const getSocketDot = (type: SocketType, contextful : boolean) => {
     const color = socketColors[type] ?? "#999";
     return `<div style="
     width: 10px;
@@ -12,6 +17,10 @@ const getSocketDot = (type, contextful) => {
     background: ${color};
   "></div>`;
 };
+
+const getBooleanDefaultContent = (value: "true" | "false" | any) => {
+
+}
 
 const checkerboard = `background-image:
   linear-gradient(45deg, #444 25%, transparent 25%),
@@ -25,14 +34,13 @@ const { data } = Astro.props;
 ---
 
 <div
+    class="bg-[#303030]"
     style={`
   width: 256px;
   border: 1px solid #333;
   border-radius: 8px;
   font-family: sans-serif;
-  background-color: #1e1e1e;
   color: white;
-  overflow: hidden;
   box-shadow: 0 0 8px rgba(0,0,0,0.5);
 `}
 >
@@ -40,6 +48,7 @@ const { data } = Astro.props;
         style={`
     background-color: ${categoryColors[data.category] || "#3a3a3a"};
     padding: 4px 8px;
+    border-radius: 8px 8px 0 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -47,56 +56,91 @@ const { data } = Astro.props;
     font-size: 14px;
   `}
     >
-        <span
-            ><span
+        <span>
+            <span
                 class=`pixi-icon small ${data.icon}`
                 style="vertical-align: middle;"></span>
-            {data.name}</span
-        >
+            {data.name}
+        </span>
     </div>
 
-    <div style="padding: 0 2px">
-        {
-            data.outputs?.map((output) => (
-                <div style="margin: 0px;" key={output.name}>
-                    <div style="display: flex; justify-content: end; flex-direction: row; align-items: baseline; gap: 4px;">
-                        <span style="font-size: 12px;">{output.name}</span>
-                        <div set:html={output.hideSocket ? "" : getSocketDot(output.type, output.isContextful)} />
-                    </div>
-                </div>
-            ))
-        }
-    </div>
-
-    <div style="margin: 0px 0px 0px 0px; padding: 0 2px;">
-        {
-            data.inputs?.map((input) => (
-                <div style="margin: 4px 0; 0 0" key={input.name}>
-                    <div style="display: flex; flex-direction: row; align-items: baseline; gap: 4px;">
-                        <div set:html={input.hideSocket ? "" : getSocketDot(input.type, input.isContextful)} />
-                        <span style="font-size: 12px;">{input.name}</span>
-                        {input.default ? (
-                            <div
-                                style={`
-              background: #2c2c2c;
-              border-radius: 4px;
-              display: inline-block;
-              padding: 2px 6px;
-              font-size: 12px;
-              color: #ccc;
-              margin-top: 2px;
-            `}
-                            >
-                                {input.default}
+    <div class="my-2 ml-[-5.5px] mr-[-7.5px]">
+        <div>
+            {
+                data.outputs?.map((output) => (
+                    <div class="m-0 h-[32px] flex flex-row items-center justify-between">
+                            <div></div>
+                            <div class="flex flex-row items-center mt-0">
+                                <span style="font-size: 12px;" class="me-2">
+                                    {output.name}
+                                </span>
+                                <div
+                                    class="w-3"
+                                    set:html={
+                                        output.hideSocket
+                                            ? ""
+                                            : getSocketDot(
+                                                  output.type,
+                                                  output.isContextful,
+                                              )
+                                    }
+                                />
                             </div>
-                        ) : null}
                     </div>
-                </div>
-            ))
-        }
+                ))
+            }
+        </div>
+
+        <div>
+            {
+                data.inputs?.map((input) => (
+                    <div class="m-0 h-[32px] flex flex-row items-center justify-between">
+                            <div class="flex flex-row items-center">
+                                <div
+                                    class="w-3"
+                                    set:html={
+                                        input.hideSocket
+                                            ? ""
+                                            : getSocketDot(
+                                                  input.type,
+                                                  input.isContextful,
+                                              )
+                                    }
+                                />
+
+                                {input.default && input.type === "Boolean" ? (
+                                    <div
+                                        style="border: 1px solid #333;"
+                                        class="bg-[#1e1e1e] aspect-square h-[22px] rounded-sm inline-block m-0 ms-1"
+                                    >
+                                        
+                                    </div>
+                                ) : null}
+
+                                <span style="font-size: 12px;" class="ms-1">
+                                    {input.name}
+                                </span>
+                            </div>
+
+                            {input.default && input.type !== "Boolean" ? (
+                                <div
+                                    style="border: 1px solid #333;"
+                                    class="bg-[#1e1e1e] text-[#ccc] w-1/2 rounded-sm inline-block px-1.5 py-1 m-0 me-4 text-sm"
+                                >
+                                    {input.default}
+                                </div>
+                            ) : null}
+                    </div>
+                ))
+            }
+        </div>
     </div>
 
-    {data.hasPreview ? <div
-        style={`height: 256px; border-radius: 4px; margin-top: 8px; ${checkerboard}`}>
-    </div> : null}
+    {
+        data.hasPreview ? (
+            <div class="aspect-square mt-4 rounded"
+                style={`${checkerboard}`}
+            />
+        ) : null
+    }
 </div>
