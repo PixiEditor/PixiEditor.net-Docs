@@ -14,10 +14,12 @@ node:
     isContextful: false
     default: 'null'
   - name: Color Sample Mode
-    type: Color Sample Mode (Enum)
+    type: Default
+    displayType: Color Sample Mode (Enum)
     typeLink: /docs/usage/node-graph/nodes/image/begin-modify-image#color-sample-mode
     description: 'The color sample mode to use when sampling colors from the image. This determines how colors are sampled from the texture, which can affect the final output of the image modifications.'
     isContextful: false
+    hideSocket: true
     default: Color Managed
   outputs:
   - name: UV
