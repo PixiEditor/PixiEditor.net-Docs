@@ -1,0 +1,67 @@
+---
+title: 'Posterize'
+node:
+  name: 'Posterize'
+  category: Effects
+  icon: icon-swatches
+  isPair: false
+  hasPreview: true
+  inputs:
+  - name: Background
+    type: Painter
+    description: 'Provides the background image to be posterized.'
+    isContextful: false
+    default: null
+  - name: Mode
+    type: Posterization Mode (Enum)
+    typeLink: /docs/usage/node-graph/nodes/effects/posterize#posterization-modes
+    hideSocket: true
+    description: 'Defines how the posterization effect is applied to the image.'
+    isContextful: false
+    default: Rgb
+  - name: Levels
+    type: Integer
+    description: 'Specifies the number of color levels to reduce the image to.'
+    isContextful: false
+    default: '8'
+  - name: Color Space
+    type: ColorSpaceType (Enum)
+    typeLink: /docs/usage/node-graph/nodes/effects/posterize#color-spaces
+    hideSocket: true
+    description: 'Determines the color space in which the posterization is applied.'
+    isContextful: false
+    default: sRGB
+  outputs:
+  - name: Output
+    type: Painter
+    description: 'Painter instruction with the applied posterization effect.'
+    isContextful: false
+    default: null
+  description: 'Applies a posterization effect to the image, reducing the number of colors.'
+---
+
+## Posterization Modes
+
+Posterization can be applied in different modes, each affecting the image in a unique way. The available modes are:
+
+### RGB
+
+Each color channel (Red, Green, Blue) is posterized independently, resulting in a colorful posterization effect.
+
+### Luminance
+
+The image is converted to grayscale based on luminance, and then posterized. This mode emphasizes brightness levels rather than color.
+
+## Color Spaces
+
+### Inherit
+
+The posterization effect is applied in the color space of the input image. This is useful for maintaining consistency with the original image's color representation.
+
+### sRGB
+
+The posterization effect is applied in the sRGB color space. It's usually the best choice if you are unsure which one to use.
+
+### Linear
+
+The posterization effect is applied in a linear color space. By default PixiEditor processes colors in linear sRGB color space.

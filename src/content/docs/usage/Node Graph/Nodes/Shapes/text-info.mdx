@@ -1,0 +1,27 @@
+---
+title: 'Text Info'
+node:
+  name: 'Text Info'
+  category: Shape
+  icon: icon-shredder
+  isPair: false
+  hasPreview: false
+  inputs:
+  - name: Text
+    type: String
+    description: 'Text to analyze.'
+    isContextful: false
+    default: Empty
+  outputs:
+  - name: Text Length
+    type: Integer
+    description: 'Length of the input text.'
+    isContextful: false
+    default: '0'
+  - name: Text Line Count
+    type: Integer
+    description: 'Number of lines in the input text.'
+    isContextful: false
+    default: '0'
+  description: 'Analyzes the input text and provides information such as length and line count.'
+---

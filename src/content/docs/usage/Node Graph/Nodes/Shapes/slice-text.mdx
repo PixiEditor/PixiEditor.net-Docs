@@ -1,0 +1,37 @@
+---
+title: 'Slice Text'
+node:
+  name: 'Slice Text'
+  category: Shape
+  icon: icon-slice
+  isPair: false
+  hasPreview: false
+  inputs:
+  - name: Text
+    type: String
+    description: 'Text to slice.'
+    isContextful: false
+    default: Empty
+  - name: Text Slice Use Length
+    type: Boolean
+    description: 'Use Length property to determine how many characters to slice.'
+    isContextful: false
+    default: 'True'
+  - name: Index Start At
+    type: Integer
+    description: 'Starting index to slice from (0-based).'
+    isContextful: false
+    default: '0'
+  - name: Length
+    type: Integer
+    description: 'Number of characters to include in the slice. Ignored if Text Slice Use Length is false.'
+    isContextful: false
+    default: '1'
+  outputs:
+  - name: Text
+    type: String
+    description: 'Sliced text output.'
+    isContextful: false
+    default: Empty
+  description: 'Slices a portion of the input text based on the specified starting index and length.'
+---
