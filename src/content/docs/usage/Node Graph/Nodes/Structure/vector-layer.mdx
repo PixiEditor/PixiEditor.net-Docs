@@ -25,7 +25,7 @@ node:
     isContextful: false
     default: 'true'
   - name: Mask Is Visible
-    type: bool
+    type: Boolean
     description: 'Indicates whether the mask of the vector layer is visible in the canvas. If set to false, the mask will not be rendered.'
     isContextful: false
     default: 'true'
@@ -40,7 +40,8 @@ node:
     isContextful: false
     default: null
   - name: Blend Mode
-    type: Blend Mode (Enum)
+    type: Default
+    displayType: Blend Mode (Enum)
     typeLink: /docs/usage/layers/blend-modes
     hideSocket: true
     description: 'The blend mode to use for the vector layer. This determines how the layer interacts with the background and other layers.'
