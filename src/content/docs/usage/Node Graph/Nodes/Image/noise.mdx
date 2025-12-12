@@ -8,8 +8,9 @@ node:
   hasPreview: true
   inputs:
   - name: Noise Type
-    type: Noise Type (Enum)
-    typeLink: /docs/usage/node-graph/nodes/image/noise#noise-type
+    type: Default
+    displayType: Noise Type (Enum)
+    typeLink: "#noise-types"
     hideSocket: true
     description: 'The type of noise to generate. This determines the algorithm used to create the noise pattern.'
     isContextful: false
@@ -35,8 +36,9 @@ node:
     isContextful: false
     default: 0
   - name: Feature
-    type: Voronoi Feature (Enum)
-    typeLink: /docs/usage/node-graph/nodes/image/noise#feature
+    type: Default
+    displayType: Voronoi Feature (Enum)
+    typeLink: "#feature"
     hideSocket: true
     default: 'F1'
     description: 'The feature to use for the Voronoi noise generation. This determines the specific characteristics of the generated noise pattern.'

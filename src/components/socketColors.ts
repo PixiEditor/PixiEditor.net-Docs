@@ -1,4 +1,30 @@
-export const socketColors = {
+import { z } from "astro/zod";
+
+export const SocketTypeSchema = z.enum([
+  "Texture",
+  "Filter",
+  "Boolean",
+  "Float",
+  "Double",
+  "Color",
+  "Paintable",
+  "Painter",
+  "VecD",
+  "Vec3D",
+  "VecI",
+  "Integer",
+  "String",
+  "Ellipse Data",
+  "Points Data",
+  "Text Data",
+  "Vector Shape",
+  "Matrix3x3",
+  "Default",
+] as const);
+
+export type SocketType = z.infer<typeof SocketTypeSchema>;
+
+export const socketColors: Record<SocketType, string> = {
   Texture: "#99c47a",
   Filter: "#cc5c5c",
   Boolean: "#68abdf",
