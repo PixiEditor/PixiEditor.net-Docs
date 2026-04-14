@@ -1,0 +1,24 @@
+---
+title: 'Blackboard Variable Value'
+node:
+  name: 'Blackboard Variable Value'
+  category: ''
+  icon: icon-variable
+  isPair: false
+  hasPreview: false
+  inputs:
+  - name: Variable Name
+    type: String
+    description: 'Name of the blackboard variable to retrieve the value from.'
+    isContextful: false
+    default: 'null'
+  outputs:
+  - name: Value
+    type: Object
+    description: 'The value of the specified blackboard variable. The type of this output depends on the type of the variable stored in the blackboard.'
+    isContextful: false
+    default: 'false'
+  description: 'Retrieves the value of a blackboard variable. The type of the output depends on the type of the variable stored in the blackboard.'
+---
+
+Check the [Blackboard](../blackboard.mdx) page for more information about blackboard variables.

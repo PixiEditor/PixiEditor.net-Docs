@@ -1,0 +1,38 @@
+---
+title: 'Keyboard Info'
+node:
+  name: 'Keyboard Info'
+  category: Inputs
+  icon: icon-keyboard
+  isPair: false
+  hasPreview: false
+  inputs: null
+  outputs:
+  - name: Is Ctrl Pressed
+    type: bool
+    description: 'Is the Ctrl key on the keyboard currently pressed?'
+    isContextful: false
+    default: 'false'
+  - name: Is Shift Pressed
+    type: bool
+    description: 'Is the Shift key on the keyboard currently pressed?'
+    isContextful: false
+    default: 'false'
+  - name: Is Alt Pressed
+    type: bool
+    description: 'Is the Alt key on the keyboard currently pressed?'
+    isContextful: false
+    default: 'false'
+  - name: Is Meta Pressed
+    type: bool
+    description: 'Is the Meta key on the keyboard currently pressed? (Windows key on Windows, Command key on Mac)'
+    isContextful: false
+    default: 'false'
+  description: 'Provides information about the current state of modifier keys on the keyboard.'
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside type="caution">
+This node is intended to be used as a part of the Brush. The behavior might be unexpected when used as part of a normal document.
+</Aside>

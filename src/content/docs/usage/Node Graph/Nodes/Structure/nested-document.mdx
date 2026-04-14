@@ -1,0 +1,114 @@
+---
+title: Nested Document
+node:
+  name: Nested Document
+  category: Structure
+  icon: icon-file
+  isPair: false
+  hasPreview: true
+  inputs:
+  - name: Background
+    type: Painter
+    description: 'A painter to be rendered behind the nested document. Use for chaining multiple structure members and painters together.'
+    isContextful: false
+    default: null
+  - name: Bilinear Sampling
+    type: Boolean
+    description: 'Should bilinear sampling be used when rendering the nested document. If false, nearest neighbor sampling will be used instead. Bilinear sampling can produce smoother results, but will blurry pixel-art content.'
+    isContextful: false
+    default: 'false'
+  - name: Clip To Bounds
+    type: Boolean
+    description: 'Determines whether the nested document should be clipped to its bounds. If true, any content outside the bounds will be hidden.'
+    isContextful: false
+    default: 'true'
+  - name: Blend Mode
+    type: Blend Mode
+    typeLink: '/docs/usage/layers/blend-modes'
+    description: 'The blend mode to use when rendering the nested document. This determines how the nested document is blended with the background.'
+    isContextful: false
+    default: Normal
+  - name: Opacity
+    type: Float
+    description: 'The opacity of the nested document. A value of 0 means fully transparent, while a value of 1 means fully opaque.'
+    isContextful: false
+    default: '1'
+  - name: Is Visible
+    type: Boolean
+    description: 'Determines whether the nested document is visible. If false, the document will not be rendered.'
+    isContextful: false
+    default: 'true'
+  - name: Mask
+    type: Painter
+    description: 'Custom Mask to apply to the nested document.'
+    isContextful: false
+    default: null
+  - name: Mask Is Visible
+    type: Boolean
+    description: 'Determines whether the mask of the nested document is visible.'
+    isContextful: false
+    default: 'true'
+  - name: Filters
+    type: Filter
+    description: 'Filters to apply to the entire nested document.'
+    isContextful: false
+    default: 'null'
+  - name: Use Custom Time
+    type: Boolean
+    description: 'Determines whether to use custom animation time for the nested document.'
+    isContextful: false
+    default: 'false'
+  - name: Custom Active Frame
+    type: Integer
+    description: 'What active frame should be passed to the nested document. This allows you to control the animation.'
+    isContextful: false
+    default: '0'
+  - name: Custom Normalized Time
+    type: Double
+    description: 'Custom normalized time for the nested document. This allows you to control the animation progress in 0-1 range.'
+    isContextful: false
+    default: '0'
+  - name: Document
+    type: Document Reference
+    typeLink: '#document-reference'
+    description: 'A reference to another .pixi document to be nested within the current document. The content of the referenced document will be rendered as part of the current document.'
+    isContextful: false
+    default: 'null'
+  outputs:
+  - name: Output
+    type: Painter
+    description: 'Painting instruction to render the image layer with all applied options, including filters and background.'
+    isContextful: false
+    default: null
+  - name: Without Filters
+    type: Painter
+    description: 'Painting instruction to render the image without any filters applied.'
+    isContextful: false
+    default: null
+  - name: Raw Layer Output
+    type: Painter
+    description:  'Painting instruction to render the raw image layer without the background and filters applied.'
+    isContextful: false
+    default: null
+  - name: Canvas Position
+    type: VecD
+    description: 'The position of the image layer on the canvas. This is the top-left corner of the image layer in canvas coordinates.'
+    isContextful: false
+    default: (0, 0)
+  - name: Center Position
+    type: VecD
+    description: 'The center position of the image layer on the canvas. This is the center point of the image layer in canvas coordinates.'
+    isContextful: false
+    default: (0, 0)
+  - name: Size
+    type: VecD
+    description: 'The size of the image layer. This is the width and height of the image layer in canvas coordinates.'
+    isContextful: false
+    default: (0, 0)
+  - name: Graph
+    type: Node Graph
+    description: 'The node graph of the nested document.'
+    isContextful: false
+    default: 'null'
+  description: 'A structure node that allows you to nest another .pixi document within the current document. This is useful for organizing complex documents into smaller, more manageable pieces, and for reusing content across multiple documents.'
+---

@@ -12,8 +12,10 @@ import disconnectedImage from './assets/Disconnected.png';
 import gpuContext from './assets/gpu-context.png';
 import painter from './assets/Painter.png';
 import diamond from './assets/diamond.png';
+import rect from './assets/rect.png';
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { Quiz, QuizOption } from 'starlight-videos/components'
+import { Aside } from '@astrojs/starlight/components';
 
 Property sockets are part of a Node Graph system. If you are not familiar with the Node Graph, we recommend you to read the [Getting Started with Nodes](/docs/usage/node-graph/getting-started-with-node-graph) guide first.
 
@@ -155,7 +157,33 @@ each component of the matrix is a single precision number (`float`).
 
 ### <span style={{color: "#ff00ff"}}>⬤</span> Default
 
-A magenta color is used when the property doesn't have a unique color attached. It usually means that property type is not meant to be connected. Such as dropdown (enum) values.
+A magenta color is used when the property doesn't have a unique color attached. It usually means that property type is not meant to be connected.
+
+### <div style={{display: "inline-block", width: "24px", height: "24px", borderRadius: "50%", background: "conic-gradient(#FF6A72 0%, #FFD84A 25%, #47F0C2 50%, #6A7CFF 75%, #FF6A72 100%)", border: "1px solid #ccc", verticalAlign: "middle"}}></div> Object
+
+A type, that can hold any value. All other types inherit from object.
+
+### <span style={{color: "#8F6A36"}}>⬤</span> Document Reference
+
+A reference to other .pixi document.
+
+## Arrays
+
+Some nodes have a long, rectangular sockets. Which look like this:
+
+<Image src={rect} width="140" alt="Array socket"/>
+
+It means, that the type of the property is **an array**, arrays are special data types which hold multiple values inside.
+
+[1, 2, 3]
+
+Arrays in PixiEditor are **strongly typed**, it means that you can't mix types in an array.
+
+<Aside type="danger" title='Illegal array*'>
+[1, "hello", 5.2] 
+</Aside>
+
+*It is possible to include different types inside the array if the base type of the array is an [Object](#-object) or values inherit from base array type. 
 
 ## Diamond Sockets
 
@@ -163,7 +191,7 @@ Some nodes have diamond-shaped sockets. Which look like this:
 
 <Image src={diamond} width="80" alt="Diamond socket"/>
 
-They accept the same data types as regular, circular sockets, but they are used to represent a special type of data flow.
+They accept the same data types as regular, circular sockets, but they are used to represent special type of data flow.
 
 Diamond sockets are contextful, meaning that the data they "hold" is determined by the context of the node they are connected to.
 

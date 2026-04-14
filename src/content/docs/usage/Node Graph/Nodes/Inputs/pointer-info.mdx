@@ -1,0 +1,57 @@
+---
+title: 'Pointer Info'
+node:
+  name: 'Pointer Info'
+  category: Inputs
+  icon: icon-mouse
+  isPair: false
+  hasPreview: false
+  inputs: null
+  outputs:
+  - name: Is Left Button Pressed
+    type: Boolean
+    description: 'Is left mouse button currently pressed.'
+    isContextful: false
+    default: 'false'
+  - name: Is Right Button Pressed
+    type: Boolean
+    description: 'Is right mouse button currently pressed.'
+    isContextful: false
+    default: 'false'
+  - name: Position On Canvas
+    type: VecD
+    description: 'Current position of the pointer on the canvas.'
+    isContextful: false
+    default: (0, 0)
+  - name: Pressure
+    type: Double
+    description: 'Pressure applied by the pointer. The value is between 0 and 1, where 0 means no pressure and 1 means full pressure. Mouse always returns 1.'
+    isContextful: false
+    default: '1.0'
+  - name: Twist
+    type: Double
+    description: 'The clockwise rotation of a pen device around its own major axis (such as when the user spins the pen in their fingers).'
+    isContextful: false
+    default: '0.0'
+  - name: Tilt
+    type: VecD
+    description: 'XTilt: The plane angle between the Y-Z plane and the plane that contains the Y axis and the axis of the input device (typically a pen/stylus). YTilt: The plane angle between the X-Z plane and the plane that contains the X axis and the axis of the input device (typically a pen/stylus).'
+    isContextful: false
+    default: (0, 0)
+  - name: Movement Direction
+    type: VecD
+    description: 'Direction of the pointer movement calculated as a vector from the previous pointer position to the current pointer position. The vector is normalized, so it only represents the direction of the movement and not its speed.'
+    isContextful: false
+    default: (0, 0)
+  - name: Rotation
+    type: Double
+    description: 'The rotation of the stroke in radians. Use to rotate the brush in the direction of the stroke. It is not a raw pointer input.'
+    isContextful: false
+    default: '0'
+  description: 'Provides information about the current state of the pointer, including button presses, position, pressure, tilt, movement direction, and rotation.'
+---
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside type="caution">
+This node is intended to be used as a part of the Brush. The behavior might be unexpected when used as part of a normal document.
+</Aside>

@@ -1,0 +1,44 @@
+---
+title: 'Pixel Perfect Ellipse '
+node:
+  name: 'Pixel Perfect Ellipse '
+  category: Shape
+  icon: icon-lowres-circle
+  isPair: false
+  hasPreview: false
+  inputs:
+  - name: Position
+    type: VecD
+    description: 'Top left corner of the bounding box of the ellipse.'
+    isContextful: false
+    default: (0, 0)
+  - name: Size
+    type: VecI
+    description: 'Width and height of the ellipse.'
+    isContextful: false
+    default: '(32, 32)'
+    min: '(0, 0)'
+  - name: Stroke Color
+    type: Paintable
+    description: 'Stroke paintable of the ellipse. A paintable can be a solid color, gradient or a texture.'
+    isContextful: false
+    default: Black
+  - name: Fill Color
+    type: Paintable
+    description: 'Fill paintable of the ellipse. A paintable can be a solid color, gradient or a texture.'
+    isContextful: false
+    default: Black
+  - name: Stroke Width
+    type: Double
+    description: 'Width of the stroke. If the value is 0, the stroke will not be rendered.'
+    isContextful: false
+    default: '1'
+  outputs:
+  - name: Output
+    type: Path Data
+    typeLink: '/docs/usage/node-graph/property-sockets/#-vector-shape'
+    description: 'Path data representing the pixel perfect ellipse.'
+    isContextful: false
+    default: 'null'
+  description: 'Generates a pixel perfect ellipse shape based on the given position, size, stroke, fill and stroke width.'
+---

@@ -1,0 +1,48 @@
+---
+title: 'Stroke Info'
+node:
+  name: 'Stroke Info'
+  category: Brushes
+  icon: icon-line-squiggle
+  isPair: false
+  hasPreview: false
+  inputs: null
+  outputs:
+  - name: Stroke Width
+    type: Double
+    description: 'The width of the stroke.'
+    isContextful: false
+    default: 1f
+  - name: Start Point
+    type: VecD
+    description: 'The starting point of the stroke.'
+    isContextful: false
+    default: VecD.Zero
+  - name: Last Applied Point
+    type: VecD
+    description: 'The last point where the stroke was applied.'
+    isContextful: false
+    default: VecD.Zero
+  - name: Target Sample Texture
+    type: Texture
+    description: 'The texture used for sampling the stroke. It is a texture of stroke size with layer data under the stroke.'
+    isContextful: false
+    default: 'null'
+  - name: Target Sample Texture Pos
+    type: VecD
+    description: 'The position of the target sample texture relative to the full layer.'
+    isContextful: false
+    default: VecD.Zero
+  - name: Target Full Texture
+    type: Texture
+    description: 'The full texture of the target layer.'
+    isContextful: false
+    default: 'null'
+  description: 'Provides information about the current stroke being drawn, including its width, starting point, last applied point, and textures for sampling the stroke.'
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside type="caution">
+This node is intended to be used as a part of the Brush. The behavior might be unexpected when used as part of a normal document.
+</Aside>

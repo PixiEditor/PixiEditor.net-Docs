@@ -1,0 +1,42 @@
+---
+title: 'Character Position'
+node:
+  name: 'Character Position'
+  category: Utility
+  icon: icon-whole-word
+  isPair: false
+  hasPreview: false
+  inputs:
+  - name: Match Case
+    type: Boolean
+    description: 'If true, the search will be case sensitive. If false, the search will be case insensitive.'
+    isContextful: false
+    default: 'false'
+  - name: Text
+    type: String
+    description: 'The text in which to search for the specified substring.'
+    isContextful: false
+    default: null
+  - name: Search Text
+    type: String
+    description: 'The substring to search for within the text.'
+    isContextful: false
+    default: null
+  outputs:
+  - name: First Position
+    type: Integer
+    description: 'The position of the first occurrence of the search text within the text. Returns -1 if not found.'
+    isContextful: false
+    default: '-1'
+  - name: Last Position
+    type: Integer
+    description: 'The position of the last occurrence of the search text within the text. Returns -1 if not found.'
+    isContextful: false
+    default: '-1'
+  - name: Count
+    type: Integer
+    description: 'The number of occurrences of the search text within the text.'
+    isContextful: false
+    default: '0'
+  description: 'Provides information about the positions and count of a specified substring within a given text.'
+---

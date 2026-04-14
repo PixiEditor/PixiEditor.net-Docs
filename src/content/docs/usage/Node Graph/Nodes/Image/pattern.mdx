@@ -1,0 +1,73 @@
+---
+title: 'Pattern'
+node:
+  name: 'Pattern'
+  category: Image
+  icon: icon-stamp
+  isPair: false
+  hasPreview: true
+  inputs:
+  - name: Fill
+    type: Texture
+    description: 'Texture for the pattern.'
+    isContextful: false
+    default: 'null'
+  - name: Matrix
+    type: Matrix3x3
+    description: 'Transformation matrix for the pattern, allowing for scaling, rotation, and translation of the pattern. It only works with Stretch to Fit stretching mode.'
+    isContextful: false
+    default: Identity
+  - name: Spacing
+    type: Double
+    description: 'The spacing between pattern repetitions.'
+    isContextful: false
+    default: '0'
+  - name: Shape
+    type: Shape Data
+    description: 'The shape which will be used for placing the pattern. The pattern will be laid out along the shape (on the stroke).'
+    isContextful: false
+    default: 'null'
+  - name: Alignment
+    type: Pattern Alignment
+    typeLink: '#pattern-alignment'
+    description: 'The alignment of the pattern within the shape.'
+    isContextful: false
+    default: Center
+  - name: Stretching
+    type: Pattern Stretching
+    typeLink: '#pattern-stretching'
+    description: 'The stretching mode of the pattern, determining how the pattern is placed.'
+    isContextful: false
+    default: Stretch To Fit
+  outputs:
+  - name: Output
+    type: Painter
+    description: 'The resulting pattern painter.'
+    isContextful: false
+    default: null
+  description: 'Places the repeating pattern on the specified shape, creating a custom stroke.'
+---
+
+# Pattern Stretching
+
+## Place Along
+
+The pattern is placed along the shape as is, without any deformations. It will be rotated to match the angle of the shape, but it will not be stretched. The spacing between pattern repetitions will increase the gaps between pattern instances.
+
+## Stretch To Fit
+
+The pattern is stretched to fit the shape as tightly as possible. Spacing will not leave gaps between pattern instances.
+
+# Pattern Alignment
+
+## Center
+
+The pattern is centered on the shape.
+
+## Outside
+
+The pattern is aligned to the outside of the shape. The center of the pattern will be placed at a distance of half of the pattern size from the shape.
+
+## Inside
+
+The pattern is aligned to the inside of the shape. The center of the pattern will be placed at a distance of half of the pattern size from the shape.

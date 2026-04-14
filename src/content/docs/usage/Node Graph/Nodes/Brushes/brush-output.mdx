@@ -1,0 +1,130 @@
+---
+title: 'Brush Output'
+node:
+  name: 'Brush Output'
+  category: Brushes
+  icon: icon-paint-brush
+  isPair: false
+  hasPreview: false
+  inputs:
+  - name: Name
+    type: String
+    description: 'Name of the brush, used for identification in the Brush Picker.'
+    isContextful: false
+    default: 'Unnamed'
+  - name: Shape
+    type: Vector Shape
+    description: 'Defines the shape of the brush. Can be any vector shape.'
+    isContextful: false
+    default: 'null'
+  - name: Stroke
+    type: Paintable
+    description: 'Defines the outline of the brush shape. Can be a color, gradient, or texture.'
+    isContextful: false
+    default: 'null'
+  - name: Stroke Transform
+    type: Matrix3x3
+    description: 'Transformation applied to the Stroke paintable (e.g. offset, rotation, scale).'
+    isContextful: false
+    default: Identity
+  - name: Fill
+    type: Paintable
+    description: 'Defines the fill of the brush shape. Can be a color, gradient, or texture.'
+    isContextful: false
+    default: 'null'
+  - name: Fill Transform
+    type: Matrix3x3
+    description: 'Transformation applied to the Fill paintable (e.g. offset, rotation, scale).'
+    isContextful: false
+    default: Identity
+  - name: Content
+    type: Painter
+    description: 'Custom render input for the brush. Allows using arbitrary shaders or render logic instead of standard fill.'
+    isContextful: false
+    default: null
+  - name: Content Transform
+    type: Matrix3x3
+    description: 'Transformation applied to the Content input, allowing offset, rotation, or scaling.'
+    isContextful: false
+    default: Identity
+  - name: Blend Mode
+    type: Blend Mode
+    typeLink: '#/docs/usage/layers/blend-modes'
+    description: 'Defines how the final brush stroke is blended with the target image after the stroke is completed.'
+    isContextful: false
+    default: Normal
+  - name: Stamp Blend Mode
+    type: Blend Mode
+    typeLink: '#blend-mode'
+    description: 'Defines how each individual stamp blends with previous stamps within a single stroke.'
+    isContextful: false
+    default: Normal
+  - name: Use Custom Stamp Blender
+    type: Boolean
+    description: 'Enables use of a custom SKSL blending function for stamp blending instead of built-in modes.'
+    isContextful: false
+    default: 'false'
+  - name: Custom Stamp Blender Code
+    type: String
+    description: 'Custom SKSL code used to define how stamps are blended when custom stamp blending is enabled.'
+    isContextful: false
+    default: 'Default'
+  - name: Can Reuse Stamps
+    type: Boolean
+    description: 'Optimization flag. If enabled, the brush stamp is calculated once and reused across the stroke when possible. It only applies when Content is used. Toggle on when stamps are identical throughout the stroke.'
+    isContextful: false
+    default: 'false'
+  - name: Pressure
+    type: Float
+    description: 'Controls brush size based on input pressure. Can be driven by pointer pressure or custom logic.'
+    isContextful: false
+    min: '0'
+    max: '1'
+    default: '1'
+  - name: Spacing
+    type: Float
+    description: 'Minimum distance between consecutive stamps as a percentage of stamp size. Controls stroke density.'
+    min: '0'
+    max: '100'
+    isContextful: false
+    default: '0'
+  - name: Fit To Stroke Size
+    type: Boolean
+    description: 'Determines whether the brush automatically scales to match the tool stroke size.'
+    isContextful: false
+    default: 'true'
+  - name: Auto Position
+    type: Boolean
+    description: 'Automatically positions the brush under the pointer. Disable to manually control stamp placement.'
+    isContextful: false
+    default: 'true'
+  - name: Allow Sample Stacking
+    type: Boolean
+    description: 'Determines whether multiple samples can accumulate when applying the brush.'
+    isContextful: false
+    default: 'false'
+  - name: Always Clear
+    type: Boolean
+    description: 'Clears previous stamps before applying a new one.'
+    isContextful: false
+    default: 'false'
+  - name: Snap To Pixels
+    type: Boolean
+    description: 'Snaps the brush to pixel centers for precise rendering. Use when modifying stamp or when working with pixel art.'
+    isContextful: false
+    default: 'false'
+  - name: Tags
+    type: String
+    description: 'Tags used to categorize and filter brushes in the Brush Picker. Separate multiple tags with commas.'
+    isContextful: false
+    default: null
+  - name: Previous
+    type: Node Graph
+    description: 'Allows chaining multiple brushes together. Uses another brush graph as input.'
+    isContextful: false
+    default: 'null'
+  outputs: null
+  description: 'Defines a brush used for painting, including shape, appearance, blending behavior, and advanced customization such as shaders and custom stamp blending.'
+---
+
+Check out the [Brush documentation](/docs/usage/brushes/getting-started) for more details and examples of how to use the Brush Output Node effectively.

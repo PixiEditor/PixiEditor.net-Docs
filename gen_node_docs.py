@@ -18,22 +18,18 @@ output_pattern_generic = re.compile(
     r'Create(?:(?P<kind>Func))?Output<([^>]+)>\(([^,]+),\s*"([^"]+)"(?:,\s*(.+?))?\)'
 )
 
-# Non-generic inputs/outputs (Func/Render/plain)
+# Non-generic inputs/outputs
 input_pattern_nongeneric = re.compile(
-    r'Create(?:(?P<kind>Func|Render))?Input\(([^,]+),\s*"([^"]+)"(?:,\s*(.+?))?\)'
+    r'Create(?:(?P<kind>Func|Render|SyncedType))?Input\(([^,]+),\s*"([^"]+)"(?:,\s*(.+?))?\)'
 )
 
 output_pattern_nongeneric = re.compile(
-    r'Create(?:(?P<kind>Func|Render))?Output\(([^,]+),\s*"([^"]+)"(?:,\s*(.+?))?\)'
+    r'Create(?:(?P<kind>Func|Render|SyncedType))?Output\(([^,]+),\s*"([^"]+)"(?:,\s*(.+?))?\)'
 )
-
 
 property_pattern = re.compile(
-    r'public\s+(InputProperty|FuncOutputProperty|OutputProperty|FuncInputProperty|InputProperty|FuncOutputProperty)<([^>]+)>\s+(\w+)\s*\{'
+    r'public\s+(InputProperty|FuncOutputProperty|OutputProperty|FuncInputProperty)<([^>]+)>\s+(\w+)\s*\{'
 )
-
-class_inheritance_pattern = re.compile(r'class\s+\w+\s*:\s*([^ {]+)')
-interface_pattern = re.compile(r'class\s+\w+\s*:\s*[^,{]+,\s*([^ {]+)')
 
 def screaming_to_words(text):
     return " ".join(word.capitalize() for word in text.split("_"))
@@ -48,6 +44,24 @@ def extract_viewmodel_metadata(file_content):
         "category": screaming_to_words(category),
         "icon": f"icon-{icon.split('.')[-1].lower()}"
     }
+
+def map_type(type_name):
+    type_mapping = {
+        "Float1": "Double",
+        "Float2": "VecD",
+        "Int1": "Integer",
+        "Half3": "Vec3D",
+        "Half4": "Color",
+        "Int2": "VecI",
+    }
+    return type_mapping.get(type_name, type_name)
+
+def extract_property_types(file_content):
+    prop_types = {}
+    for match in property_pattern.finditer(file_content):
+        _, generic_type, prop_name = match.groups()
+        prop_types[prop_name] = generic_type.strip()
+    return prop_types
 
 def extract_inputs_outputs_from_content(file_content, prop_types):
     inputs = []
@@ -67,7 +81,7 @@ def extract_inputs_outputs_from_content(file_content, prop_types):
     # non-generic inputs
     for match in input_pattern_nongeneric.finditer(file_content):
         kind, name, label, default = match.groups()
-        type_ = prop_types.get(name, "unknown")  # look up type from properties
+        type_ = prop_types.get(name, "unknown")
         inputs.append({
             "name": screaming_to_words(label),
             "type": map_type(type_),
@@ -90,7 +104,7 @@ def extract_inputs_outputs_from_content(file_content, prop_types):
     # non-generic outputs
     for match in output_pattern_nongeneric.finditer(file_content):
         kind, name, label, default = match.groups()
-        type_ = prop_types.get(name, "unknown")  # look up type from properties
+        type_ = prop_types.get(name, "unknown")
         outputs.append({
             "name": screaming_to_words(label),
             "type": map_type(type_),
@@ -101,48 +115,17 @@ def extract_inputs_outputs_from_content(file_content, prop_types):
 
     return inputs, outputs
 
-
-def map_type(type_name):
-    type_mapping = {
-        "Float1": "Double",
-        "Float2": "VecD",
-        "Int1": "Integer",
-        "Half3": "Vec3D",
-        "Half4": "Color",
-        "Int2": "VecI",
-    }
-
-    return type_mapping.get(type_name, type_name)
-
 def find_base_class_name(file_content):
-    # Extract base class from class declaration, first base class only
     match = re.search(r'class\s+\w+\s*:\s*([\w\d_]+)', file_content)
     if match:
         return match.group(1)
     return None
 
 def find_node_file_by_classname(classname):
-    # Look for a file matching <classname>.cs (or <classname>Node.cs)
-    # We'll assume files end with Node.cs, so try classname + "Node.cs"
-    candidate = nodes_dir / f"{classname}Node.cs"
-    if candidate.exists():
-        return candidate
-    
-    # Traverse directories to find the file
     for file in nodes_dir.rglob(f"{classname}Node.cs"):
-        if file.exists():
-            return file
-
-    # Fallback: classname + ".cs"
-    candidate = nodes_dir / f"{classname}.cs"
-    if candidate.exists():
-        return candidate
-    
-    # Traverse directories to find the file
+        return file
     for file in nodes_dir.rglob(f"{classname}.cs"):
-        if file.exists():
-            return file
-
+        return file
     return None
 
 def extract_node_metadata_recursive(file_path, collected_inputs=None, collected_outputs=None, collected_isPair=False, collected_hasPreview=False):
@@ -151,23 +134,18 @@ def extract_node_metadata_recursive(file_path, collected_inputs=None, collected_
     if collected_outputs is None:
         collected_outputs = []
 
-    with file_path.open("r", encoding="utf-8") as f:
-        content = f.read()
+    content = file_path.read_text(encoding="utf-8")
+    prop_types = extract_property_types(content)
 
-    prop_types = extract_property_types(content)  # extract property types from this class
-
-    # Gather inputs and outputs for this class
     inputs, outputs = extract_inputs_outputs_from_content(content, prop_types)
     collected_inputs.extend(inputs)
     collected_outputs.extend(outputs)
 
-    # Gather isPair and hasPreview flags if any found here (or keep old True)
     if not collected_isPair:
         collected_isPair = bool(pair_pattern.search(content))
     if not collected_hasPreview:
         collected_hasPreview = "RenderNode" in content or "IPreviewRenderable" in content
 
-    # Find base class, stop if base class is "Node"
     base_class = find_base_class_name(content)
     if not base_class or base_class == "Node":
         return {
@@ -177,10 +155,8 @@ def extract_node_metadata_recursive(file_path, collected_inputs=None, collected_
             "hasPreview": collected_hasPreview
         }
 
-    # Find base class file and recurse if found
     base_file = find_node_file_by_classname(base_class)
     if base_file is None:
-        # Base class file not found, stop here
         return {
             "inputs": collected_inputs,
             "outputs": collected_outputs,
@@ -188,25 +164,14 @@ def extract_node_metadata_recursive(file_path, collected_inputs=None, collected_
             "hasPreview": collected_hasPreview
         }
 
-    # Recurse up the hierarchy
     return extract_node_metadata_recursive(base_file, collected_inputs, collected_outputs, collected_isPair, collected_hasPreview)
 
-def extract_property_types(file_content):
-    prop_types = {}
-    for match in property_pattern.finditer(file_content):
-        prop_kind, generic_type, prop_name = match.groups()
-        prop_types[prop_name] = generic_type.strip()
-    return prop_types
-
-
 def to_kebab_case(name: str) -> str:
-    # Convert PascalCase or camelCase to kebab-case
     s1 = re.sub('(.)([A-Z][a-z]+)', r'\1-\2', name)
-    kebab = re.sub('([a-z0-9])([A-Z])', r'\1-\2', s1).lower()
-    return kebab
+    return re.sub('([a-z0-9])([A-Z])', r'\1-\2', s1).lower()
 
 def merge_metadata(viewmodel_meta, node_meta):
-    merged = {
+    return {
         "name": viewmodel_meta["name"].replace("Node", ""),
         "category": viewmodel_meta["category"],
         "icon": viewmodel_meta["icon"],
@@ -216,10 +181,13 @@ def merge_metadata(viewmodel_meta, node_meta):
         "outputs": node_meta.get("outputs") or None,
         "description": "TODO: Add a description."
     }
-    return merged
 
-def write_mdx_file(metadata, name):
-    title = f"{metadata['name']}"
+def write_mdx_file(metadata, name, existing_files):
+    if f"{name}.mdx" in existing_files:
+        print(f"Skipping {name}: File already exists somewhere in output_dir.")
+        return
+
+    title = metadata['name']
     frontmatter = {
         "title": title,
         "node": metadata
@@ -228,30 +196,24 @@ def write_mdx_file(metadata, name):
     yaml_frontmatter = yaml.dump(frontmatter, sort_keys=False, allow_unicode=True)
     content = f"---\n{yaml_frontmatter}---\n"
 
-    mdx_path = output_dir / f"{name}.mdx"
-    if mdx_path.exists():
-        print(f"Skipping {name}: File already exists.")
-        return
     output_dir.mkdir(parents=True, exist_ok=True)
-
-    new_content = content
+    mdx_path = output_dir / f"{name}.mdx"
 
     with mdx_path.open("w", encoding="utf-8") as f:
-        f.write(new_content)
+        f.write(content)
 
 def main():
     nodes = {f.name.replace("Node.cs", ""): f for f in nodes_dir.rglob("*Node.cs")}
     viewmodels = {f.name.replace("NodeViewModel.cs", ""): f for f in viewmodels_dir.rglob("*NodeViewModel.cs")}
 
+    # 🔥 Precompute existing mdx files (recursive)
+    existing_mdx_files = {f.name for f in output_dir.rglob("*.mdx")}
+
     for key in sorted(set(nodes.keys()) & set(viewmodels.keys())):
         viewmodel_path = viewmodels[key]
         node_path = nodes[key]
 
-        with viewmodel_path.open("r", encoding="utf-8") as f:
-            vm_content = f.read()
-
-        with node_path.open("r", encoding="utf-8") as f:
-            node_content = f.read()
+        vm_content = viewmodel_path.read_text(encoding="utf-8")
 
         viewmodel_meta = extract_viewmodel_metadata(vm_content)
         if not viewmodel_meta:
@@ -261,7 +223,7 @@ def main():
         node_meta = extract_node_metadata_recursive(node_path)
         merged = merge_metadata(viewmodel_meta, node_meta)
 
-        write_mdx_file(merged, to_kebab_case(key))
+        write_mdx_file(merged, to_kebab_case(key), existing_mdx_files)
 
 if __name__ == "__main__":
     main()

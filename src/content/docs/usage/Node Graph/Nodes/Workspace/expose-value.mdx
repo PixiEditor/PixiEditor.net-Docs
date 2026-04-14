@@ -1,0 +1,38 @@
+---
+title: 'Expose Value'
+node:
+  name: 'Expose Value'
+  category: Workspace
+  icon: icon-eye
+  isPair: false
+  hasPreview: false
+  inputs:
+  - name: Name
+    type: String
+    description: 'Name of the value to expose. This is used to identify the value in the context and should be unique within the graph.'
+    isContextful: false
+    default: '""'
+  - name: Input
+    type: Object
+    description: 'The value to expose. This can be any type of data that you want to make accessible outside the node graph.'
+    isContextful: false
+    default: 'null'
+  outputs: null
+  description: 'Exposes a value from the node graph, making it accessible outside of the graph.'
+---
+
+import custom from '../assets/custom_node.png';
+import customUse from '../assets/custom_use.png';
+import { Image } from 'astro:assets';
+
+## What does it mean to expose a value?
+
+Since version 2.1, PixiEditor document (.pixi file) can be embedded into other documents. This allows you to create reusable node graphs that can be used across multiple documents.
+
+When you expose a value, you are basically creating an output for your node. 
+
+<Image src={custom} alt="Custom Node with Expose Value node" />
+
+So now, when you use this document in another document, you can access the exposed value as an output
+
+<Image src={customUse} alt="Using the exposed value in another document" />

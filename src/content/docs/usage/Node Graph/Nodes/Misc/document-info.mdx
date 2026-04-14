@@ -1,0 +1,32 @@
+---
+title: 'Document Info'
+node:
+  name: 'Document Info'
+  category: ''
+  icon: icon-info
+  isPair: false
+  hasPreview: false
+  inputs: []
+  outputs:
+  - name: Size
+    type: VecI
+    description: 'The size of the document in pixels.'
+    isContextful: false
+    default: 'null'
+  - name: Center
+    type: VecD
+    description: 'The center of the document in pixels. This is calculated as (Size / 2).'
+    isContextful: false
+    default: 'null'
+  - name: Render Output Size
+    type: VecI
+    description: 'A size of currently rendered output in pixels. It is dependend on various factors such as zoom level, render output setting and more.'
+    isContextful: false
+    default: 'null'
+  - name: Render Output Center
+    type: VecD
+    description: 'The center of currently rendered output in pixels. This is calculated as (Render Output Size / 2).'
+    isContextful: false
+    default: 'null'
+  description: 'Provides information about the current document, such as its size and the size of the currently rendered output.'
+---

@@ -1,0 +1,37 @@
+---
+title: 'Viewport Info'
+node:
+  name: 'Viewport Info'
+  category: Workspace
+  icon: icon-scan-search
+  isPair: false
+  hasPreview: false
+  inputs: null
+  outputs:
+  - name: Transform
+    type: Matrix3x3
+    description: 'The transformation matrix of the viewport, representing its position, rotation, and scale.'
+    isContextful: false
+    default: Identity
+  - name: Pan Position
+    type: VecD
+    description: 'The current pan position of the viewport. It is a different value than translation of the Transform output, as it is a virtual cursor position used for panning the viewport.'
+    isContextful: false
+    default: (0, 0)
+  - name: Zoom
+    type: Double
+    description: 'The current zoom level of the viewport.'
+    isContextful: false
+    default: '1.0'
+  - name: Flip X
+    type: Boolean
+    description: 'Indicates whether the viewport is flipped horizontally.'
+    isContextful: false
+    default: 'false'
+  - name: Flip Y
+    type: Boolean
+    description: 'Indicates whether the viewport is flipped vertically.'
+    isContextful: false
+    default: 'false'
+  description: 'Provides information about the current state of the viewport, including its transformation matrix, pan position, zoom level, and flip status.'
+---
