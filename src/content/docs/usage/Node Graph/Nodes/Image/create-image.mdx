@@ -27,6 +27,10 @@ node:
         type: Matrix3x3
         description: Matrix to transform the content before painting onto the image. Use to scale, rotate, or translate the content.
         default: "Identity"
+      - name: Disallow Auto Scaling
+        type: Boolean
+        description: Tells PixiEditor not to scale the image when rendering on partial resolutions (when zooming out in the viewport). Toggle on if zooming the viewport causes the graph to break or look weird.
+        default: "false"
   outputs:
       - name: Image
         type: Texture
