@@ -1,0 +1,32 @@
+---
+title: 'Switch'
+node:
+  name: 'Switch'
+  category: Utility
+  icon: icon-ethernet-port
+  isPair: false
+  hasPreview: false
+  inputs:
+  - name: Condition
+    type: Boolean
+    description: 'A boolean condition that determines which output will be used. If the condition is true, the "On True" output will be used. If the condition is false, the "On False" output will be used.'
+    isContextful: true
+    default: 'false'
+  - name: On True
+    type: Object
+    description: 'An object that will be outputted if the condition is true. The type of the object can be anything.'
+    isContextful: false
+    default: 'null'
+  - name: On False
+    type: Object
+    description: 'An object that will be outputted if the condition is false. The type of the object can be anything.'
+    isContextful: false
+    default: 'null'
+  outputs:
+  - name: Result
+    type: Object
+    description: 'The output of the switch node. The value will be taken from the "On True" input if the condition is true, and from the "On False" input if the condition is false.'
+    isContextful: false
+    default: 'null'
+  description: 'A node that outputs one of two values based on a boolean condition. Value types can be different.'
+---

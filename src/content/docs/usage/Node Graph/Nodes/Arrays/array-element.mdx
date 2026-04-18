@@ -1,0 +1,28 @@
+---
+title: 'Array Element'
+node:
+  name: 'Array Element'
+  category: Arrays
+  icon: icon-package-open
+  isPair: false
+  hasPreview: false
+  inputs:
+  - name: Index
+    type: Integer
+    description: 'Index of the element to retrieve. PixiEditor starts arrays at 0.'
+    isContextful: false
+    default: '0'
+  - name: Array
+    type: Object
+    isArray: true
+    description: 'Array to retrieve the element from.'
+    isContextful: false
+    default: 'null'
+  outputs:
+  - name: Output
+    type: Object
+    description: 'Value from the Array at given Index. If Index is outside of the bounds of the array, it will be clamped to 0 if Index is less than 0 and Array length - 1 if the Index is bigger.'
+    isContextful: false
+    default: 'null'
+  description: 'Retrieves an element from an array at a specified index. If the index is out of bounds, it will be clamped to the nearest valid index.'
+---

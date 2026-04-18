@@ -1,0 +1,70 @@
+---
+title: 'Decompose Gradient'
+node:
+  name: 'Decompose Gradient'
+  category: Color
+  icon: icon-circle-pile
+  isPair: false
+  hasPreview: false
+  inputs:
+  - name: Gradient
+    type: Gradient Paintable
+    typeLink: '/docs/usage/node-graph/property-sockets/#-paintable'
+    description: 'Input gradient paintable to decompose.'
+    isContextful: false
+    default: 'null'
+  outputs:
+  - name: Colors
+    type: Array of Color
+    typeLink: '/docs/usage/node-graph/property-sockets/#-color'
+    typeSocket: 'Color'
+    description: 'An array of colors extracted from the input gradient.'
+    isArray: true
+    isContextful: false
+    default: 'null'
+  - name: Offsets
+    type: Array of Float
+    typeLink: '/docs/usage/node-graph/property-sockets/#-float'
+    typeSocket: 'Float'
+    description: 'An array of offsets corresponding to each color in the input gradient.'
+    isArray: true
+    isContextful: false
+    default: 'null'
+  - name: Type
+    type: Gradient Type
+    typeLink: '/docs/usage/node-graph/nodes/color/gradient#gradient-type'
+    description: 'The type of the input gradient.'
+    isContextful: false
+    default: Linear
+  - name: Absolute Coordinates
+    type: Boolean
+    description: 'Determines whether the gradient uses absolute coordinates. If false, the gradient will use relative coordinates.'
+    isContextful: false
+    default: 'false'
+  - name: Start Point
+    type: VecD
+    description: 'The starting point of the Linear gradient.'
+    isContextful: false
+    default: (0, 0)
+  - name: End Point
+    type: VecD
+    description: 'The ending point of the Linear gradient.'
+    isContextful: false
+    default: (1, 0)
+  - name: Center Point
+    type: VecD
+    description: 'The center point of the Radial and Conical gradient.'
+    isContextful: false
+    default: (0.5, 0.5)
+  - name: Radius
+    type: Double
+    description: 'The radius of the Radial gradient.'
+    isContextful: false
+    default: '0'
+  - name: Angle
+    type: Double
+    description: 'The angle of the Conical gradient.'
+    isContextful: false
+    default: '0'
+  description: 'Decomposes a gradient into its constituent colors, offsets, and properties.'
+---

@@ -1,0 +1,34 @@
+---
+title: 'Equals'
+node:
+  name: 'Equals'
+  category: Utility
+  icon: icon-equal
+  isPair: false
+  hasPreview: false
+  inputs:
+  - name: A
+    type: Object
+    description: 'First value to compare.'
+    isContextful: false
+    default: 'null'
+  - name: B
+    type: Object
+    description: 'Second value to compare.'
+    isContextful: false
+    default: 'null'
+  outputs:
+  - name: Result
+    type: Boolean
+    description: 'True if A and B are equal, false otherwise.'
+    isContextful: false
+    default: 'false'
+  description: 'Compares two values for equality. The comparison is type-sensitive and differs between primitive and complex types. For primitive types (like numbers, strings, booleans), it checks if the values are identical. For complex types (like arrays, objects), it checks if they reference the same instance in memory.'
+---
+import { Aside } from '@astrojs/starlight/components';
+
+## Floating Point Precision
+
+<Aside type="caution">
+When comparing floating-point numbers, avoid using Equals Node due to potential precision issues. Instead, consider using Math Node with `Compare` mode.
+</Aside>

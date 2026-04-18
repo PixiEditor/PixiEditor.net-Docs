@@ -1,0 +1,27 @@
+---
+title: 'Distance'
+node:
+  name: 'Distance'
+  category: Numbers
+  icon: icon-ruler
+  isPair: false
+  hasPreview: false
+  inputs:
+  - name: Point 1
+    type: VecD
+    description: 'Start point to calculate distance from.'
+    isContextful: true
+    default: (0, 0)
+  - name: Point 2
+    type: VecD
+    description: 'End point to calculate distance to.'
+    isContextful: true
+    default: (0, 0)
+  outputs:
+  - name: Distance
+    type: Double
+    description: 'Distance between Point 1 and Point 2.'
+    isContextful: true
+    default: 0
+  description: 'Calculates the distance between two points.'
+---

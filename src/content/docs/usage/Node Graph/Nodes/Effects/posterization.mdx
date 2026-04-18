@@ -1,0 +1,63 @@
+---
+title: 'Posterization'
+node:
+  name: 'Posterization'
+  category: Effects
+  icon: icon-swatches
+  isPair: false
+  hasPreview: true
+  inputs:
+  - name: Background
+    type: Painter
+    description: 'The background painter to which the posterization effect will be applied.'
+    isContextful: false
+    default: null
+  - name: Mode
+    type: Posterization Mode
+    typeLink: '#posterization-mode'
+    description: 'The mode of posterization to apply.'
+    isContextful: false
+    default: Rgb
+  - name: Levels
+    type: Integer
+    description: 'The number of color levels to use in the posterization effect. Higher values will result in a less pronounced effect, while lower values will create a more stylized, abstract look.'
+    isContextful: false
+    default: '8'
+  - name: Color Space
+    type: Color Space Type
+    typeLink: '#color-space-type'
+    description: 'The color space in which the posterization effect will be applied.'
+    isContextful: false
+    default: sRGB
+  outputs:
+  - name: Output
+    type: Painter
+    description: 'The resulting painter with the posterization effect applied.'
+    isContextful: false
+    default: null
+  description: 'Applies a posterization effect to the input background painter, reducing the number of colors in the image.'
+---
+
+# Posterization Mode
+
+## RGB
+
+In RGB mode, the posterization effect is applied to each of the red, green and blue channels separately. The levels input determines how many distinct values each channel can have. For example, if the levels input is set to 4, each channel can only have 4 distinct values (0, 85, 170, 255), resulting in a total of 64 possible colors (4 for red * 4 for green * 4 for blue).
+
+## Luminance
+
+In Luminance mode, the posterization effect is applied to the luminance of the image. The levels input determines how many distinct luminance values the image can have. The colors in the output image are determined by mapping the original colors to the nearest color with the corresponding luminance level.
+
+# Color Space Type
+
+## Inherit
+
+The posterization effect will be applied in the same color space as the render context (usually the document's color space).
+
+## sRGB
+
+The posterization effect will be applied in the sRGB color space, which is a standard color space for images that are displayed on screens.
+
+## Linear sRGB
+
+The posterization effect will be applied in the linear sRGB color space, which is a linearized version of the sRGB color space. This can result in a different visual effect compared to applying the posterization in the standard sRGB color space, especially when working with colors that have a wide range of luminance values.

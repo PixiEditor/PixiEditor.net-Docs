@@ -1,0 +1,109 @@
+---
+title: 'Gradient'
+node:
+  name: 'Gradient'
+  category: Color
+  icon: icon-gradient
+  isPair: false
+  hasPreview: false
+  inputs:
+  - name: Absolute Coordinates
+    type: Boolean
+    description: 'Should the start and end points be treated as absolute coordinates (pixels) or as relative coordinates (0 to 1 range).'
+    isContextful: false
+    default: 'false'
+  - name: Type
+    type: Gradient Type
+    typeLink: '#gradient-type'
+    description: 'The type of gradient to be used.'
+    isContextful: false
+    default: Linear
+  - name: Colors
+    type: Array of Color
+    typeLink: '/docs/usage/node-graph/property-sockets/#-color'
+    typeSocket: 'Color'
+    isArray: true
+    description: 'An array of colors used in the gradient. The number of colors must be equal to the number of offsets.'
+    isContextful: false
+    default: 'null'
+  - name: Offsets
+    type: Array of Float
+    typeLink: '/docs/usage/node-graph/property-sockets/#-float'
+    typeSocket: 'Float'
+    isArray: true
+    description: 'An array of offsets corresponding to each color in the gradient. The number of offsets must be equal to the number of colors.'
+    isContextful: false
+    default: 'null'
+  - name: Stops Count
+    type: Integer
+    description: 'The number of color stops in the gradient. Available when the Colors and Offsets inputs are not connected. When the inputs are connected, the count is determined by the length of the arrays.'
+    isContextful: false
+    default: '2'
+  - name: Start Point
+    type: VecD
+    description: 'The starting point of the gradient.'
+    isContextful: false
+    default: (0, 0)
+  - name: End Point
+    type: VecD
+    description: 'The ending point of the gradient.'
+    isContextful: false
+    default: (1, 0)
+  - name: Start Point
+    type: VecD
+    description: 'Starting point of the Linear gradient. The interpretation of this point depends on the Absolute Coordinates input.'
+    isContextful: false
+    default: (0, 0)
+  - name: End Point
+    type: VecD
+    description: 'Ending point of the Linear gradient. The interpretation of this point depends on the Absolute Coordinates input.'
+    isContextful: false
+    default: (1, 0)
+  - name: Center Point
+    type: VecD
+    description: 'Center point of the Radial and Conical gradient. The interpretation of this point depends on the Absolute Coordinates input.'
+    isContextful: false
+    default: (0.5, 0.5)
+  - name: Radius
+    type: Double
+    description: 'Radius of the Radial gradient. The interpretation of this value depends on the Absolute Coordinates input.'
+    isContextful: false
+    default: '0.5'
+  - name: Angle
+    type: Double
+    description: 'Angle of the Conical gradient in degrees.'
+    isContextful: false
+    default: '0'
+  - name: Color Stop Color
+    type: Color
+    description: 'Color of the color stop. Available when the Colors input is not connected.'
+    isContextful: false
+    default: White
+  - name: Color Stop Offset
+    type: Float
+    description: 'Offset of the color stop. Available when the Offsets input is not connected.'
+    isContextful: false
+    default: '0'
+  outputs:
+  - name: Gradient
+    type: Gradient Paintable
+    typeLink: '/docs/usage/node-graph/property-sockets/#-paintable'
+    description: 'The resulting gradient paintable that can be used as a color input for other nodes.'
+    isContextful: false
+    default: 'null'
+  description: 'Generates a gradient paintable based on the specified type, colors, offsets, and other parameters.'
+---
+
+## Gradient Type
+
+### Linear
+
+In Linear gradient, the colors transition along a straight line defined by the Start Point and End Point. The gradient is perpendicular to the line connecting the start and end points.
+
+### Radial
+
+In Radial gradient, the colors transition radially from a center point outward. The Center Point defines the center of the gradient, while the Radius defines how far the gradient extends from the center.
+
+### Conical
+
+In Conical gradient, the colors transition around a center point in a circular fashion. The Center Point defines the center of the gradient, while the Angle defines the starting angle of the gradient in degrees.

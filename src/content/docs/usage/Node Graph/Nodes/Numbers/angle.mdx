@@ -1,0 +1,27 @@
+---
+title: 'Angle'
+node:
+  name: 'Angle'
+  category: Numbers
+  icon: icon-triangle-right
+  isPair: false
+  hasPreview: false
+  inputs:
+  - name: Vector
+    type: VecD
+    description: 'Input vector to calculate angle from'
+    isContextful: true
+    default: (0, 0)
+  outputs:
+  - name: Radians
+    type: Double
+    description: 'Angle in radians'
+    isContextful: true
+    default: 0
+  - name: Degrees
+    type: Double
+    description: 'Angle in degrees'
+    isContextful: true
+    default: 0
+  description: 'Calculates an angle of a vector using Atan2 function.'
+---

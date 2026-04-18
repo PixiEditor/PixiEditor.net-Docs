@@ -1,0 +1,25 @@
+---
+title: Array
+node:
+  name: Array
+  category: Arrays
+  icon: icon-brackets
+  isPair: false
+  hasPreview: false
+  inputs:
+  - name: Input
+    type: Object
+    description: 'Input of any type, will create more inputs of the same type if connected.'
+    isContextful: false
+    default: 'null'
+  outputs:
+  - name: Output
+    type: Object Array
+    typeSocket: Object
+    typeLink: /docs/usage/node-graph/property-sockets/#-object
+    description: 'An array, which includes all input values'
+    isContextful: false
+    isArray: true
+    default: 'null'
+  description: 'Creates an array out of input values. Connecting an input will create more inputs. All inputs are of the same type. If there is a type mismatch, all inputs will adapt the closest common ancestor type.'
+---

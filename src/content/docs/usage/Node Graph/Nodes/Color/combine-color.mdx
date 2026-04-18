@@ -13,33 +13,52 @@ node:
     isContextful: true
     default: "0"
     min: "0.0"
-    max: "CPU context: 255, GPU context: 1.0"
+    max: "255"
   - name: G
     type: Double
     description: 'G channel value of the color'
     isContextful: true
     default: "0"
     min: "0.0"
-    max: "CPU context: 255, GPU context: 1.0"
+    max: "255"
   - name: B
     type: Double
     description: 'B channel value of the color'
     isContextful: true
     default: "0"
     min: "0.0"
-    max: "CPU context: 255, GPU context: 1.0"
+    max: "255"
   - name: A
     type: Double
     description: 'A channel value of the color. If not provided, the output will be opaque.'
     isContextful: true
-    default: "1 (or 255 in CPU context)"
+    default: "255"
   - name: Mode
-    type: CombineSeparateColorMode (Enum)
-    description: 'TODO: Add a description.'
+    type: Combine Separate Color Mode
+    typeLink: '#combine-separate-color-mode-enum'
+    description: 'The mode in which the color components are combined.'
     isContextful: false
     default: RGB
   outputs: null
-  description: 'The Combine Color Node is used to create a color from its separate RGB(A) components. It can be used to create colors in both CPU and GPU contexts, with different value ranges for each context.'
+  description: 'The Combine Color Node is used to create a color from its separate RGB(A) components. It can be used to create colors in both CPU and GPU contexts.'
 ---
 
-## CombineSeparateColorMode Enum
+## Combine Separate Color Mode Enum
+
+### RGB
+
+In RGB mode, the R, G, and B inputs are treated as the red, green, and blue channels of the color, respectively. The A input is treated as the alpha channel of the color. The output color is created by combining these channels together.
+
+All channels are expected to be in the range of 0 to 255.
+
+### HSL
+
+In HSL mode, the R, G, and B inputs are treated as the hue, saturation, and lightness components of the color, respectively. The A input is treated as the alpha channel of the color.
+
+H expects a value in the range of 0 to 360, while S and L expect values in the range of 0 to 100.
+
+### HSV
+
+In HSV mode, the R, G, and B inputs are treated as the hue, saturation, and value components of the color, respectively. The A input is treated as the alpha channel of the color.
+
+H expects a value in the range of 0 to 360, while S and V expect values in the range of 0 to 100.
