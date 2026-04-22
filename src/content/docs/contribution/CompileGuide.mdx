@@ -57,30 +57,30 @@ import { Steps, Code, FileTree, Tabs, TabItem } from '@astrojs/starlight/compone
         - Sample2_LocalizationSample.csproj
     </FileTree>
 
-    Either open `PixiEditor/src/PixiEditor.sln` in your IDE of choice or run the following command in terminal:
+    Either open `PixiEditor/src/PixiEditor.sln` in your IDE of choice or run the following commands in terminal:
 
+    ```
+    cd src
+    ```
    
     <Tabs>
     <TabItem label="Windows">
     ```
-    dotnet run --project src/PixiEditor.Desktop/PixiEditor.Desktop.csproj -r win-x64
+    dotnet run --project PixiEditor.Desktop/PixiEditor.Desktop.csproj -r win-x64
     ```
     </TabItem>
     <TabItem label="Linux">
     ```
-    dotnet run --project src/PixiEditor.Desktop/PixiEditor.Desktop.csproj -r linux-x64
+    dotnet run --project PixiEditor.Desktop/PixiEditor.Desktop.csproj -r linux-x64
     ```
     </TabItem>
     <TabItem label="macOS">
     ```
-    dotnet run --project src/PixiEditor.Desktop/PixiEditor.Desktop.csproj -r osx-arm64
+    dotnet run --project PixiEditor.Desktop/PixiEditor.Desktop.csproj -r osx-arm64
     ```
     Replace `osx-arm64` with `osx-x64` if you are on Intel Mac.
     </TabItem>
     </Tabs>
-
-
-    Make sure to run the commands above from root repo directory (the one contaning `src` folder)
 
 </Steps>
 

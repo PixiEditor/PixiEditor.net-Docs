@@ -59,6 +59,11 @@ node:
     description: 'Defines how each individual stamp blends with previous stamps within a single stroke.'
     isContextful: false
     default: Normal
+  - name: Opacity
+    type: Double
+    description: 'Defines the opacity at which all stamps will be applied to the final image. Ranges from 0 (fully transparent) to 1 (fully opaque).'
+    isContextful: false
+    default: Normal
   - name: Use Custom Stamp Blender
     type: Boolean
     description: 'Enables use of a custom SKSL blending function for stamp blending instead of built-in modes.'
