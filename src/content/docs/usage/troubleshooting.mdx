@@ -1,0 +1,120 @@
+---
+id: troubleshooting
+title: Troubleshooting
+sidebar_label: Troubleshooting
+---
+
+# PixiEditor doesn't open / stopped opening
+
+## Switch to OpenGL
+
+PixiEditor by default uses Vulkan to render graphics, some hardware and software may not properly work with it.
+
+There are a few ways to do it.
+
+**If you're using Standalone PixiEditor version:**
+
+**Windows:**
+
+Right click on PixiEditor shortcut and select “Properties”, in “Target” add `-–opengl` after `PixiEditor.exe` and after the closing quote `”`, for example `“C:\Program Files\PixiEditor\PixiEditor.exe" --opengl`)
+
+**Linux**
+
+Run binary with `--opengl` flag. 
+
+Example with Flatpak:
+`flatpak run net.pixieditor.PixiEditor --opengl`
+
+**MacOS**
+
+MacOS always uses OpenGL
+
+
+**If you're using Steam PixiEditor version:**
+
+1. Right click on PixiEditor in the Library and click "Properties"
+2. In the Launch Options under the General tab, type `--opengl`
+
+---
+
+Another way to do it, is to locate local appdata of PixiEditor
+
+Windows: Click Win + R and type `%localappdata%/PixiEditor`
+linux: `/home/yourusername/.local/share/PixiEditor`
+
+and creating a file called `render_api.config` and setting its contents to `OpenGL`
+
+### Making it pernament
+
+If PixiEditor runs correctly, you can permanently set OpenGL as a default by going to Edit/Settings and set "Preferred Render Api" to "OpenGL". After that, you won't need to use --opengl flag anymore.
+
+## Check for zombie processes
+
+Sometimes PixiEditor may not close properly and "Zombie" process appears. This only applies to Windows. Open Task Manager (Ctrl + Shift + Esc) and search for `PixiEditor` or `PixiEditor.Desktop`, if it exists, kill it and try opening PixiEditor again.
+
+## Run the app in Safe Mode
+
+**If you're using Standalone PixiEditor version:**
+
+**Windows:**
+
+Right click on PixiEditor shortcut and select “Properties”, in “Target” add `-–safeMode` after `PixiEditor.exe` and after the closing quote `”`, for example `“C:\Program Files\PixiEditor\PixiEditor.exe" --safeMode`)
+
+**Linux**
+
+Run binary with `--safeMode` flag. 
+
+Example with Flatpak:
+`flatpak run net.pixieditor.PixiEditor --safeMode`
+
+**MacOS**
+
+PixiEditor is likely installed under `/Applications/PixiEditor.app` or `/Users/yourusername/Applications/PixiEditor.app` (make sure to replace `yourusername` with your actual user name)
+
+Run `/Applications/PixiEditor.app/Contents/MacOS/PixiEditor -- --safeMode` (make sure to include double `--`
+
+**If you're using Steam PixiEditor version:**
+
+1. Right click on PixiEditor in the Library and click "Properties"
+2. In the Launch Options under the General tab, type `--safeMode`
+
+
+## Clear app data
+
+Installing and uninstalling the app does not remove preferences and local editor data. Sometimes it may cause issues, to fully reset PixiEditor you need to remove the following folders:
+
+**Windows**
+
+Click Win + R and type
+
+- `%localappdata%/PixiEditor` then hit enter and remove the folder
+- `%appdata%/PixiEditor` then hit enter and remove the folder
+- `%tmp%/PixiEditor` then hit enter and remove the folder
+
+**macOS**
+
+Find and remove
+- `/Users/yourusername/Library/Application Support/PixiEditor`
+- `$TMPDIR/PixiEditor`
+
+to find $TMPDIR, check https://superuser.com/questions/581347/where-is-the-temp-folder-in-os-x
+
+**Linux**
+
+Find and remove
+
+- `/home/yourusername/.config/PixiEditor`
+- `/home/yourusername/.local/share/PixiEditor`
+- `/tmp/PixiEditor`
+
+In Flatpak version, paths are different, but uninstalling the app should automatically remove all associated files.
+
+# UI is shifted and does not match mouse clicks
+
+Go to the Settings -> Appearance and toggle on "Use system title bar" or pass `--system-decorations` CLI argument
+
+# PixiEditor opens but freezes
+
+By default PixiEditor loads last files on startup, some files may cause PixiEditor to freeze.
+
+Follow `Run the app in Safe Mode` guide under `PixiEditor doesn't open / stopped opening` above or `Clear app data` if it doesn't help.
