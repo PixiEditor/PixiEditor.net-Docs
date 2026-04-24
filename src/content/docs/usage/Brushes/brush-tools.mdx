@@ -1,20 +1,67 @@
----
-title: 'Creating custom tools with Brush Engine'
-sidebar:
-  order: 5
----
-
 Since PixiEditor 2.1, you can create your own toolsets and tools based on Brushes.
 
-Go to %localappdata/PixiEditor/Configs and create a file called ToolSetsConfig.json. Now, the contents of the file may look like this:
+Go to `%localappdata%/PixiEditor/Configs` if you can't find the `Configs` folder make one. Then create a file called `ToolSetsConfig.json`. Now let’s add our tool. We do that by adding this to the top of the JSON.
 
+```json
+{
+    "CustomTools": [
+        {
+            "ToolName": "Gradient",
+            "Brush": "path\\to\\brush\\GradientBrush.pixi",
+            "Icon": "C:\\Users\\Antho\\AppData\\Local\\PixiEditor\\Configs\\Anthonys Awsme Tools\\TEST.svg",
+            "ToolTip": "Inverts colors",
+            "DefaultShortcut": "G",
+            "ActionDisplays": [
+              {
+                "ActionDisplay": "Click and drag to create a gradient"
+              },
+              {
+                "Modifiers": "Ctrl",
+                "ActionDisplay": "Click and drag to create an inverted gradient."
+              }
+            ]
+        }
+    ],
+}
+```
+<i>note in JSON files we use \\\ in place of / or \\ to separate files and folders</i>
+<p>Alright we made our tool, but if you loaded up PixiEditor right now nothing would happen. Thats because we need to add it to a `toolset`. To create your own toolset, you could add this just below your `CustomTools` in your JSON file.</p>
+
+```json
+    "ToolSets": [
+        {
+            "Name": "Toolset Name",
+            "Icon": "icon-noise",
+            "Tools": [
+                "Gradient"
+            ]
+        }
+       ]
+```
+But what if you wanted to add your tool to one of PixiEditor's existing toolset? You could do this.
+
+```json
+    "ToolSets": [
+        {
+            "Name" : "PAINT_TOOLSET",
+            "Tools": [
+                "Gradient"
+            ]
+
+        }
+      ]
+```
+The `"Name"`'s of the three built in toolsets are `PIXEL_ART_TOOLSET`, `PAINT_TOOLSET`, and `VECTOR_TOOLSET`.
+You can overwrite built-in toolsets settings and icons. It is not possible to remove any existing items.
+
+full code
 ```json
 {
   "CustomTools": [
     {
       "ToolName": "Gradient",
-      "Brush": "path/to/brush/GradientBrush.pixi",
-      "Icon": "path/to/icon.png",
+      "Brush": "path\\to\\brush\\GradientBrush.pixi",
+      "Icon": "path\\to\\icon.png",
       "ToolTip": "Allows for drawing gradients",
       "DefaultShortcut": "G",
       "ActionDisplays": [
@@ -42,7 +89,7 @@ Go to %localappdata/PixiEditor/Configs and create a file called ToolSetsConfig.j
       "Tools": [
         {
           "ToolName": "MoveViewport",
-          "Icon": "path/to/new/icon.png"
+          "Icon": "path\\to\\new\\icon.png"
         }
       ]
     }
@@ -52,4 +99,3 @@ Go to %localappdata/PixiEditor/Configs and create a file called ToolSetsConfig.j
 
 For icons, you can use .png, .svg or icon-name to use PixiEditor’s built-in icons. All glyphs can be found [here](https://github.com/PixiEditor/PixiEditor/blob/master/src/PixiEditor.UI.Common/Fonts/PixiPerfectIcons.axaml).
 
-You can overwrite built-in toolsets settings and icons. It is not possible to remove any existing items.
