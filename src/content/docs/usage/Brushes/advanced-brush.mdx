@@ -54,6 +54,11 @@ We'll use [Stroke Info](/docs/usage/node-graph/nodes/brushes/stroke-info/) node 
 
 Now, when you draw with this brush, it will sample the pixels from the canvas, apply a grayscale filter to them and then apply the modified pixels back to the canvas. This creates a brush that turns the area it is applied to into grayscale.
 
+<Aside variant="tip" title="Blurring and other effects">
+    Some filters require extra pixels around the edges to work properly (e.g. blurring). In that case, you can use the Oversample input of the Brush Output node to inflate the sample area by a certain amount of pixels. This will give the filter enough pixels to work with and prevent edge artifacts.
+    Check out the [Blur tool](https://github.com/PixiEditor/PixiEditor/tree/master/src/PixiEditor/Data/BrushTools/Blur.pixi) for a complete example.
+</Aside>
+
 ## Blackboard
 
 Check out the [Blackboard](/docs/usage/node-graph/blackboard/) documentation to learn more about the blackboard.
