@@ -43,6 +43,11 @@ node:
     description: 'Direction of the pointer movement calculated as a vector from the previous pointer position to the current pointer position. The vector is normalized, so it only represents the direction of the movement and not its speed.'
     isContextful: false
     default: (0, 0)
+  - name: Velocity
+    type: Double
+    description: 'The speed of the pointer movement. It is calculated based on the distance between the previous pointer position and the current pointer position, as well as the time between the two positions. Values range from 0 - 5000 pixels per second.'
+    min: '0'
+    max: '5000'
   - name: Rotation
     type: Double
     description: 'The rotation of the stroke in radians. Use to rotate the brush in the direction of the stroke. It is not a raw pointer input.'

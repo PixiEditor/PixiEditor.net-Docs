@@ -108,6 +108,10 @@ node:
     description: 'Determines whether multiple samples can accumulate when applying the brush.'
     isContextful: false
     default: 'false'
+  - name: Oversample
+    type: Double
+    description: 'Inflates the sample (stamp) area (in pixels) by the value specified by this input. It does not influence the final stroke size, only the stamp texture. Useful when you need to apply filters or effects to the stamp that require extra pixels around the edges (e.g. blurring).'
+    isContextful: false
   - name: Always Clear
     type: Boolean
     description: 'Clears previous stamps before applying a new one.'
