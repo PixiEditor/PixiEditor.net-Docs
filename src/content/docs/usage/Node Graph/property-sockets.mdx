@@ -17,7 +17,7 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { Quiz, QuizOption } from 'starlight-videos/components'
 import { Aside } from '@astrojs/starlight/components';
 
-Property sockets are part of a Node Graph system. If you are not familiar with the Node Graph, we recommend you to read the [Getting Started with Nodes](/docs/usage/node-graph/getting-started-with-node-graph) guide first.
+Property sockets are part of the Node Graph system. If you are not familiar with the Node Graph, we recommend that you read the [Getting Started with Nodes](/docs/usage/node-graph/getting-started-with-node-graph) guide first.
 
 ## What are Property Sockets?
 
@@ -29,11 +29,11 @@ Inputs are on the left side of the Node, and outputs are on the right side. Each
 
 ### Inputs
 
-Inputs can be in 2 states. **Connected** or **disconnected**. Disconnected inputs usually expose a value editor to the user, allowing them to change the value of the input.
+Inputs can be in 2 states: **Connected** and **Disconnected**. Disconnected inputs usually expose a value editor to the user, allowing them to change the value of the input.
 
 <Tabs>
   <TabItem label="Connected">
-  Connected `Size` input does not expose anything. It's value is determined by the output of the node it is connected to. You can preview the value of the input by hovering over the socket.
+  Connected `Size` input does not expose anything. Its value is determined by the output of the node it is connected to. You can preview the value of the input by hovering over the socket.
     <Image src={connectedImage} alt="Connected input" width="200"/>
   </TabItem>
   <TabItem label="Disconnected">
@@ -54,13 +54,13 @@ Each property holds/can process a specific type of data. Each data type is repre
 
 A painting operation, each Node that accepts a Painter either connects to the chain of painting operations or paints the chain of operations to the texture.
 
-The simplest example are layers and the **Output Node**. Each layer accepts a <span style={{color: "#ff8c00"}}>⬤</span> `Background` input and returns a `Output` <span style={{color: "#ff8c00"}}>⬤</span>.
+The simplest example are layers and the **Output Node**. Each layer accepts a <span style={{color: "#ff8c00"}}>⬤</span> `Background` input and returns an `Output` <span style={{color: "#ff8c00"}}>⬤</span>.
 
 While the **Output Node** accepts a <span style={{color: "#ff8c00"}}>⬤</span> `Background` input and does not return anything.
 
 <Image src={painter} alt="Painter Node" />
 
-In that example, chain of 2 painting operations is created.
+In this example, chain of 2 painting operations is created.
 
 1. Paint the "New layer 1"
 2. Paint the "New layer 2" on top of the first layer with blend mode "Normal" and opacity 100%.
@@ -69,7 +69,7 @@ In that example, chain of 2 painting operations is created.
 
 ### <span style={{color: "#99c47a"}}>⬤</span> Texture
 
-A texture with defined width and height. For example [Create Image Node](/docs/usage/node-graph/nodes/create-image) produces a <span style={{color: "#99c47a"}}>⬤</span> `Texture` output, which can be used by other nodes that accept textures, such as the [Modify Image Node](/docs/usage/node-graph/nodes/modify-image).
+A texture with a defined width and height. For example [Create Image Node](/docs/usage/node-graph/nodes/create-image) produces a <span style={{color: "#99c47a"}}>⬤</span> `Texture` output, which can be used by other nodes that accept textures, such as the [Modify Image Node](/docs/usage/node-graph/nodes/modify-image).
 
 ### <span style={{color: "#cc5c5c"}}>⬤</span> Filter
 
@@ -97,21 +97,19 @@ Paintable is a type that describes fill/brush. Color is a paintable, it describe
 
 ### <span style={{color: "#c984ca"}}>⬤</span> VecD
 
- (Vector 2 of double precision numbers)
-
-A vector with 2 double precision numbers.
+A vector of 2 double precision numbers.
 
 ### <span style={{color: "#597513"}}>⬤</span> Vec3D
 
-A vector with 3 double precision numbers.
+A vector of 3 double precision numbers.
 
 ### <span style={{color: "#c9b4ca"}}>⬤</span> VecI
 
-A vector with 2 integers.
+A vector of 2 integers.
 
 ### <span style={{color: "#4c64b1"}}>⬤</span> Integer
 
-An integer value, which can be used to represent whole numbers. It occupies 4 bytes of memory and can represent a number from range: -2,147,483,648 to 2,147,483,647
+An integer value, which can be used to represent whole numbers. It occupies 4 bytes of memory and can represent any number in the range of -2,147,483,648 to 2,147,483,647
 
 ### <span style={{color: "#C9E4C6"}}>⬤</span> String
 
@@ -161,39 +159,39 @@ A magenta color is used when the property doesn't have a unique color attached. 
 
 ### <div style={{display: "inline-block", width: "24px", height: "24px", borderRadius: "50%", background: "conic-gradient(#FF6A72 0%, #FFD84A 25%, #47F0C2 50%, #6A7CFF 75%, #FF6A72 100%)", border: "1px solid #ccc", verticalAlign: "middle"}}></div> Object
 
-A type, that can hold any value. All other types inherit from object.
+A type that can hold any value. All other types inherit from object.
 
 ### <span style={{color: "#8F6A36"}}>⬤</span> Document Reference
 
-A reference to other .pixi document.
+A reference to another .pixi document.
 
 ## Arrays
 
-Some nodes have a long, rectangular sockets. Which look like this:
+Some nodes have long rectangular sockets which look like this:
 
 <Image src={rect} width="140" alt="Array socket"/>
 
-It means, that the type of the property is **an array**, arrays are special data types which hold multiple values inside.
+This means that the type of the property is **an array**, arrays are special data types which hold multiple values inside.
 
 [1, 2, 3]
 
-Arrays in PixiEditor are **strongly typed**, it means that you can't mix types in an array.
+Arrays in PixiEditor are **strongly typed**. It means that you can't mix types in an array.
 
 <Aside type="danger" title='Illegal array*'>
 [1, "hello", 5.2] 
 </Aside>
 
-*It is possible to include different types inside the array if the base type of the array is an [Object](#-object) or values inherit from base array type. 
+*It is possible to include different types inside the array if the base type of the array is [Object](#-object) or if the different types inherit from the base type of the array.
 
 ## Diamond Sockets
 
-Some nodes have diamond-shaped sockets. Which look like this:
+Some nodes have diamond-shaped sockets which look like this:
 
 <Image src={diamond} width="80" alt="Diamond socket"/>
 
-They accept the same data types as regular, circular sockets, but they are used to represent special type of data flow.
+They accept the same data types as the regular (circular) sockets, but they are used to represent a special type of data flow.
 
-Diamond sockets are contextful, meaning that the data they "hold" is determined by the context of the node they are connected to.
+Diamond sockets are contextful. This means that the data they "hold" is determined by the context of the node they are connected to.
 
 There are 2 types of contexts:
 
@@ -203,8 +201,8 @@ A default context (CPU), which is the only context for circular sockets. A prope
 
 ### GPU Context
 
-Some Nodes such as [Modify Image Node](/docs/usage/node-graph/nodes/image/begin-modify-image) expose a GPU context. In GPU context, the property socket with diamond shape work **per pixel**. This means that there is no a single value for the property,
-but rather a formula that is applied to the pixel that is being processed.
+Some Nodes such as [Modify Image Node](/docs/usage/node-graph/nodes/image/begin-modify-image) expose a GPU context. In GPU context, the diamond-shaped property sockets work **per pixel**. This means that there is no a single value for the property,
+but rather there is a formula that is individually applied to each pixel being processed.
 
 Let's take a look at this example:
 
@@ -213,26 +211,24 @@ Let's take a look at this example:
 <figcaption>_click to zoom_</figcaption>
 </figure>
 
-In this example, we're modifying the Mona Lisa image with [Modify Image Node](/docs/usage/node-graph/nodes/image/begin-modify-image). This node exposes 2 diamond-shaped sockets:
+In this example, we're modifying the Mona Lisa image with the [Modify Image Node](/docs/usage/node-graph/nodes/image/begin-modify-image). This node exposes 2 diamond-shaped sockets:
 - `UV`
 - `Color`
 
-Notice how [Modify Image Node](/docs/usage/node-graph/nodes/image/begin-modify-image) consists of 2 parts: Begin and End with blue zone between them.
+Notice how the [Modify Image Node](/docs/usage/node-graph/nodes/image/begin-modify-image) consists of 2 parts, **Begin Modify Image** and **End Modify Image**, with a blue zone between them. There are 2 Nodes in the blue zone: [Separate Color](/docs/usage/node-graph/nodes/color/separate-color) and [Combine Color](/docs/usage/node-graph/nodes/color/combine-color). By following the connections in this example you should be able to see that we are swapping the red and green channels of the input texture.
 
-There are also 2 Nodes connected to Modify Image: [Separate Color](/docs/usage/node-graph/nodes/color/separate-color) and [Combine Color](/docs/usage/node-graph/nodes/color/combine-color). Essentially, in this example, we are swapping red with green channel of the image.
+Here `Color` is not a single value, instead it's **the color of the currently processed pixel** in the texture. Similarly `UV` is the coordinates of the same pixel. You can think of the pair of [Modify Image Nodes](/docs/usage/node-graph/nodes/image/begin-modify-image) as a big loop going over each pixel in the image.
 
-A `Color` is not a single value, but **it points to a color of currently processed pixel**. The `UV` is a coordinate of the pixel in the texture, which is being processed. It's essentially a one big loop.
-
-Imagine it processes a very first pixel of the image (top-left corner). The `Color` would be equal to #647360 <span style={{color: "#647360"}}>■</span> and `UV` would be equal to (0, 0). Then Separate Color Node would 
+For example, consider processing the very first pixel of the image (top-left corner). For that pixel `Color` would be equal to #647360 <span style={{color: "#647360"}}>■</span> and `UV` would be equal to (0, 0). Then the Separate Color Node would 
 return:
 
-- `R` = 100
-- `G` = 115
-- `B` = 96
+- `R` = 100 (0x64)
+- `G` = 115 (0x73)
+- `B` = 96 (0x60)
 - `A` = 255
 
 :::caution
-In reality color values inside GPU Context are normalized to 0-1 range, but it's irrelevant for this example.
+In reality, the color values inside GPU Context are normalized to a 0-1 range, but that's irrelevant for this example.
 :::
 
 Finally, the `Combine Color Node` would take these values and swap them, resulting in:
@@ -242,13 +238,13 @@ Finally, the `Combine Color Node` would take these values and swap them, resulti
 - `B` = 96
 - `A` = 255
 
-This color value and the `UV` are passed to the `End Modify Image`, which puts the modified pixel back to the texture at the same `UV` coordinate (0, 0).
+This resulting color value and the `UV` are passed to the `End Modify Image` node, which puts the modified pixel back on the texture at the same `UV` coordinate (0, 0).
 
 :::tip
-You can modify UV as well to put the pixel to a different location in the texture. For example, you can use UV to flip the image, or to apply a transformation to the image.
+You can modify the UV as well to put the pixel in a different location on the texture. For example, you can use UV to flip the image, or to apply a transformation to the image.
 :::
 
-Then it processes the next pixel to the right, and so on until it reaches the end of the image.
+Afterwards the loop would continue processing the next pixel to the right, and so on until the end of the image.
 
 ### Mixing GPU and CPU Contexts
 
@@ -260,7 +256,7 @@ You can connect circular sockets to diamond sockets and vice versa. But you need
 | GPU -> GPU   | ✅ Normal GPU data flow. Value dependend on the context      |
 | GPU -> CPU   | 🚫 Not allowed! Context data can never leave GPU context.    |
 
-**Diamond socket can act the same as circular socket, if it is used in CPU context, but circular socket can never become GPU context aware.**
+**Diamond socket can act the same as circular socket when used in CPU context, but circular socket can never become GPU context aware.**
 
 _GPU context is basically a Shader. Modify Image Node generates a shader code out of connected Nodes and their properties_
 
@@ -270,14 +266,14 @@ Some property types can be implicitly converted from one type to another. If the
 
 ### Multi value to single value 
 
-A `VecD` can be implicitly converted to a `Float` (or any single numeric value) by taking the first value of the vector.
+A `VecD` can be implicitly converted to a `Float` (or to any single numeric value) by taking the first value of the vector.
 
 (10, 20) -> 10
 (10, 20, 30) -> 10
 
 ### Single value to multi value
 
-A `Float` (or any single numeric value) can be implicitly converted to a `VecD` by creating a vector with X and Y values equal to the float value.
+A `Float` (or any single numeric value) can be implicitly converted to a `VecD` by creating a vector with the X and Y values equal to the float value.
 
 For VecD to Vec3D conversion, the Z value is set to Y value (X, Y, Y).
 

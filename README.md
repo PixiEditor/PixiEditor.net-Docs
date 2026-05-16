@@ -25,7 +25,13 @@ It is oriented towards developers working on PixiEditor
 
 ### VS Code / VSCodium
 
-Go to the Run tab and run the `Development Server` launch configuration
+Install yarn if you don't have it. Then run `yarn install` in the repo's core directory. Afterwards in go to the Run tab in VS Code  and run the `Development Server` launch configuration
+
+<details>
+    <summary>Development server seems to be running but http://localhost:4321/docs/ doesn't load?</summary>
+    
+    This can be caused by a VPN in running locally in TUN mode, try disabling the VPN or editing launch.json to run `astro dev --host` instead of `astro dev`
+</details>
 
 #### Recommended Extensions
 * [Astro](https://marketplace.visualstudio.com/items?itemName=astro-build.astro-vscode)
