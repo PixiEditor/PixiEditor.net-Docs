@@ -1,0 +1,34 @@
+---
+title: Color Ramp
+node:
+  name: Color Ramp
+  category: Image
+  icon: icon-gradient
+  isPair: false
+  hasPreview: true
+  inputs:
+  - name: Factor
+    type: Painter
+    description: 'The image or value to color ramp.'
+    isContextful: false
+    default: 'null'
+  - name: Gradient
+    type: Gradient Paintable
+    typeLink: '/docs/usage/node-graph/property-sockets/#-paintable'
+    description: 'Input gradient paintable to decompose.'
+    isContextful: false
+    default: 'null'
+  - name: Color Space
+    type: Color Space Type
+    typeLink: /docs/usage/node-graph/nodes/effects/shader#color-space-type
+    description: 'The color space in which the shader operates. This determines how color values are interpreted and processed within the shader.'
+    isContextful: false
+    default: Inherit
+  outputs:
+  - name: Output
+    type: Painter
+    description: 'The color-ramped output.'
+    isContextful: false
+    default: 'null'
+  description: 'Recieves a greyscale value and maps it to the specified gradient. Internally, it is just a shader.'
+---
