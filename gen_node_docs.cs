@@ -158,6 +158,25 @@ if (existingDocs.Contains("#PIXIEDITOR:" + node.Name.Replace("Node", "")))
 
 
     var yaml = serializer.Serialize(metadata);
+    var sb = new StringBuilder();
+
+sb.AppendLine("---");
+sb.Append(yaml);
+sb.AppendLine("---");
+
+foreach (var enumType in nodeMetadata.Enums)
+{
+    sb.AppendLine();
+    sb.AppendLine($"## {ScreamingToWords(enumType.Name)}");
+
+    foreach (var value in Enum.GetNames(enumType))
+    {
+        sb.AppendLine();
+        sb.AppendLine($"### {ScreamingToWords(value)}");
+        sb.AppendLine();
+        sb.AppendLine("TODO: Add description.");
+    }
+}
 
 var category =
     viewModelMetadata["category"]
@@ -180,7 +199,7 @@ var path = Path.Combine(
 
     File.WriteAllText(
         path,
-        $"---\n{yaml}---\n",
+        sb.ToString(),
         Encoding.UTF8);
 
 
@@ -262,12 +281,9 @@ var icon =
 
 
 
-static NodeMetadata ExtractNodeMetadata(
-    Type node)
+static NodeMetadata ExtractNodeMetadata(Type node)
 {
-    var inputs = new List<object>();
-    var outputs = new List<object>();
-
+    var nodeMetadata = new NodeMetadata();
 
     foreach (var property in node.GetProperties(
         BindingFlags.Public |
@@ -276,68 +292,58 @@ static NodeMetadata ExtractNodeMetadata(
     {
         var type = property.PropertyType;
 
-
         if (!type.IsGenericType)
             continue;
 
+        var genericDefinition = type.GetGenericTypeDefinition();
+        var genericName = genericDefinition.Name;
 
-        var genericName =
-            type.GetGenericTypeDefinition()
-                .Name;
+        var argumentType = type.GetGenericArguments()[0];
+        var argument = argumentType.Name;
 
+        var isContextful =
+            genericName.StartsWith("FuncInputProperty") ||
+            genericName.StartsWith("FuncOutputProperty");
 
-        var argument =
-            type.GetGenericArguments()
-                .First()
-                .Name;
-
-
-        if (genericName.Contains("InputProperty"))
+        var port = new Dictionary<string, object>
         {
-            inputs.Add(new
-            {
-                name = ScreamingToWords(property.Name),
-                type = MapType(argument),
-                description =
-                    "TODO: Add a description."
-            });
+            ["name"] = ScreamingToWords(property.Name),
+            ["type"] = MapType(argument),
+            ["description"] = "TODO: Add a description."
+        };
+
+        if (isContextful)
+            port["isContextful"] = true;
+
+        if (argumentType.IsEnum)
+        {
+            port["typeLink"] = "#" + ToKebabCase(argumentType.Name);
+
+            if (!nodeMetadata.Enums.Contains(argumentType))
+                nodeMetadata.Enums.Add(argumentType);
         }
 
-
-        if (genericName.Contains("OutputProperty"))
+        if (genericName.EndsWith("InputProperty`1"))
         {
-            outputs.Add(new
-            {
-                name = ScreamingToWords(property.Name),
-                type = MapType(argument),
-                description =
-                    "TODO: Add a description."
-            });
+            nodeMetadata.Inputs.Add(port);
+        }
+        else if (genericName.EndsWith("OutputProperty`1"))
+        {
+            nodeMetadata.Outputs.Add(port);
         }
     }
 
-
-    var isPair =
+    nodeMetadata.IsPair =
         node.GetCustomAttributes()
-            .Any(a =>
-                a.GetType().Name ==
-                "PairNodeAttribute");
+            .Any(a => a.GetType().Name == "PairNodeAttribute");
 
-
-    var hasPreview =
+    nodeMetadata.HasPreview =
         node.GetInterfaces()
             .Any(i =>
                 i.Name.Contains("Preview") ||
                 i.Name.Contains("Renderable"));
 
-
-    return new()
-    {
-        Inputs = inputs,
-        Outputs = outputs,
-        IsPair = isPair,
-        HasPreview = hasPreview
-    };
+    return nodeMetadata;
 }
 
 static string GetIconName(
@@ -389,6 +395,8 @@ static string MapType(
         "Half3" => "Vec3D",
         "Half4" => "Color",
         "Int2" => "VecI",
+        "Int32" => "Int",
+        "Single" => "Float",
         _ => type
     };
 }
@@ -446,6 +454,8 @@ class NodeMetadata
 {
     public List<object> Inputs { get; set; } = [];
     public List<object> Outputs { get; set; } = [];
+
+    public List<Type> Enums { get; } = [];
 
     public bool IsPair { get; set; }
     public bool HasPreview { get; set; }

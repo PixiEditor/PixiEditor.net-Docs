@@ -1,0 +1,185 @@
+﻿---
+title: Vector Math
+node:
+  name: Vector Math
+  category: Numbers
+  icon: icon-plus-minus
+  isPair: false
+  hasPreview: false
+  inputs:
+  - name: Mode
+    type: VectorMathMode
+    description: Selects the vector operation to perform.
+    typeLink: '#vector-math-mode'
+  - name: X
+    type: VecD
+    description: First vector input used by the selected operation.
+    isContextful: true
+  - name: Y
+    type: VecD
+    description: Second vector input used by binary operations.
+    isContextful: true
+  - name: Z
+    type: VecD
+    description: Third vector input used by operations requiring an additional vector.
+    isContextful: true
+  - name: S
+    type: Double
+    description: Scalar value used by scalar operations such as Scale.
+    isContextful: true
+  outputs:
+  - name: Result Float1
+    type: Double
+    description: Scalar result produced by operations such as Dot, Length, or Distance.
+    isContextful: true
+  - name: Result
+    type: VecD
+    description: Vector result produced by vector operations.
+    isContextful: true
+  description: Performs mathematical operations on vectors and scalars.
+
+---
+
+## Vector Math Mode
+
+| Mode                  | X | Y | Z | S | Output |
+|-----------------------|---|---|---|---|--------|
+| Add                   | ✅ | ✅ |   |   | Vector |
+| Subtract              | ✅ | ✅ |   |   | Vector |
+| Multiply              | ✅ | ✅ |   |   | Vector |
+| Divide                | ✅ | ✅ |   |   | Vector |
+| Multiply Add           | ✅ | ✅ | ✅ |   | Vector |
+| Dot                   | ✅ | ✅ |   |   | Scalar |
+| Cross                 | ✅ | ✅ |   |   | Scalar |
+| Distance              | ✅ | ✅ |   |   | Scalar |
+| Length                | ✅ |   |   |   | Scalar |
+| Scale                 | ✅ |   |   | ✅ | Vector |
+| Normalize             | ✅ |   |   |   | Vector |
+| Absolute              | ✅ |   |   |   | Vector |
+| Power                 | ✅ | ✅ |   |   | Vector |
+| Sign                  | ✅ |   |   |   | Vector |
+| Min                   | ✅ | ✅ |   |   | Vector |
+| Max                   | ✅ | ✅ |   |   | Vector |
+| Round                 | ✅ |   |   |   | Vector |
+| Floor                 | ✅ |   |   |   | Vector |
+| Ceil                  | ✅ |   |   |   | Vector |
+| Fraction              | ✅ |   |   |   | Vector |
+| Modulo                | ✅ | ✅ |   |   | Vector |
+| Wrap                  | ✅ | ✅ | ✅ |   | Vector |
+| Snap                  | ✅ | ✅ |   |   | Vector |
+| Sin                   | ✅ |   |   |   | Vector |
+| Cos                   | ✅ |   |   |   | Vector |
+| Tan                   | ✅ |   |   |   | Vector |
+| Negate                | ✅ |   |   |   | Vector |
+
+### Add
+
+Adds two vectors component-wise.
+
+### Subtract
+
+Subtracts the second vector from the first vector component-wise.
+
+### Multiply
+
+Multiplies two vectors component-wise.
+
+### Divide
+
+Divides the first vector by the second vector component-wise.
+
+### Multiply Add
+
+Multiplies two vectors component-wise and then adds the third vector:
+`X * Y + Z`.
+
+### Dot
+
+Calculates the dot product of two vectors, producing a scalar value.
+
+### Cross
+
+Calculates the cross product of two vectors, producing a perpendicular vector.
+
+### Distance
+
+Calculates the distance between two vectors.
+
+### Length
+
+Returns the magnitude of a vector.
+
+### Scale
+
+Multiplies a vector by a scalar value.
+
+### Normalize
+
+Converts a vector into a unit vector with a length of 1.
+
+### Absolute
+
+Returns the absolute value of each vector component.
+
+### Power
+
+Raises each component of the first vector to the power of the corresponding component of the second vector.
+
+### Sign
+
+Returns the sign of each component:
+`-1` for negative values, `0` for zero, and `1` for positive values.
+
+### Min
+
+Returns the minimum value of each component between two vectors.
+
+### Max
+
+Returns the maximum value of each component between two vectors.
+
+### Round
+
+Rounds each vector component to the nearest integer.
+
+### Floor
+
+Rounds each vector component down to the nearest integer.
+
+### Ceil
+
+Rounds each vector component up to the nearest integer.
+
+### Fraction
+
+Returns only the fractional part of each vector component.
+
+### Modulo
+
+Returns the remainder after dividing each component of the first vector by the corresponding component of the second vector.
+
+### Wrap
+
+Wraps vector components into a specified range.
+
+`X` is the value, `Y` is the minimum range, and `Z` is the maximum range.
+
+### Snap
+
+Snaps each vector component to the nearest lower multiple of the corresponding value in `Y`.
+
+### Sin
+
+Calculates the sine of each vector component.
+
+### Cos
+
+Calculates the cosine of each vector component.
+
+### Tan
+
+Calculates the tangent of each vector component.
+
+### Negate
+
+Returns the inverse of each component by multiplying it by `-1`.
