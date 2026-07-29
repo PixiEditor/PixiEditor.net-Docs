@@ -165,6 +165,10 @@ A type that can hold any value. All other types inherit from object.
 
 A reference to another .pixi document.
 
+### <span style={{color: "#e84fb0"}}>⬤</span> Palette
+
+Represents an array of colors. (Added in PixiEditor 2.1.2.1)
+
 ## Arrays
 
 Some nodes have long rectangular sockets which look like this:
@@ -201,7 +205,7 @@ A default context (CPU), which is the only context for circular sockets. A prope
 
 ### GPU Context
 
-Some Nodes such as [Modify Image Node](/docs/usage/node-graph/nodes/image/begin-modify-image) expose a GPU context. In GPU context, the diamond-shaped property sockets work **per pixel**. This means that there is no a single value for the property,
+Some Nodes such as [Modify Image Node](/docs/usage/node-graph/nodes/image/modify-image-left) expose a GPU context. In GPU context, the diamond-shaped property sockets work **per pixel**. This means that there is no a single value for the property,
 but rather there is a formula that is individually applied to each pixel being processed.
 
 Let's take a look at this example:
@@ -211,13 +215,13 @@ Let's take a look at this example:
 <figcaption>_click to zoom_</figcaption>
 </figure>
 
-In this example, we're modifying the Mona Lisa image with the [Modify Image Node](/docs/usage/node-graph/nodes/image/begin-modify-image). This node exposes 2 diamond-shaped sockets:
+In this example, we're modifying the Mona Lisa image with the [Modify Image Node](/docs/usage/node-graph/nodes/image/modify-image-left). This node exposes 2 diamond-shaped sockets:
 - `UV`
 - `Color`
 
-Notice how the [Modify Image Node](/docs/usage/node-graph/nodes/image/begin-modify-image) consists of 2 parts, **Begin Modify Image** and **End Modify Image**, with a blue zone between them. There are 2 Nodes in the blue zone: [Separate Color](/docs/usage/node-graph/nodes/color/separate-color) and [Combine Color](/docs/usage/node-graph/nodes/color/combine-color). By following the connections in this example you should be able to see that we are swapping the red and green channels of the input texture.
+Notice how the [Modify Image Node](/docs/usage/node-graph/nodes/image/modify-image-left) consists of 2 parts, **Begin Modify Image** and **End Modify Image**, with a blue zone between them. There are 2 Nodes in the blue zone: [Separate Color](/docs/usage/node-graph/nodes/color/separate-color) and [Combine Color](/docs/usage/node-graph/nodes/color/combine-color). By following the connections in this example you should be able to see that we are swapping the red and green channels of the input texture.
 
-Here `Color` is not a single value, instead it's **the color of the currently processed pixel** in the texture. Similarly `UV` is the coordinates of the same pixel. You can think of the pair of [Modify Image Nodes](/docs/usage/node-graph/nodes/image/begin-modify-image) as a big loop going over each pixel in the image.
+Here `Color` is not a single value, instead it's **the color of the currently processed pixel** in the texture. Similarly `UV` is the coordinates of the same pixel. You can think of the pair of [Modify Image Nodes](/docs/usage/node-graph/nodes/image/modify-image-left) as a big loop going over each pixel in the image.
 
 For example, consider processing the very first pixel of the image (top-left corner). For that pixel `Color` would be equal to #647360 <span style={{color: "#647360"}}>■</span> and `UV` would be equal to (0, 0). Then the Separate Color Node would 
 return:

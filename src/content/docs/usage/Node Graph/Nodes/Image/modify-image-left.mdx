@@ -15,7 +15,7 @@ node:
     default: 'null'
   - name: Color Sample Mode
     type: Color Sample Mode (Enum)
-    typeLink: /docs/usage/node-graph/nodes/image/begin-modify-image#color-sample-mode
+    typeLink: /docs/usage/node-graph/nodes/image/modify-image-left#color-sample-mode
     description: 'The color sample mode to use when sampling colors from the image. This determines how colors are sampled from the texture, which can affect the final output of the image modifications.'
     isContextful: false
     default: Color Managed
@@ -54,7 +54,7 @@ Input UV (End Modify Image) sets **UV coordinates for sampling the image**. This
 
 Output Color (Begin Modify Image) outputs a color sampled from the image using the UV from the previous pass. This is a color that will be used to render the image at the current UV coordinates.
 
-You can modify the color any way you want, when you plug it into the Input `Color` of [End Modify Image](/docs/usage/node-graph/nodes/image/end-modify-image), you'll set the final color at the current UV coordinates (not modified ones, but active in GPU context).
+You can modify the color any way you want, when you plug it into the Input `Color` of [End Modify Image](/docs/usage/node-graph/nodes/image/modify-image-right), you'll set the final color at the current UV coordinates (not modified ones, but active in GPU context).
 
 
 :::note

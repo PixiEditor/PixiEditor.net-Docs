@@ -19,5 +19,6 @@ export const socketColors = {
   "Vector Shape": "conic-gradient(#a473a5 0% 33%, #f2f2f2 33% 66%, #e1d0e1 66% 100%)",
   Matrix3x3: "#ffea4f",
   Default: "#ff00ff",
-  Object: "conic-gradient(#FF6A72 0%, #FFD84A 25%, #47F0C2 50%, #6A7CFF 75%, #FF6A72 100%)"
+  Object: "conic-gradient(#FF6A72 0%, #FFD84A 25%, #47F0C2 50%, #6A7CFF 75%, #FF6A72 100%)",
+  Palette: "#e84fb0"
 };

@@ -1,0 +1,43 @@
+﻿---
+title: Random
+node:
+  name: Random
+  category: Utility
+  icon: icon-noise
+  isPair: false
+  hasPreview: false
+  inputs:
+  - name: Min
+    type: Float
+    description: 'Minimum value of the random range.'
+  - name: Max
+    type: Float
+    description: 'Maximum value of the random range.'
+  - name: Seed
+    type: Int
+    description: 'Seed value for the random number generator. Using the same seed will produce the same sequence of random numbers.'
+  - name: Trigger
+    type: Random Trigger
+    typeLink: '#random-trigger'
+    description: 'Defines when new random number should be generated.'
+  - name: Input Trigger
+    type: Float
+    description: 'A trigger input that can be used to force the generation of a new random number when its value changes if the Trigger input is set to Input Trigger.'
+  outputs:
+  - name: Result
+    type: Float
+    description: 'The generated random number within the specified range.'
+  description: 'The Random node generates a random number within a specified range defined by the Min and Max inputs. The Seed input allows for reproducible random sequences, while the Trigger input determines when a new random number is generated.'
+---
+
+## Random Trigger
+
+Random Trigger is an enum that defines the conditions under which a new random number should be generated. The available options are:
+
+### OnExecute
+
+Value is generated when the node is executed. This is the default behavior and is suitable for scenarios where you want a new random number each time the node runs (e.g., each animation frame)
+
+### OnInputChanged
+
+Value is generated when the Input Trigger value changes. This allows for more controlled random number generation based on specific input conditions.
