@@ -395,7 +395,7 @@ static string MapType(
         "Half3" => "Vec3D",
         "Half4" => "Color",
         "Int2" => "VecI",
-        "Int32" => "Int",
+        "Int32" => "Integer",
         "Single" => "Float",
         _ => type
     };
