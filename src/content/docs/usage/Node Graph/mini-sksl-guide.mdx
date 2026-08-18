@@ -47,23 +47,23 @@ The types in SKSL are named differently from GLSL:
 | `float`                                                            | High precision floating-point number         |
 | `half`                                                             | Medium precision floating-point number       |
 | `int`                                                              | High precision signed integer                |
-| <code style="color:red"><b>uint</b></code>                         | High precision unsigned integer              |
+| <code class="text-orange-500 font-bold">uint</code>                | High precision unsigned integer              |
 | `short`                                                            | Medium precision signed integer              |
-| <code style="color:red"><b>ushort</b></code>                       | Medium precision unsigned integer            |
+| <code class="text-orange-500 font-bold">ushort</code>              | Medium precision unsigned integer            |
 | `bool`                                                             | Boolean, `true` or `false`                   |
 | `float2`, `float3`, `float4` (`vec2`, `vec3`, `vec4`)              | Float vectors. `vec2` and `float2` are interchangable, same for others |
 | `half2`, `half3`, `half4`                                          | Medium precision float vectors               |
 | `int2`, `int3`, `int4`                                             | Integer vectors                              |
-| <b style="color:red"><code>uint2</code>, <code>uint3</code>, <code>uint4</code></b>        | Unsigned integer vectors |
+| <span class="text-orange-500 font-bold"><code>uint2</code>, <code>uint3</code>, <code>uint4</code></span>        | Unsigned integer vectors |
 | `short2`, `short3`, `short4`                                       | Medium precision integer vectors             |
-| <b style="color:red"><code>ushort2</code>, <code>ushort3</code>, <code>ushort4</code></b>  | Medium precision unsigned integer vectors |
+| <span class="text-orange-500 font-bold"><code>ushort2</code>, <code>ushort3</code>, <code>ushort4</code></span>  | Medium precision unsigned integer vectors |
 | `bool2`, `bool3`, `bool4`                                          | Boolean vectors                              |
 | `float2x2`, `float3x3`, `float4x4` (`mat2x2`, `mat3x3`, `mat4x4`)  | Matrices of floats                           |
 | `half2x2`, `half3x3`, `half4x4`                                    | Matrices of medium precision floats          |
 | `shader`                                                           | SkSL shader object for runtime composition   |
 
 :::caution
-The types highlighted in red are only supported in version 300 of SKSL.
+The types highlighted in orange are only supported in version 300 of SKSL.
 They can be used by scripts that start with a line containing a `#version 300` directive.
 This functionality is not officially documented anywhere but it seems likely
 that it will stay as part of the language.
@@ -144,25 +144,25 @@ vec2 greenblue = vect.gb; // (2, 3)
 |----------------------------|-------------|-------------|---------------|
 | 1 (highest) | parenthetical grouping | `( )` | NA |
 | 2           | array subscript<br/>function call and constructor structure<br/>field selector, swizzler<br/>postfix increment and decrement | `[ ]`<br/>`( )`<br/>`.`<br/>`++` `--` | Left to Right |
-| 3           | prefix increment and decrement<br/>unary | `++` `--`<br/>`+` `-` <code style="color:red"><b>~</b></code> `!` | Right to Left | |
-| 4           | multiplicative | `*` `/` <code style="color:red"><b>%</b></code> | Left to Right |
+| 3           | prefix increment and decrement<br/>unary | `++` `--`<br/>`+` `-` <code class="text-orange-500 font-bold">~</code> `!` | Right to Left | |
+| 4           | multiplicative | `*` `/` <code class="text-orange-500 font-bold">%</code> | Left to Right |
 | 5           | additive | `+` `-` | Left to Right |
-| 6           | bit-wise shift | <code style="color:red"><b>&lt;&lt; &gt;&gt;</b></code> | Left to Right |
+| 6           | bit-wise shift | <span class="text-orange-500 font-bold"><code>&lt;&lt;</code> <code>&gt;&gt;</code></span> | Left to Right |
 | 7           | relational | `<` `>` `<=` `>=` | Left to Right |
 | 8           | equality | `==` `!=` | Left to Right |
-| 9           | bit-wise and | <code style="color:red"><b>&</b></code> | Left to Right |
-| 10          | bit-wise exclusive or | <code style="color:red"><b>^</b></code> |Left to Right |
-| 11          | bit-wise inclusive or | <code style="color:red"><b>\|</b></code> | Left to Right |
+| 9           | bit-wise and | <code class="text-orange-500 font-bold">&</code> | Left to Right |
+| 10          | bit-wise exclusive or | <code class="text-orange-500 font-bold">^</code> | Left to Right |
+| 11          | bit-wise inclusive or | <code class="text-orange-500 font-bold">\|</code> | Left to Right |
 | 12          | logical and | `&&` | Left to Right |
 | 13          | logical exclusive or | `^^` | Left to Right |
 | 14          | logical inclusive or | `\|\|` | Left to Right |
 | 15          | selection | `?` `:` | Right to Left |
-| 16          | assignment<br/> arithmetic assignments | `=`<br/>`+=` `-=`<br/>`*=` `/=`<br/><b style="color:red"><code>%=</code> <code>&lt;&lt;=</code> <code>&gt;&gt;=</code></b><br/><b style="color:red"><code>&=</code> <code>^=</code> <code>\|=</code></b> | Right to Left |
+| 16          | assignment<br/> arithmetic assignments | `=`<br/>`+=` `-=`<br/>`*=` `/=`<br/><span class="text-orange-500 font-bold"><code>%=</code> <code>&lt;&lt;=</code> <code>&gt;&gt;=</code><br/><code>&=</code> <code>^=</code> <code>\|=</code></span> | Right to Left |
 | 17 (lowest) | sequence | `,` | Left to Right |
 
 
 :::caution
-The operators highlighted above in red are only supported in version 300 of SKSL.
+The operators highlighted above in orange are only supported in version 300 of SKSL.
 They can be used by scripts that start with a line containing a `#version 300` directive.
 This functionality is not officially documented anywhere but it seems likely
 that it will stay as part of the language.
