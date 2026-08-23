@@ -1,5 +1,5 @@
 ---
-title: 'Mini SKSL guide'
+title: 'SKSL guide'
 sidebar:
   order: 5
 ---
@@ -8,7 +8,7 @@ sidebar:
 
 SKSL is a shading language developed by Google for use in their Skia graphics library, which is the foundation for rendering in many applications, including PixiEditor. It allows developers to write custom shaders that can manipulate images and graphics at a low level.
 
-SKSL was modeled on [GLSL ES 1.00](https://www.khronos.org/files/opengles_shading_language.pdf) and shares most of its syntax and limitations. This page lists some differences you should be aware of.
+SKSL was modeled on [GLSL ES 1.00](https://www.khronos.org/files/opengles_shading_language.pdf) and shares most of its syntax and limitations. This page gives an outline of SKSL for those who are at least a bit familiar with GLSL and shader programming.
 
 PixiEditor uses SKSL in the Node Graph's [Shader](/docs/usage/node-graph/nodes/effects/shader) node, allowing you to create custom shader effects by writing SKSL code directly.
 
@@ -26,7 +26,7 @@ Knowledge of vector mathematics, color spaces, and how shaders work will be bene
 
 ## Basic Structure
 
-A basic SKSL shader consists of a `main` function that takes in vector2 coordinates and produces an output color. The `main` function is the entry point for the shader.
+A basic SKSL shader consists of a `main` function that takes in a vector2 with image coordinates and produces an output color. The `main` function is the entry point for the shader.
 
 ```glsl
 half4 main(vec2 coords) { // coords are not normalized
@@ -35,7 +35,38 @@ half4 main(vec2 coords) { // coords are not normalized
 ```
 
 :::tip
-You can pass `float2` instead of `vec2` as a input coordinates parameter type
+You can use `float2` instead of `vec2` to refer to a vector of floats
+:::
+
+## Types
+
+The types in SKSL are named differently from GLSL:
+
+| Type                                                               | Description                                  |
+|--------------------------------------------------------------------|----------------------------------------------|
+| `float`                                                            | High precision floating-point number         |
+| `half`                                                             | Medium precision floating-point number       |
+| `int`                                                              | High precision signed integer                |
+| <code class="text-orange-500 font-bold">uint</code>                | High precision unsigned integer              |
+| `short`                                                            | Medium precision signed integer              |
+| <code class="text-orange-500 font-bold">ushort</code>              | Medium precision unsigned integer            |
+| `bool`                                                             | Boolean, `true` or `false`                   |
+| `float2`, `float3`, `float4` (`vec2`, `vec3`, `vec4`)              | Float vectors. `vec2` and `float2` are interchangable, same for others |
+| `half2`, `half3`, `half4`                                          | Medium precision float vectors               |
+| `int2`, `int3`, `int4`                                             | Integer vectors                              |
+| <span class="text-orange-500 font-bold"><code>uint2</code>, <code>uint3</code>, <code>uint4</code></span>        | Unsigned integer vectors |
+| `short2`, `short3`, `short4`                                       | Medium precision integer vectors             |
+| <span class="text-orange-500 font-bold"><code>ushort2</code>, <code>ushort3</code>, <code>ushort4</code></span>  | Medium precision unsigned integer vectors |
+| `bool2`, `bool3`, `bool4`                                          | Boolean vectors                              |
+| `float2x2`, `float3x3`, `float4x4` (`mat2x2`, `mat3x3`, `mat4x4`)  | Matrices of floats                           |
+| `half2x2`, `half3x3`, `half4x4`                                    | Matrices of medium precision floats          |
+| `shader`                                                           | SkSL shader object for runtime composition   |
+
+:::caution
+The types highlighted in orange are only supported in version 300 of SKSL.
+They can be used by scripts that start with a line containing a `#version 300` directive.
+This functionality is not officially documented anywhere but it seems likely
+that it will stay as part of the language.
 :::
 
 ## Declaring Uniforms
@@ -46,28 +77,6 @@ Uniforms allow you to pass arbitrary data to the shader from the CPU. They are d
 uniform vec2 iResolution;
 uniform double someValue;
 ```
-
-### Basic Types
-SKSL supports several basic types, such as:
-
-| Type        | Description                                  |
-|-------------|----------------------------------------------|
-| `float`     | high precision floating-point scalar                 |
-| `half`      | medium precision floating-point scalar                 |
-| `vec2`      | 2-component float vector              |
-| `vec3`      | 3-component float vector              |
-| `vec4`      | 4-component float vector              |
-| `float2x2`  | 2×2 matrix of floats                  |
-| `float3x3`  | 3×3 matrix of floats                  |
-| `half2`     | 2-component medium precision float vector              |
-| `half3`     | 3-component medium precision float vector              |
-| `half4`     | 4-component medium precision float vector              |
-| `int`       | high precision integer scalar                        |
-| `int2`      | 2-component integer vector                   |
-| `int3`      | 3-component integer vector                   |
-| `int4`      | 4-component integer vector                   |
-| `shader`    | SkSL shader object for runtime composition   |
-
 
 ### layout(color)
 
@@ -91,3 +100,159 @@ half4 main(vec2 coords) {
     return iImage.eval(coords);
 }
 ```
+
+## Vectors
+
+The general creation syntax is:
+
+```glsl
+half4 color = half4(0.5, 0.5, 0.5, 1.0);
+vec3 rgb = vec3(1.0); // each component is set to 1.0
+vec4 translucent = vec4(rgb, 0.5); // the rgb vector provides the first three components
+```
+
+Vectors support swizzling, which means that you can extract their components into a new vector by listing them after a dot:
+
+```glsl
+half4 color = half4(0.5, 0.5, 0.5, 1.0);
+half3 rgb = half3(color.rgb); // .rgb is used to extract first 3 components
+vec4 mixed = vec4(rgb.br, color.gr); // the resulting vector contains (rgb.b, rgb.r, color.g, color.r)
+```
+
+You can also use constants 0 and 1 as swizzle components:
+
+```glsl
+half4 color = half4(0.5, 0.5, 0.5, 1.0);
+half4 newColor = color.1gb0; // (1.0, 0.5, 0.5, 0.0)
+```
+
+Vector components can be accessed by `xyzw`, `rgba`, or `stpq`. In other words, each component has multiple names, for example first one can be accessed by `x`, `r`, or `s`:
+
+```glsl
+vec4 vect = vec4(1, 2, 3, 4);
+float red = vect.r; // 1
+float xcoord = vect.x; // still 1
+float scoord = vect.s; // still 1
+
+vec2 yz = vect.yz; // (2, 3)
+vec2 greenblue = vect.gb; // (2, 3)
+```
+
+## Operators
+
+| Precedence                 | Description | Operators   | Associativity |
+|----------------------------|-------------|-------------|---------------|
+| 1 (highest) | parenthetical grouping | `( )` | NA |
+| 2           | array subscript<br/>function call and constructor structure<br/>field selector, swizzler<br/>postfix increment and decrement | `[ ]`<br/>`( )`<br/>`.`<br/>`++` `--` | Left to Right |
+| 3           | prefix increment and decrement<br/>unary | `++` `--`<br/>`+` `-` <code class="text-orange-500 font-bold">~</code> `!` | Right to Left | |
+| 4           | multiplicative | `*` `/` <code class="text-orange-500 font-bold">%</code> | Left to Right |
+| 5           | additive | `+` `-` | Left to Right |
+| 6           | bit-wise shift | <span class="text-orange-500 font-bold"><code>&lt;&lt;</code> <code>&gt;&gt;</code></span> | Left to Right |
+| 7           | relational | `<` `>` `<=` `>=` | Left to Right |
+| 8           | equality | `==` `!=` | Left to Right |
+| 9           | bit-wise and | <code class="text-orange-500 font-bold">&</code> | Left to Right |
+| 10          | bit-wise exclusive or | <code class="text-orange-500 font-bold">^</code> | Left to Right |
+| 11          | bit-wise inclusive or | <code class="text-orange-500 font-bold">\|</code> | Left to Right |
+| 12          | logical and | `&&` | Left to Right |
+| 13          | logical exclusive or | `^^` | Left to Right |
+| 14          | logical inclusive or | `\|\|` | Left to Right |
+| 15          | selection | `?` `:` | Right to Left |
+| 16          | assignment<br/> arithmetic assignments | `=`<br/>`+=` `-=`<br/>`*=` `/=`<br/><span class="text-orange-500 font-bold"><code>%=</code> <code>&lt;&lt;=</code> <code>&gt;&gt;=</code><br/><code>&=</code> <code>^=</code> <code>\|=</code></span> | Right to Left |
+| 17 (lowest) | sequence | `,` | Left to Right |
+
+
+:::caution
+The operators highlighted above in orange are only supported in version 300 of SKSL.
+They can be used by scripts that start with a line containing a `#version 300` directive.
+This functionality is not officially documented anywhere but it seems likely
+that it will stay as part of the language.
+:::
+
+## Built-in functions
+
+`genType` in the tables below refers to regular and vector floating point number types, e.g. `int`, `short2`, `float4`... .
+When used with vector types, the functions are applied component-wise, except for geometric functions.
+This info is adapted from the [GLSL ES 1.00 spec](https://www.khronos.org/files/opengles_shading_language.pdf).
+The list of functions provided here is (likely) not exhaustive.
+
+### Common functions
+
+| Syntax                                                                    | Description          |
+|---------------------------------------------------------------------------|----------------------|
+| `genType abs(genType x)`                                                  | Returns x if x >= 0, otherwise it returns –x. |
+| `genType sign(genType x)`                                                 | Returns 1.0 if x > 0, 0.0 if x = 0, or –1.0 if x < 0 |
+| `genType floor(genType x)`                                                | Returns a value equal to the nearest integer that is less than or equal to x |
+| `genType ceil(genType x)`                                                 | Returns a value equal to the nearest integer that is greater than or equal to x |
+| `genType fract(genType x)`                                                | Returns x – floor(x) |
+| `genType mod(genType x, genType y)`<br/>`genType mod(genType x, float y)` | Modulus (modulo). Returns x – y ∗ floor (x/y) |
+| `genType min(genType x, genType y)`<br/>`genType min(genType x, float y)` | Returns y if y < x, otherwise it returns x |
+| `genType max(genType x, genType y)`<br/>`genType max(genType x, float y)` | Returns y if x < y, otherwise it returns x. |
+| `genType clamp(genType x, genType minVal, genType maxVal)`<br/>`genType clamp(genType x, float minVal, float maxVal)`         | Returns min(max(x, minVal), maxVal). Results are undefined if minVal > maxVal. |
+| `genType mix(genType x, genType y, genType a)`<br/>`genType mix(genType x, genType y, float a)`                               | [Linear interpolation](https://en.wikipedia.org/wiki/Linear_interpolation) (lerp). Returns the linear blend of x and y, i.e. x*(1-a)+y*a. |
+| `genType step(genType edge, genType x)`<br/>`genType step(float edge, genType x)`                                             | Returns 0.0 if x < edge, otherwise it returns 1.0 |
+| `genType smoothstep(genType edge0, genType edge1, genType x)`<br/>`genType smoothstep(float edge0, float edge1, genType x)`   | Returns 0.0 if x &lt;= edge0 and 1.0 if x &gt;= edge1 and performs smooth Hermite interpolation between 0 and 1 when edge0 < x < edge1. |
+
+### Trigonometry functions
+
+| Syntax                                 | Description          |
+|----------------------------------------|----------------------|
+| `genType radians(genType degrees)`    | Converts degrees to radians |
+| `genType degrees(genType radians)`    | Converts radians to degrees |
+| `genType sin(genType angle)`          | Sine |
+| `genType cos(genType angle)`          | Cosine |
+| `genType tan(genType angle)`          | Tangent |
+| `genType asin(genType x)`             | Arc sine. Returns an angle whose sine is x, from -π/2 to π/2. |
+| `genType acos(genType x)`             | Arc cosine. Returns an angle whose cosine is x, from 0 to π. |
+| `genType atan(genType y, genType x)`  | [Atan2](https://en.wikipedia.org/wiki/Atan2). Returns the angle of the vector with coordinates x and y. |
+| `genType atan(genType y_over_x)`      | Arc tangent. Returns an angle whose tangent is y_over_x, from -π/2 to π/2. |
+
+### Exponential functions
+
+| Syntax                                 | Description          |
+|----------------------------------------|----------------------|
+| `genType pow(genType x, genType y)`   | Returns x raised to the power y |
+| `genType exp(genType x)`              | Natural exponentiation |
+| `genType log(genType x)`              | Natural logarithm |
+| `genType exp2(genType x)`             | Returns 2 raised to the x power |
+| `genType log2(genType x)`             | Returns the base 2 logarithm of x |
+| `genType sqrt(genType x)`             | Square root |
+| `genType inversesqrt(genType x)`      | Returns 1/sqrt(x) |
+
+### Geometric functions
+
+These operate on vectors as vectors, not component-wise
+
+| Syntax                                                    | Description          |
+|-----------------------------------------------------------|----------------------|
+| `float length(genType x)`                                         | Returns the eucledian length of the vector x |
+| `float distance(genType p0, genType p1)`                          | Returns the eucledian distance between two points |
+| `float dot(genType x, genType y)`                                 | Returns the dot product of x and y |
+| `vec3 cross(vec3 x, vec3 y)`<br/>`half3 cross(half3 x, half3 y)`  | Returns the cross product of x and y |
+| `genType normalize(genType x)`                                    | Returns a vector in the same direction as x but with a length of 1. |
+| `genType faceforward(genType N, genType I, genType Nref)`         | If dot(Nref, I) < 0 return N, otherwise return –N. |
+| `genType reflect(genType I, genType N)`                           | For the incident vector I and surface normal N, returns the reflection direction: I – 2 ∗ dot(N, I) ∗ N. N must be normalized. |
+| `genType refract(genType I, genType N, float eta)`                | For the incident vector I and surface normal N, and the ratio of indices of refraction eta, return the refraction vector. I and N must be normalized. |
+
+### Matrix functions
+
+`matType` refers to any matrix type.
+
+| Syntax                                        | Description          |
+|-----------------------------------------------|----------------------|
+| `matType matrixCompMult(matType x, matType y)`  | Multiply matrix x by matrix y component-wise, i.e., `result[i][j]` is the scalar product of `x[i][j]` and `y[i][j]`. |
+
+### Vector comparison functions
+
+`boolN` refers to a boolean vector of any size. `vecN` refers to a numeric (`float`, `half`, `int` or `short`) vector of any size.
+
+| Syntax                                        | Description          |
+|-----------------------------------------------|----------------------|
+| `boolN lessThan(vecN x, vecN y)`                                   | Returns the component-wise comparison of x < y. |
+| `boolN lessThanEqual(vecN x, vecN y)`                              | Returns the component-wise comparison of x &lt;= y. |
+| `boolN greaterThan(vecN x, vecN y)`                                | Returns the component-wise comparison of x > y. |
+| `boolN greaterThanEqual(vecN x, vecN y)`                           | Returns the component-wise comparison of x >= y. |
+| `boolN equal(vecN x, vecN y)`<br/>`boolN equal(boolN x, boolN y)`        | Returns the component-wise comparison of x == y. |
+| `boolN notEqual(vecN x, vecN y)`<br/>`boolN notEqual(boolN x, boolN y)`  | Returns the component-wise comparison of x != y. |
+| `bool any(boolN x)`                                                | Returns true if any component of x is true. |
+| `bool all(boolN x)`                                                | Returns true only if all components of x are true. |
+| `boolN not(boolN x)`                                               | Returns the component-wise logical complement of x. |
