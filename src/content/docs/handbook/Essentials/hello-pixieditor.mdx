@@ -1,0 +1,278 @@
+---
+title: 'The UI Walkthrough'
+sidebar:
+  order: 1
+  badge:
+    text: Start Here
+    variant: tip
+---
+
+**Welcome to PixiEditor!**
+
+If you haven't yet, you can <a href="https://pixieditor.net/download/">download PixiEditor here</a>.
+
+On this page you'll find all the information about the app's UI.
+
+## The Startup Window
+
+Once you open the app, an extra window will open up called ```Hello there!```. That is the startup window. You can also open it manually, by going to ```View → Open startup window``` in the menu bar.
+
+![Screenshot of the startup window with highlights.](./assets/startup-window.png)
+
+On the screenshot, there are 4 main parts of that window highlighted in orange:
+
+![Screenshot of the startup window with highlights - zoom.](./assets/startup-window-zoom.png)
+
+###  1. Button Group
+- ```Open File``` Opens file explorer. It let's you choose pixi files, but also all other file types supported by PixiEditor such as jpg, png, svg etc.
+- ```New``` Opens the [Create New Image](#create-new-image) Window.
+- ```Browse Workspaces``` Opens the Workspaces Browser. At the moment workspaces are available only in the Extension Browser.
+- ```Explore Files``` Opens the Example Files made by PixiEditor Team and Contributors.
+-  <span className="pixi-icon icon-paste-as-new-layer"/> - Creates new file from clipboard 
+-  <span className="pixi-icon icon-extensions"/> - Opens extensions library
+
+### 2. Recent Files
+Under Recent Files you can see 3 most recent files opened. To see a list of all recent files go to ```File → Recent``` in the menu bar.
+
+### 3. Social Icons
+At the bottom there are all PixiEditor important links. There are tooltips on hover, to check destination of each link.
+
+### 4. News Feed
+This is a place where we share new blogposts, videos, updates. We recommend to keep this visible, but if you'd prefer to hide that panel, simply click on the button with arrow. It won't show again as long as you open it manually.
+
+
+## Create New Image
+
+There are 3 ways to create a new file:
+
+1. Click the ```New``` button from the startup window
+2. Use a shortcut ```Ctrl + N``` on Windows or ```⌘ + N``` on Mac
+3. Go to ```File → New``` in the menu bar
+
+Each of above will open the Create New Image Window:
+
+![Screenshot of the create new image window with highlights.](./assets/new-image.png)
+
+Looking from the top, options in this window are as follows:
+
+![Screenshot of the create new image window with highlights.](./assets/new-image-zoom.png)
+
+
+### 1. Presets Picker
+With 9 most popular dimensions to choose from. Clicking on one of the options fills the input and you can later manually adjust it.
+
+### 2. Width + Height
+Inputs where you can enter your desired dimensions. You can click on it and type from keyboard or use your pointer to change the value up and down while dragging. It suports simple mathematical operators ```+ - * /```. You can type in ```1920/2```, click outside of the input, and the result will show. At the moment PixiEditor support pixels only. 
+
+### 3. Preserve Aspect Ratio
+It comes in handy if you want to keep the ratio, but scale the image up or down. Simply click on that checkbox to enable it.
+
+Once you choose all options, click the ```Create``` button on the bottom or hit ```Enter```.
+
+
+## Toolsets
+
+In PixiEditor, there are 4 primary toolsets: Pixel Art, Painting, Vector and Adjustments. You can find them looking to the left from the canvas.
+
+![Screenshot of the UI with highlights on toolsets.](./assets/toolsets.png)
+
+### 1. Tool Context Bar
+
+On the left side of the context bar there are always visible undo and redo arrows. They change the last action made in the app no matter what tool is selected. You can also use shortcuts for that: ```Ctrl/⌘ + Z``` for undo, and ```Ctrl/⌘ + Shift + Z``` for redo.
+
+The second part of this bar in collapsable. You can hide it by using the arrow at the end of the bar. This part shows the tool's name and its specific settings. You can notice how it changes while selecting different tools.
+
+### 2. Toolset Picker
+
+To change the active toolset, hover on the pill with the toolset name. This will show all available toolsets to choose from. Click on the desired toolset to select it.
+
+### 3. Tools
+
+Below the toolset name, there is a group of icons, each representing a different tool. To select a tool, click on its icon. Active tool is marked with a white outline. It is impossible to have no tool selectd.
+
+### 4. Extension Library
+
+If you need some tool, that is not available in the basic toolsets, you can look for it in the Extension Library. This purple button is a shortcut to get there.
+
+## Preview Tab
+
+In the bottom right corner you can see the preview tab. All tabs in PixiEditor are dockable, so you can change the placement any way you want.
+
+![Screenshot of the UI with a highlight on the Preview Tab.](./assets/preview.png)
+
+Other than the preview itself there are some information and toggle buttons in the bottom.
+
+![Screenshot of the UI with a highlight on the Preview Tab - zoom.](./assets/preview-zoom.png)
+
+While using your pointer on the preview, you can see the pointer position (X and Y) and the color your pointer is pointing to. By default the color is in RGBA. You can change it to HEX by using the toggle on the right with the colorspace name. The white circle lets you choose between high and low resolution of preview.
+
+In the right corner there is an option to change the background of the preview. By clicking the rectangle you change to: no color, solid white, solid black, checker pattern. Of course, this feature makes sense only if you dont have a fully filled layer on your canvas.
+
+## Layer Panel
+
+Layers are the heart of your files. By default layer panel is placed in the middle of the right side of the app.
+
+![Screenshot of the UI with a highlight on the Layer Panel.](./assets/layers.png)
+
+It contains a few sections highlighted below:
+
+![Screenshot of the UI with a highlight on the Layer Panel - zoom.](./assets/layers-zoom.png)
+
+###  1. Button Group
+-  <span className="pixi-icon icon-file-plus"/> - Creates new layer
+-  <span className="pixi-icon icon-folder-plus"/> - Creates new folder
+-  <span className="pixi-icon icon-trash"/> - Deletes all selected layers and folders (you can redo this action)
+-  <span className="pixi-icon icon-alpha-lock"/> - Locks transparency of the select layer. It means you wont'd be able to use tools on any pixels that are not already filled with color.
+-  <span className="pixi-icon icon-create-mask"/> - Creates a mask for the selected layer
+-  <span className="pixi-icon icon-merge"/> - Merges selected layer with the layer below. Works also for groups - it merges all the layers of a group with the selected one.
+
+###  2. Layer Options
+
+For each layer you can change the blend mode by clicking on the dropdown with option ```Normal```. Next to it, there is a slider that changes the opacity of the layer. You can also use the input to type in the value. 
+
+
+###  3. Layers
+
+Layers have an eye icon <span className="pixi-icon icon-eye"/> / <span className="pixi-icon icon-eye-off"/>  that is used to hide a layer from a composition. Next, there is a small preview of the layer content with the name and information about blending and opacity. To change the name, double click on it - your cursor will change and you can modify text. 
+
+
+###  4. Add Reference Layer
+
+Somtimes, you might want to use an image as a reference. You can add it from the files on your computer by clicking on ```Add Reference Layer``` button.
+
+Once you select an image, you'll see it on the canvas, and some new elements will appear on the UI:
+
+![Screenshot of the UI of reference image.](./assets/reference.png)
+
+-  <span className="pixi-icon icon-eye"/> / <span className="pixi-icon icon-eye-off"/> - Hides / Shows the reference layer
+-  <span className="pixi-icon icon-layers-top"/> / <span className="pixi-icon icon-layers-bottom"/> - Changes the reference layer position to above / under other layers
+-  Preview of the reference layer
+-  <span className="pixi-icon icon-crop"/> - Enters a transformation mode for the reference layer (scaling and moving the layer)
+-  <span className="pixi-icon icon-reset"/> - Resets transformations made to the reference layer
+-  <span className="pixi-icon icon-trash"/> - Deletes the current reference layer. Has to be done in order to add a new one.
+
+## Color Tabs
+
+This panel by default is made out of 4 tabs and lets you work with colors.
+
+![Screenshot of the UI with a highlight on the Color Picker.](./assets/colors.png)
+
+We'll describe each seperately.
+
+### Color Picker
+![Screenshot of the UI with a highlight on the Color Picker.](./assets/picker.png)
+
+The main part of this tab is a HSV/HSL Color Picker, which consists of a circular hue slider and HV/HL square.
+
+In the left bottom corner there are 2 squares with an arrow. The top square is the primary color and the one below is the secondary color. Clicking on the arrow swaps the two colors (you can also click ```X``` on keyboard).
+
+On the bottom there is a wide slider which controls the alpha. You can also use an input on the right to change its value.
+
+Last two elements are the HSV/HSL dropdown and a color value written in HEX.
+
+### Color Slider
+![Screenshot of the UI with a highlight on the Color Slider.](./assets/sliders.png)
+
+With these sliders you are changing the primary color. It is a set of HSV/HSL/RGB + Alpha sliders. They additionally have inputs for entering precise values.
+
+### Color Swatches
+![Screenshot of the UI with a highlight on the Color Swatches.](./assets/swatches.png)
+
+```I have no idea how this works```
+
+### Color Palette
+![Screenshot of the UI with a highlight on the Color Palette.](./assets/palette.png)
+
+This tab lets you use and edit color palettes in PixiEditor. Color palettes are quite advanced, so all features not visible at first glance will be covered in another material.
+
+Most actions can be found at the top bar:
+
+- The two squares present current primary and secondary colors (you can click ```X``` on keyboard to swap them)
+- The longer rectangle is for adding new colors to color palette. It doesn't change the primary color. Clicking on it opens a small color picker.
+-  <span className="pixi-icon icon-plus-square"/> - Adds selected color to the palette
+-  <span className="pixi-icon icon-database"/> - Opens the Palette Browser 
+-  <span className="pixi-icon icon-hard-drive"/> - Opens file manager to import a new palette from your drive. You can also upload a picture, and all colors from that picture will be added.
+-  <span className="pixi-icon icon-save"/> - Saves the palette to your drive
+-  <span className="pixi-icon icon-trash"/> - Deletes the current palette
+
+In the middle you can see all colors of a palette. First 10 colors have small numbers - that is the shortcut for choosing a color. Just click a corresponding number on your keyboard to set it as primary color. You can drag the color rectangles to change order.
+
+At the bottom there is a panel for replacing colors in the palette. If that color is used on the canvas, it will be changed too. In order to do that, drag a color from the palette to the rectangle on the left, then click on the rectangle on the right and pick a new color. Click on the icon <span className="pixi-icon icon-swap"/> to replace it.
+
+## Viewport Options 
+
+There is one icon in the right top corner of the viewport that hides many important options. To view these options, click on the button with <span className="pixi-icon icon-tool"/>  icon.
+
+![Screenshot of the UI with a highlight on the viewport options.](./assets/viewport.png)
+![Screenshot of the UI with a highlight on the viewport options.](./assets/viewport-zoom.png)
+
+### 1. Canvas Rotation
+
+-  Number of degrees by which the viewport is rotated. To rotate the viewport use rotation tool <span className="pixi-icon icon-rotate-view"/> available in each toolset.
+-  <span className="pixi-icon icon-reset"/> - Resets the viewport rotation and orientation (clears the flip)
+
+### 2. Canvas Resolution
+
+That option is a toggle, clicking one button clears the other:
+
+-  <span className="pixi-icon icon-circle"/> - Turns on high resolution preview
+-  <span className="pixi-icon icon-lowres-circle"/> -  Turns on document resolution preview
+
+```What is it for???```
+
+### 3. Canvas Options
+
+-  <span className="pixi-icon icon-x-symmetry"/> - Turns on / off a symmetry line along the y axis
+-  <span className="pixi-icon icon-y-symmetry"/> - Turns on / off a symmetry line along the x axis
+-  <span className="pixi-icon icon-recenter-x-symmetry"/> - Resets the symmetry line along the y axis to default position
+-  <span className="pixi-icon icon-recenter-y-symmetry"/> - Resets the symmetry line along the x axis to default position
+-  <span className="pixi-icon icon-x-flip"/> - Flips the canvas horizontally. This is a viewport option, to transform the image use ```Image → Flip```
+-  <span className="pixi-icon icon-image180"/> - Flips the canvas vertically. This is a viewport option, to transform the image use ```Image → Flip```
+-  <span className="pixi-icon icon-gridlines"/> - Turns on / off the gridlines
+-  <span className="pixi-icon icon-snapping"/> - Turns on / off the snapping
+
+### 4. Grid Size
+
+You can use these inputs to change size of the gridlines. Type in desired dimensions or hover on the input and drag your mouse for finding a perfect size. 
+
+### 5. Render Preview
+
+This dropdown lets you choose between different previews of a file. To create a new preview, you need to add a [Custom Output Node](https://pixieditor.net/docs/usage/node-graph/nodes/workspace/custom-output/) (workspaces from the Extension Library often include multiple previews).
+
+
+## Top Bar 
+![Screenshot of the UI with a highlight on the top bar.](./assets/top-bar.png)
+
+### 1. App Info + Search
+
+- The most to the left there is a PixiEditor logo. Clicking on it shows current version and lets you download an update if available -  you will see a blue dot on the logo if that's the case.
+- Next to the logo there is a search bar. You can click on it or use ```Ctrl/⌘ + K``` to open. It lets you search for files, but also, you can look for actions like flipping, resizing etc. It also shows a shortcut if available, so it is a good way to learn the app!
+
+### 2. Quick Actions
+
+-  <span className="pixi-icon icon-play" style="color: #5fad65;"/> - Mini animation player. You can play/pause your animation, but also manually move the red indicator.
+-  <span className="pixi-icon icon-timeline"/> - Opens an Animation Timeline. Content of the Timeline depends on the active file.
+-  <span className="pixi-icon icon-nodes"/> - Opens a Node Graph. Content of the Node Graph depends on the active file.
+
+### 3. Account Info
+
+On the right side, you can see an account icon. By logging in you can access and purchase extensions. Some extensions include UI decorations like the "Awesome Supporter" badge.
+
+Next to the account icon, there is an extension icon that opens the Extension Library.
+
+### 4. Opened Files
+
+Right below the top bar, you can see a list of opened files. The active file is highlighted in red. There is always a small preview and a name. If a file has unsaved changes, you will see a white dot next to the name.
+
+## Bottom Bar
+![Screenshot of the UI with a highlight on the bottom bar.](./assets/bottom-bar.png)
+
+### 1. Color and Tool Info
+
+- The two squares present current primary and secondary colors (you can click ```X``` on keyboard to swap them)
+- The text presents information about how to use the selected tool.
+
+### 2. Position and Version Info
+
+- The X and Y shows your pointer position on the viewport. It is not limited to the size of the canvas.
+- Next to it, there is the current version of the app.
