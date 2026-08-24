@@ -229,3 +229,15 @@
 .icon-blocks::before { content: ''; }
 .icon-scan-search::before { content: ''; }
 .icon-equal::before { content: ''; }
+.icon-adjust::before { content: ''; }
+.icon-blur::before { content: ''; }
+.icon-extensions::before { content: ''; }
+.icon-sponge::before { content: ''; }
+.icon-smudge::before { content: ''; }
+.icon-sharpen::before { content: ''; }
+.icon-gamepad::before { content: ''; }
+.icon-flame::before { content: ''; }
+.icon-replace::before { content: ''; }
+.icon-recenter-y-symmetry::before { content: ''; }
+.icon-recenter-x-symmetry::before { content: ''; }
+.icon-mountain-snow::before { content: ''; }
