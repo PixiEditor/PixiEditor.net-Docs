@@ -88,7 +88,7 @@ Toolsets are fully customizable! See the [Creating custom tools with Brush Engin
 
 ### 1. Tool Context Bar
 
-On the left side of the context bar, there are always visible undo and redo arrows. They change the last action made in the app no matter what tool is selected. You can also use shortcuts for that: ```Ctrl + Z``` / ```⌘ + Z``` for undo, and ```⌘ + Shift + Z``` / ```Ctrl + Shift + Z``` for redo.
+On the left side of the context bar, there are always visible undo and redo arrows. They change the last action made in the app no matter what tool is selected. You can also use shortcuts for that: ```Ctrl + Z``` / ```⌘ + Z``` for undo, and ```Ctrl + Y``` / ```⌘ + Shift + Z``` for redo.
 
 The second part of this bar is collapsible. You can hide it by using the arrow at the end of the bar. This part shows the tool's name and its specific settings. You can notice how it changes while selecting different tools.
 
@@ -217,7 +217,7 @@ Most actions can be found at the top bar:
 - The longer rectangle is for adding new colors to the color palette. It doesn't change the primary color. Clicking on it opens a small color picker.
 -  <span className="pixi-icon icon-plus-square"/> - Adds selected color to the palette
 -  <span className="pixi-icon icon-database"/> - Opens the Palette Browser 
--  <span className="pixi-icon icon-hard-drive"/> - Opens file manager to import a new palette from your drive. [Check this guide](https://pixieditor.net/blog/2025/03/19/q1-status/#color-palettes) for supported formats.
+-  <span className="pixi-icon icon-hard-drive"/> - Opens file manager to import a new palette from your drive.
 -  <span className="pixi-icon icon-save"/> - Saves the palette to your drive
 -  <span className="pixi-icon icon-trash"/> - Deletes the current palette
 
@@ -230,6 +230,63 @@ To replace a color:
 1. Drag the color you want to change from your palette into the left rectangle.
 2. Click the right rectangle to choose your new replacement color.
 3. Click the swap icon <span className="pixi-icon icon-swap"/> to apply the change across your palette and canvas.
+
+#### Supported Color Palette Formats
+
+<table><thead>
+  <tr>
+    <th>Name</th>
+    <th>Open</th>
+    <th>Save</th>
+  </tr></thead>
+<tbody>
+  <tr>
+    <td>Cls</td>
+    <td>yes</td>
+    <td>yes</td>
+  </tr>
+  <tr>
+    <td>Jasc Palette <br/>.pal, .psppalette</td>
+    <td>yes</td>
+    <td>yes</td>
+  </tr>
+  <tr>
+    <td>CorelDraw .pal</td>
+    <td>yes</td>
+    <td>yes</td>
+  </tr>
+  <tr>
+    <td>DeluxePaint<br/>.bbm, .lbm</td>
+    <td>yes</td>
+    <td>no</td>
+  </tr>
+  <tr>
+    <td>Gimp GPL .pal</td>
+    <td>yes</td>
+    <td>yes</td>
+  </tr>
+  <tr>
+    <td>Hex</td>
+    <td>yes</td>
+    <td>yes</td>
+  </tr>
+  <tr>
+    <td>Paint.NET Palette .txt</td>
+    <td>yes</td>
+    <td>yes</td>
+  </tr>
+  <tr>
+    <td>Pixi</td>
+    <td>yes</td>
+    <td>no</td>
+  </tr>
+  <tr>
+    <td>Png</td>
+    <td>yes</td>
+    <td>yes</td>
+  </tr>
+</tbody>
+</table>
 
 ## Viewport Options 
 
@@ -290,7 +347,7 @@ It lets you search for files, but you can also look for actions like flipping, r
 
 ### 2. Quick Actions
 
--  <span className="pixi-icon icon-play" style="color: #5fad65;"/> - Mini animation player. You can play/pause your animation, but also manually move the red indicator (it marks a specific point in time within the animation).
+-  <span className="pixi-icon icon-play" style="color: #5fad65;"/> - Mini animation player. You can play/pause your animation by clicking on the green button and change the active animation frame with the red indicator underneath.
 -  <span className="pixi-icon icon-timeline"/> - Opens an Animation Timeline. Content of the Timeline depends on the active file.
 -  <span className="pixi-icon icon-nodes"/> - Opens a Node Graph. Content of the Node Graph depends on the active file.
 
