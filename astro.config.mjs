@@ -38,8 +38,8 @@ export default defineConfig({
               autogenerate: { directory: 'open-beta' },
           },
           {
-              label: 'Usage',
-              autogenerate: { directory: 'usage' },
+              label: 'Handbook',
+              autogenerate: { directory: 'handbook' },
               collapsed: true,
           },
           {
