@@ -12,7 +12,7 @@ Images can be added to `src/assets/`
 
 ### Usage
 
-`src/contents/usage` contains documentation about the usage of PixiEditor, and is oriented towards the users of PixiEditor.
+`src/contents/handbook` contains documentation about the usage of PixiEditor, and is oriented towards the users of PixiEditor.
 
 ### Contribution
 

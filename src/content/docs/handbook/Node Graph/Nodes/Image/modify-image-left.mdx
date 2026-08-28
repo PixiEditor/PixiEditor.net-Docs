@@ -15,7 +15,7 @@ node:
     default: 'null'
   - name: Color Sample Mode
     type: Color Sample Mode (Enum)
-    typeLink: /docs/usage/node-graph/nodes/image/modify-image-left#color-sample-mode
+    typeLink: /docs/handbook/node-graph/nodes/image/modify-image-left#color-sample-mode
     description: 'The color sample mode to use when sampling colors from the image. This determines how colors are sampled from the texture, which can affect the final output of the image modifications.'
     isContextful: false
     default: Color Managed
@@ -36,7 +36,7 @@ node:
 
 Modify image pair is used to modify an image in a complex way. This pair of nodes sets up a GPU context for image modifications. Unlike filters, which uniformly applies an effect to the entire image, modify image allows for more complex and dynamic modifications. Such as sampling colors from the image and applying custom logic to modify the image based on those sampled colors.
 
-It is a visual equivalent of [Shader Node](/docs/usage/node-graph/nodes/effects/shader).
+It is a visual equivalent of [Shader Node](/docs/handbook/node-graph/nodes/effects/shader).
 
 ### How is the image sampled?
 
@@ -54,7 +54,7 @@ Input UV (End Modify Image) sets **UV coordinates for sampling the image**. This
 
 Output Color (Begin Modify Image) outputs a color sampled from the image using the UV from the previous pass. This is a color that will be used to render the image at the current UV coordinates.
 
-You can modify the color any way you want, when you plug it into the Input `Color` of [End Modify Image](/docs/usage/node-graph/nodes/image/modify-image-right), you'll set the final color at the current UV coordinates (not modified ones, but active in GPU context).
+You can modify the color any way you want, when you plug it into the Input `Color` of [End Modify Image](/docs/handbook/node-graph/nodes/image/modify-image-right), you'll set the final color at the current UV coordinates (not modified ones, but active in GPU context).
 
 
 :::note
@@ -66,7 +66,7 @@ Images may be sampled twice, with currently processing UV and UV from **UV pass*
 
 :::tip
 
-Check out [GPU Context](/docs/usage/node-graph/property-sockets#gpu-context) documentation to learn more about how GPU context works. There is an example of how to use Modify Image pair.
+Check out [GPU Context](/docs/handbook/node-graph/property-sockets#gpu-context) documentation to learn more about how GPU context works. There is an example of how to use Modify Image pair.
 
 :::
 

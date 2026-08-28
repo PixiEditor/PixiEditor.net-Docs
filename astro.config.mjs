@@ -49,8 +49,6 @@ for (const file of getFiles(usageDirectory)) {
     redirects[`/usage/${slug}`] = `/docs/handbook/${slug}`;
 }
 
-console.log(redirects);
-
 // https://astro.build/config
 export default defineConfig({
   site: 'https://pixieditor.net',

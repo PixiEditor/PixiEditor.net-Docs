@@ -6,11 +6,11 @@ using System.Text;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
-const string changeableDll = "../PixiEditor/src/PixiEditor.Desktop/bin/Debug/net8.0/PixiEditor.ChangeableDocument.dll";
-const string editorDll = "../PixiEditor/src/PixiEditor.Desktop/bin/Debug/net8.0/PixiEditor.dll";
-const string uiCommonDll = "../PixiEditor/src/PixiEditor.Desktop/bin/Debug/net8.0/PixiEditor.UI.Common.dll";
+const string changeableDll = "../PixiEditor/src/PixiEditor.Desktop/bin/Debug/net10.0/PixiEditor.ChangeableDocument.dll";
+const string editorDll = "../PixiEditor/src/PixiEditor.Desktop/bin/Debug/net10.0/PixiEditor.dll";
+const string uiCommonDll = "../PixiEditor/src/PixiEditor.Desktop/bin/Debug/net10.0/PixiEditor.UI.Common.dll";
 
-const string outputDir = "src/content/docs/usage/Node Graph/Nodes/";
+const string outputDir = "src/content/docs/handbook/Node Graph/Nodes/";
 
 var changeableAssembly = Assembly.LoadFrom(changeableDll);
 var editorAssembly = Assembly.LoadFrom(editorDll);
