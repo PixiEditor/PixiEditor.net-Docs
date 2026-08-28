@@ -10,6 +10,9 @@ import starlightImageZoom from 'starlight-image-zoom';
 export default defineConfig({
   site: 'https://pixieditor.net',
   base: '/docs/',
+  redirects: {
+    '/usage/[...slug]': '/docs/handbook/[...slug]',
+  },
 
   integrations: [starlight({
       title: 'PixiEditor Docs',
