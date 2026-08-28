@@ -5,14 +5,57 @@ import starlight from '@astrojs/starlight';
 import tailwindcss from '@tailwindcss/vite';
 import starlightVideos from 'starlight-videos';
 import starlightImageZoom from 'starlight-image-zoom';
+import fs from 'node:fs';
+import path from 'node:path';
+
+
+function getFiles(directory) {
+    return fs.readdirSync(directory, { withFileTypes: true }).flatMap(entry => {
+        const fullPath = path.join(directory, entry.name);
+
+        if (entry.isDirectory())
+            return getFiles(fullPath);
+
+        return fullPath;
+    });
+}
+
+function slugifyPath(path) {
+    return path
+        .split('/')
+        .map(segment =>
+            segment
+                .toLowerCase()
+                .trim()
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/^-+|-+$/g, '')
+        )
+        .join('/');
+}
+
+const usageDirectory = './src/content/docs/handbook';
+const redirects = {};
+
+for (const file of getFiles(usageDirectory)) {
+    if (!file.endsWith('.md') && !file.endsWith('.mdx'))
+        continue;
+
+    const relative = path.relative(usageDirectory, file)
+        .replace(/\\/g, '/')
+        .replace(/\.(md|mdx)$/, '');
+
+    const slug = slugifyPath(relative);
+
+    redirects[`/usage/${slug}`] = `/docs/handbook/${slug}`;
+}
+
+console.log(redirects);
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://pixieditor.net',
   base: '/docs/',
-  redirects: {
-    '/usage/[...slug]': '/docs/handbook/[...slug]',
-  },
+  redirects: redirects,
 
   integrations: [starlight({
       title: 'PixiEditor Docs',
