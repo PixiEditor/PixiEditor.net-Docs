@@ -16,15 +16,21 @@ PixiEditor always has two active colors:
 - The **primary color** is used with the **left mouse button**.
 - The **secondary color** is used with the **right mouse button**.
 
-This works with every tool that uses color. For example, with the pen tool, drag with the left mouse button to draw in the primary color and with the right mouse button to draw in the secondary color. You can set up two colors and switch between them without opening the color panel.
+:::note
+By default, right click uses the secondary color. If you prefer a different right-click behavior, you can change it in `Edit → Settings → General → Right-click Mode`.
+:::
 
-You can see both colors in the Color Picker tab, the Palette tab, and in the bottom bar. To swap them, press ```X```.
+Primary and secondary colors work the same way in every tool that uses color. For example, with the pen tool, click and drag with the left mouse button to draw in the primary color. Click and drag with the right mouse button to draw in the secondary color.
+
+Keeping two colors ready lets you switch between them while drawing, without opening the color panel.
+
+You can see both colors in the Color Picker tab, the Palette tab, and in the bottom bar. To swap them, press `X` (default shortcut).
 
 ### RGBA
 
 ![Infographic with the RGBA characters](./assets/rgba.png)
 
-Colors in PixiEditor are RGBA: red, green, blue and alpha (transparency). In hex, this is written as ```#RRGGBBAA```, where every pair of characters is one channel. For example, ```#FF000080``` is red at 50% opacity.
+Hex color format in PixiEditor is RGBA: red, green, blue and alpha (transparency). In hex, this is written as `#RRGGBBAA`, where every pair of characters is one channel. For example, `#FF000080` is red at 50% opacity.
 
 ## Choosing a Color
 
@@ -40,13 +46,13 @@ Elements in this tab are:
 
 **Color square and hue ring:** Click or drag in the ring to choose the hue, and in the square to choose the other two values.
 
-**Primary and secondary color:** The top square is the primary color and the one below is the secondary color. Clicking the arrow swaps the two (shortcut: ```X```).
+**Primary and secondary color:** The top square is the primary color and the one below is the secondary color. Clicking the arrow swaps the two (default shortcut: `X`).
 
 **Alpha slider:** The wide slider at the bottom controls transparency. You can also type a value in the input on its right.
 
 **HSV/HSL dropdown:** Switches the picker between HSV and HSL.
 
-**Hex value:** Shows the current color in ```#RRGGBBAA``` format. You can use the input to type in a specific value.
+**Hex value:** Shows the current color in `#RRGGBBAA` format. You can use the input to type in a specific value.
 
 ### Color Slider
 
@@ -77,9 +83,11 @@ Open the search bar with ```Ctrl + K``` / ```⌘ + K``` and type a color in hex 
 
 ![Infographic with the color picker](./assets/picker-tool.png)
 
-The color picker tool copies a color from your artwork into your primary color (left click) or secondary color (right click). You will find it in all default toolsets. Press ```o``` to access it faster.
+The color picker tool copies a color from your artwork into your primary color (left click) or secondary color (right click). You will find it in all default toolsets. The default shortcut is `O`.
 
-In the tool's settings bar you can choose a scope: ```Single Layer``` or ```Canvas```. 
+In the tool's settings bar you can choose where the color is picked from:
+- ```Single Layer``` picks the color from the active layer only, ignoring all other layers.
+- ```Canvas``` picks the color you see on the canvas, which is the result of all visible layers combined.
 
 ## Reusing Colors
 
@@ -89,7 +97,7 @@ In the tool's settings bar you can choose a scope: ```Single Layer``` or ```Canv
 
 Using a canvas-editing tool (such as the pen, shapes, or bucket fill) automatically adds the color you used the swatches list.
 
-Using non-editing tools like the color picker will not add a swatch.
+Using non-editing tools like the color picker doesn't add a swatch.
 
 Swatches are great for returning to a color you used a moment ago. To keep colors for longer or organize them, use a palette.
 
@@ -97,7 +105,7 @@ Swatches are great for returning to a color you used a moment ago. To keep color
 
 ![Screenshot of the Color Palette tab](./assets/palette.png)
 
-A palette is a set of colors that you choose and keep. Working with a limited palette keeps your artwork consistent. This tab lets you use and edit palettes.
+A color palette is a collection of colors that you can reuse across projects. Sticking to one palette keeps your artwork consistent. This tab lets you use and edit palettes.
 
 #### Action Bar
 
@@ -141,6 +149,10 @@ To replace a color:
 ![Screenshot of the context menu with palette colors](./assets/context_menu.png)
 
 While using any tool that doesn't draw on the canvas (move, rotate, etc) you can right click anywhere on the canvas and a context menu will show. If you have an active palette, on the left side you will find a palette color list. Use it to quickly change your primary color.
+
+:::note
+By default, right click opens the context menu only with tools that don't draw on the canvas. To show it with every tool, including the ones that draw, change ```Right-click Mode``` in ```Edit → Settings → General```. Right click will then no longer draw with the secondary color.
+:::
 
 ## Palette Management
 
@@ -192,7 +204,9 @@ Actions you can take with each palette on the list:
 Click the import icon <span className="pixi-icon icon-hard-drive"/> in the action bar and choose a palette file from your drive.
 
 :::tip
-You can import a PNG image, and its colors will be turned into a new palette. Works best with pixel art.
+You can import a PNG image, and its colors will be turned into a new palette. 
+
+This works best with images that use only a few colors, such as pixel art. A photo or a gradient can contain thousands of colors, which would produce a very large palette.
 :::
 
 #### Manually 
@@ -205,6 +219,8 @@ Or use a direct path:
 - macOS ```/Users/<your user name>/Library/Application Support/PixiEditor/Palettes```
 
 #### Supported Color Palette Formats
+
+ _as of version 2.1.2.4_
 
 | Name                              | Open | Save |
 | --------------------------------- | ---- | ---- |
