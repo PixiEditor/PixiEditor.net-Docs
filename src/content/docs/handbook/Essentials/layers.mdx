@@ -1,0 +1,271 @@
+---
+title: 'Layers, Blend Modes and Masking'
+sidebar:
+  order: 2
+---
+
+import transform from './assets/transform.webm';
+
+This page covers how to manage layers, how to change the way they combine with each other, and how to hide parts of them with masks. 
+
+:::note
+Aligning Multiple Layers and Layer Locking were added in PixiEditor 2.2, which is currently available in the development channel. To switch to it, go to `Edit → Settings → Updates` and change the channel to Development.
+:::
+
+## Layer Management
+
+Most work around the layers is done from the layers panel, which is located in the middle of the right side of the app.
+
+![Screenshot of the Layer Panel](./assets/layer-panel.png)
+
+### Layer List
+
+The main part of it is a list of layers:
+
+![Screenshot of the Layer List](./assets/layers-list.png)
+
+The active layer / folder is highlighted with a lighter background. 
+
+Each layer has an eye icon <span className="pixi-icon icon-eye"/> / <span className="pixi-icon icon-eye-off"/> to toggle its visibility in the composition. Next to it is a thumbnail preview of the layer content, followed by its name, opacity percentage and a blend mode.
+
+To rename a layer, double-click its name to enter text-editing mode and type your new title. There is also a `Rename` option in the right-click menu.
+
+### Reordering
+
+![Screenshot of reordering layers in the layer list](./assets/drop-highlight.png)
+
+To change the order of your layers, drag and drop them in the layers panel. Drop a layer onto a folder to move it inside. While dragging you will see a highlight indicating where the layer will be placed.
+
+### Basic Actions
+
+![Screenshot of the Layers Actions](./assets/layers-actions.png)
+
+You can do these basic actions from a bar at the top of the layers panel:
+
+-  <span className="pixi-icon icon-file-plus"/> - Create new layer (`Shift + Ctrl + N` / `⇧ + ⌘ + N`)
+-  <span className="pixi-icon icon-folder-plus"/> - Create new folder
+-  <span className="pixi-icon icon-trash"/> - Delete all selected layers and folders (you can undo this action)
+
+### Transformations
+
+To select a layer, click it in the layers panel.
+
+You can also select a layer directly from the canvas. Choose the Move tool (`V`) and click the object you want to move. You don't need selection tools like the magic wand or the lasso to move something.
+
+![Screenshot of a selected layer on the canvas](./assets/selected-layer.png)
+
+With the Move tool (`V`) active, the selected layer gets transform handles around it. 
+
+here are many ways to transform a layer:
+
+- **Scale:** Drag a handle.
+- **Scale from the center:** Hold `Ctrl` / `⌃` and drag a handle.
+- **Scale proportionally:** Hold `Shift` while dragging a handle.
+- **Free transform:** Hold `Alt` / `⌥` and drag a side handle.
+- **Shear:** Drag outside a side handle.
+- **Rotate:** Drag outside the corner handles. By default, the layer rotates around the circle in its center. Drag the circle to rotate around a different point.
+
+If you prefer to see it on video:
+
+<video src={transform} muted autoplay loop/>
+
+#### Aligning Multiple Layers
+
+*Available in version 2.2 and newer.*
+
+When you select multiple layers, a bar appears on the canvas.
+
+![Screenshot of an alignment bar for multiple layers selected](./assets/alignment-options.png)
+
+Options in this bar are as follows:
+
+-  <span className="pixi-icon icon-align-horizontal-justify-start"/> - Align to the left side of the selection
+-  <span className="pixi-icon icon-align-horizontal-justify-center"/> - Align horizontal centers
+-  <span className="pixi-icon icon-align-horizontal-justify-end"/> - Align to the right side of the selection
+-  <span className="pixi-icon icon-align-vertical-justify-start"/> - Align to the top of the selection
+-  <span className="pixi-icon icon-align-vertical-justify-center"/> - Align vertical centers
+-  <span className="pixi-icon icon-align-vertical-justify-end"/> - Align to the bottom of the selection
+-  <span className="pixi-icon icon-align-horizontal-space-between"/> - Distribute horizontal spacing (min 3 layers)
+-  <span className="pixi-icon icon-align-vertical-space-between"/> - Distribute vertical spacing (min 3 layers)
+
+
+### Locking
+
+Locking protects a layer from unwanted changes.
+
+#### Lock Layer
+
+*Available in version 2.2 and newer.*
+
+![Screenshot of a highlighted lock icon in the action top bar](./assets/lock_ht.png)
+
+![Screenshot of a locked layer in the layer panel](./assets/layer-locking.png)
+
+Locks everything on the layer. Nothing can be changed until you unlock it.
+
+#### Lock Transparency
+
+![Screenshot of a highlighted lock transparency icon in the action top bar](./assets/alpha_ht.png)
+
+![Screenshot of a layer with locked transparency in the layer panel](./assets/alpha-locking.png)
+
+Protects the transparency of the layer. When you paint, the pixels keep their original transparency value: transparent pixels stay transparent, and semi-transparent pixels stay equally semi-transparent, while their color changes.
+
+Lock Transparency works only on raster layers. It's disabled for vector and smart layers.
+
+### Clipping
+
+Clipping limits a layer to the shape of the layer below it. Anything of the clipped layer that goes outside that shape is hidden, but not erased.
+
+To clip a layer, right click on it in the Layer List and choose `Clip to Member Below`.
+
+![Screenshot of a layer clipped to the layer below](./assets/clip_one.png)
+
+Clipping works with folders too. You can clip several layers in a row.
+
+![Screenshot of two layers clipped to the layer below](./assets/clip_two.png)
+
+### Merging Layers
+
+Merging combines layers into one. There are three options in the right-click menu in the layer list:
+
+- `Merge Selected` - Merges all selected layers into a single layer.
+- `Merge Selected Layer With Above` - Merges the selected layer into the one above it.
+- `Merge Selected Layer With Below` - Merges the selected layer into the one below it. This action is also available in the top bar of the layers panel.
+
+![Screenshot of a highlighted merge layer with below icon](./assets/merge_ht.png)
+
+When layers are merged, their opacity, blend modes and clipping are baked in. Once layers are merged it can't be undone, but vector layers is the exception: you can undo it later with `Separate Shapes`.
+
+![Screenshot of a layer list before and after merging a few layers](./assets/merging.png)
+
+### Converting Layers
+
+When you right-click a layer in the layer list, you'll find 4 actions specific to vector and smart layers at the bottom of the menu:
+
+- `Rasterize` converts a layer to pixels. After rasterizing, you can paint on the layer, but you can no longer edit its shapes or its embedded content.
+
+![Screenshot of a vector circle and a rasterized copy](./assets/rasterize.png)
+
+- `Convert to Curve` converts a vector shape or text to curves. You can then use the pen tool <span className="pixi-icon icon-vector-pen"/> to adjust the path.
+
+- `Separate Shapes` separates two or more vector shapes merged together.
+
+- `To Smart Layer` works with every type of layer. It turns the layer into a nested file that you can modify outside the original layer tree.
+You can also use smart layers to embed another file in your document. It allows to use the same file several times in one document, for example the same tree repeated across a landscape.
+
+- `Reset Transform` brings back the default look of a vector or smart layer.
+
+## Blend Modes & Opacity
+
+A blend mode changes how the colors of a layer combine with the layers below it. With the default mode `Normal` a layer simply covers what's under it. Other modes can darken, lighten, add contrast, or change only the color of the artwork under them.
+
+![Screenshot with highlighted blend mode list](./assets/blend_modes.png)
+
+Blend modes work on folders as well, so you can change how a whole group of layers combines with the rest of the image.
+
+:::tip
+Blend mode and opacity work together. The blend mode decides how colors combine, and opacity decides how strongly the result shows.
+:::
+
+### Available Blend Modes
+
+**Basic**
+- `Normal` - The layer covers what's below it.
+- `Erase` - Removes pixels from the layers below. 
+
+**Darken**
+- `Darken` - Keeps the darker color of the two layers at each pixel.
+- `Multiply` - Multiplies the colors, which always gives a darker result. White has no effect. A good choice for shadows.
+- `Color Burn` - Darkens the layers below and increases contrast.
+
+**Lighten**
+- `Lighten` - Keeps the lighter color of the two layers at each pixel.
+- `Screen` - The opposite of Multiply: it always gives a lighter result. Black has no effect. A good choice for glows and light effects.
+- `Color Dodge` - Brightens the layers below and reduces contrast.
+- `Linear Dodge (Add)` - Adds the colors together, which makes the result brighter, and quickly reaches pure white.
+
+**Contrast**
+- `Overlay` - Multiplies dark areas and screens light areas, so darks get darker and lights get lighter. 
+- `Soft Light` - A gentler version of Overlay.
+- `Hard Light` - A stronger version of Overlay.
+
+**Comparison**
+- `Difference` - Subtracts the colors of one layer from the other. Identical colors become black.
+- `Exclusion` - Similar to Difference, but with lower contrast.
+
+**Color**
+- `Hue` - Applies the hue of the layer to the layers below and keeps their saturation and brightness.
+- `Saturation` - Applies the saturation of the layer.
+- `Color` - Applies both the hue and the saturation of the layer.
+- `Luminosity` - Applies the brightness of the layer and keeps the colors of the layers below.
+
+## Masking
+
+A mask hides parts of a layer without erasing them. You can change the mask at any time, so it's a non-destructive way to hide parts of your artwork.
+
+![Infographic representing how masks work](./assets/masking.png)
+
+Below you can see how a mask is presented in the layer panel:
+
+![Screenshot of layer with a mask](./assets/masked_layer.png)
+
+Folders can have masks too, so you can hide parts of everything inside the folder at once.
+
+### Working with Masks
+
+Right clicking on the layer in the layer list opens a menu in which you will find mask related actions:
+
+- `Create Mask` - Adds a mask to the selected layer or folder.
+- `Enable Mask` - Turns the effect of the mask on or off.
+- `Apply Mask` - Applies the mask to the layer permanently.
+- `Delete Mask` - Removes the mask and shows the layer fully again.
+
+To quickly add a mask, use this icon in the top bar of the layers panel:
+
+![Screenshot of a highlighted mask icon in the action top bar](./assets/mask_ht.png)
+
+### Editing a Mask
+
+Make sure the mask thumbnail is selected if you want to paint on it.
+
+You edit a mask by painting on it with black and white. White shows the layer, black hides it, and shades of gray make the layer partly transparent.
+
+:::note
+You can paint on a mask with any color selected, but only the Lightness of that color will be considered (you can see that value in Color Sliders, the HS**L** tab). However, in the mask preview you'll only see shades of gray.
+:::
+
+### Vector Masks (Node Graph)
+
+If you want to use a vector shape as a mask, for now you can do that using the Node Graph. 
+
+Prepare the vector mask layer and another layer that you want to mask. Open the Node Graph <span className="pixi-icon icon-nodes"/> and connect the vector layer output to the mask input of the other layer.
+
+![Screenshot of a node setup for using vector layer as mask](./assets/vector_mask.png)
+
+You can now close the Node Graph and modify these two layers as usual.
+
+## Reference Layer
+
+Sometimes you may want to use an external image as a visual guide while working. To add one, click the `Add Reference Layer` button at the bottom of the layers panel and select a PNG or JPG file from your computer.
+
+Unlike standard layers used for drawing, a reference layer is strictly for visual preview and guidance. It is excluded from the actual layer tree, meaning it can't be painted on or edited directly. Because it is purely for preview, it won't interfere with your artwork and maintains high resolution even on small canvases.
+
+The reference image is saved inside your `.pixi` file, so it stays with your project.
+
+Once you select an image, you'll see it on the canvas, and some new elements will appear on the UI:
+
+![Screenshot of the UI of reference image.](./assets/reference.png)
+
+-  <span className="pixi-icon icon-eye"/> / <span className="pixi-icon icon-eye-off"/> - Hides / Shows the reference layer
+-  <span className="pixi-icon icon-layers-top"/> / <span className="pixi-icon icon-layers-bottom"/> - Changes the reference layer position to above/under other layers
+-  Preview of the reference layer
+-  <span className="pixi-icon icon-crop"/> - Enters a transformation mode for the reference layer (scaling and moving the layer)
+-  <span className="pixi-icon icon-reset"/> - Resets transformations made to the reference layer
+-  <span className="pixi-icon icon-trash"/> - Deletes the current reference layer.
+
+## Layer Shortcuts
+
+By default, many layer actions don't have any shortcut set. If you'd like to add them, go to `Edit → Settings → Key Binding`. To set a new shortcut, click on the input and press any key(s) you want on your keyboard.
+
+![Screenshot of the Layer Shortcuts](./assets/layer-shortcuts.png)
