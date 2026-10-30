@@ -5,6 +5,25 @@ sidebar:
 ---
 
 import transform from './assets/transform.webm';
+import { Image } from 'astro:assets';
+import b1 from './assets/b1.jpg';
+import b2 from './assets/b2.jpg';
+import b3 from './assets/b3.jpg';
+import b4 from './assets/b4.jpg';
+import b5 from './assets/b5.jpg';
+import b6 from './assets/b6.jpg';
+import b7 from './assets/b7.jpg';
+import b8 from './assets/b8.jpg';
+import b9 from './assets/b9.jpg';
+import b10 from './assets/b10.jpg';
+import b11 from './assets/b11.jpg';
+import b12 from './assets/b12.jpg';
+import b13 from './assets/b13.jpg';
+import b14 from './assets/b14.jpg';
+import b15 from './assets/b15.jpg';
+import b16 from './assets/b16.jpg';
+import b17 from './assets/b17.jpg';
+import b18 from './assets/b18.jpg';
 
 This page covers how to manage layers, how to change the way they combine with each other, and how to hide parts of them with masks. 
 
@@ -14,17 +33,21 @@ Aligning Multiple Layers and Layer Locking were added in PixiEditor 2.2, which i
 
 ## Layer Management
 
-Most work around the layers is done from the layers panel, which is located in the middle of the right side of the app.
+Most work around the layers is done from the layers panel, which is located in the middle of the right side of the app. 
+
+:::note
+In PixiEditor every layer is separate a node in the Node Graph and many advanced rendering behaviours can be customized there. To read more about nodes, go to [this page.](https://pixieditor.net/docs/handbook/node-graph/getting-started-with-node-graph/)
+:::
 
 ![Screenshot of the Layer Panel](./assets/layer-panel.png)
 
 ### Layer List
 
-The main part of it is a list of layers:
+The main part of the Layer Panel is a list of layers:
 
 ![Screenshot of the Layer List](./assets/layers-list.png)
 
-The active layer / folder is highlighted with a lighter background. 
+The active layer or folder has a lighter background. To select more than one layer, hold `Ctrl` / `⌃`  or `Shift` while clicking. The additionally selected layers have a slightly different highlight, and you can apply actions like deleting, merging and aligning to all of them at once.
 
 Each layer has an eye icon <span className="pixi-icon icon-eye"/> / <span className="pixi-icon icon-eye-off"/> to toggle its visibility in the composition. Next to it is a thumbnail preview of the layer content, followed by its name, opacity percentage and a blend mode.
 
@@ -46,11 +69,30 @@ You can do these basic actions from a bar at the top of the layers panel:
 -  <span className="pixi-icon icon-folder-plus"/> - Create new folder
 -  <span className="pixi-icon icon-trash"/> - Delete all selected layers and folders (you can undo this action)
 
+### Layer Types
+
+PixiEditor has several kinds of layers, and they don't all behave the same way. Some actions on this page only work with certain types.
+
+- **Raster Layer:** A layer made of pixels. This is the type you draw on with brushes, the pencil, the eraser and the bucket fill.
+- **Vector Path:** You can create it with the Vector Pen tool or by converting a shape into curves.
+- **Vector Shapes:** Shapes that stay editable, so you can change their size, position and style later. They are created with the shape tools:
+  - **Rectangle**
+  - **Ellipse**
+  - **Line**
+  - **Text** 
+- **Folder:** Groups other layers. You can reorder them, and also give the folder a blend mode, a mask or a clip.
+- **Smart Layer:** A layer that you can open as a separate file and modify outside the original layer tree. It can also be linked to a file on your disk. 
+
+
 ### Transformations
 
 To select a layer, click it in the layers panel.
 
-You can also select a layer directly from the canvas. Choose the Move tool (`V`) and click the object you want to move. You don't need selection tools like the magic wand or the lasso to move something.
+You can also select a layer directly from the canvas. Choose the Move tool (```V```) and click the object you want to move. You don't need selection tools like the magic wand or the lasso to move something.
+
+:::note
+How a layer is transformed depends on its type. Raster layers are made of pixels, so moving or transforming one moves and resamples those pixels, and the result can look slightly different from the original. Other layer types, such as vector shapes, text and smart layers, only change the position of the object that is rendered, so they stay as sharp as before.
+:::
 
 ![Screenshot of a selected layer on the canvas](./assets/selected-layer.png)
 
@@ -61,7 +103,7 @@ here are many ways to transform a layer:
 - **Scale:** Drag a handle.
 - **Scale from the center:** Hold `Ctrl` / `⌃` and drag a handle.
 - **Scale proportionally:** Hold `Shift` while dragging a handle.
-- **Free transform:** Hold `Alt` / `⌥` and drag a side handle.
+- **Free transform:** Hold `Alt` / `⌥` and drag a side handle. (works only for raster layers)
 - **Shear:** Drag outside a side handle.
 - **Rotate:** Drag outside the corner handles. By default, the layer rotates around the circle in its center. Drag the circle to rotate around a different point.
 
@@ -135,15 +177,26 @@ Merging combines layers into one. There are three options in the right-click men
 
 ![Screenshot of a highlighted merge layer with below icon](./assets/merge_ht.png)
 
-When layers are merged, their opacity, blend modes and clipping are baked in. Once layers are merged it can't be undone, but vector layers is the exception: you can undo it later with `Separate Shapes`.
-
 ![Screenshot of a layer list before and after merging a few layers](./assets/merging.png)
+
+What you get after merging depends on the types of the layers:
+
+A blend mode is a mathematical formula that defines how pixels of two layers combine. In PixiEditor, the blend mode of a layer decides how that layer is combined with the layers below it.
+
+| Input | Output | Is it reversible? |
+| ------- | ------ | -------------------------- |
+| Raster + raster | One raster layer | The pixels are combined and can't be separated again. |
+| Vector + vector | One vector layer containing all the shapes | The shapes stay editable, and you can split them again with `Separate Shapes`. |
+| Raster + vector | One raster layer | The vector layer is rasterized first, so its shapes can't be edited anymore. |
+| Smart layer + any other layer | One raster layer | The smart layer is rasterized, so it no longer links to its embedded file. |
+
+Raster layers store pixels, so merged pixels can't be separated again. Vector layers store shape data, and merging only combines that data into one layer, so `Separate Shapes` can split it apart again.
 
 ### Converting Layers
 
 When you right-click a layer in the layer list, you'll find 4 actions specific to vector and smart layers at the bottom of the menu:
 
-- `Rasterize` converts a layer to pixels. After rasterizing, you can paint on the layer, but you can no longer edit its shapes or its embedded content.
+- `Rasterize` converts a layer to pixels. After rasterizing, you can paint on the layer, but you can no longer edit its shapes or open it as a smart layer.
 
 ![Screenshot of a vector circle and a rasterized copy](./assets/rasterize.png)
 
@@ -151,14 +204,14 @@ When you right-click a layer in the layer list, you'll find 4 actions specific t
 
 - `Separate Shapes` separates two or more vector shapes merged together.
 
-- `To Smart Layer` works with every type of layer. It turns the layer into a nested file that you can modify outside the original layer tree.
+- `To Smart Layer` works with every type of layer. It turns the layer into a nested file that you can modify outside the original layer tree. 
 You can also use smart layers to embed another file in your document. It allows to use the same file several times in one document, for example the same tree repeated across a landscape.
 
 - `Reset Transform` brings back the default look of a vector or smart layer.
 
 ## Blend Modes & Opacity
 
-A blend mode changes how the colors of a layer combine with the layers below it. With the default mode `Normal` a layer simply covers what's under it. Other modes can darken, lighten, add contrast, or change only the color of the artwork under them.
+A blend mode is a mathematical formula that defines how pixels of two layers blend with each other. In PixiEditor, it works in top-to-bottom order, the top layer with a blend mode changes how that layer renders blending with the layer below. The bottom layer is not affected by the layer above.
 
 ![Screenshot with highlighted blend mode list](./assets/blend_modes.png)
 
@@ -172,33 +225,63 @@ Blend mode and opacity work together. The blend mode decides how colors combine,
 
 **Basic**
 - `Normal` - The layer covers what's below it.
-- `Erase` - Removes pixels from the layers below. 
+  <Image src={b1} style={{ width: '200px', height: 'auto' }} alt="An eagle with a yellow rectangle layer using the Normal blend mode" />
+
+- `Erase` - Removes pixels from the layers below. Takes in the opacity value.
+  <Image src={b2} style={{ width: '200px', height: 'auto' }} alt="An eagle with a yellow rectangle layer using the Erase blend mode" />
 
 **Darken**
 - `Darken` - Keeps the darker color of the two layers at each pixel.
-- `Multiply` - Multiplies the colors, which always gives a darker result. White has no effect. A good choice for shadows.
+  <Image src={b3} style={{ width: '200px', height: 'auto' }} alt="An eagle with a yellow rectangle layer using the Darken blend mode" />
+
+- `Multiply` - Multiplies the colors, which always gives a darker result. White has no effect.
+  <Image src={b4} style={{ width: '200px', height: 'auto' }} alt="An eagle with a yellow rectangle layer using the Multiply blend mode" />
+
 - `Color Burn` - Darkens the layers below and increases contrast.
+  <Image src={b5} style={{ width: '200px', height: 'auto' }} alt="An eagle with a yellow rectangle layer using the Color Burn blend mode" />
 
 **Lighten**
 - `Lighten` - Keeps the lighter color of the two layers at each pixel.
+  <Image src={b6} style={{ width: '200px', height: 'auto' }} alt="An eagle with a yellow rectangle layer using the Lighten blend mode" />
+
 - `Screen` - The opposite of Multiply: it always gives a lighter result. Black has no effect. A good choice for glows and light effects.
+  <Image src={b7} style={{ width: '200px', height: 'auto' }} alt="An eagle with a yellow rectangle layer using the Screen blend mode" />
+
 - `Color Dodge` - Brightens the layers below and reduces contrast.
+  <Image src={b8} style={{ width: '200px', height: 'auto' }} alt="An eagle with a yellow rectangle layer using the Color Dodge blend mode" />
+
 - `Linear Dodge (Add)` - Adds the colors together, which makes the result brighter, and quickly reaches pure white.
+  <Image src={b9} style={{ width: '200px', height: 'auto' }} alt="An eagle with a yellow rectangle layer using the Linear Dodge (Add) blend mode" />
 
 **Contrast**
-- `Overlay` - Multiplies dark areas and screens light areas, so darks get darker and lights get lighter. 
+- `Overlay` - Multiplies dark areas and screens light areas, so darks get darker and lights get lighter.
+  <Image src={b10} style={{ width: '200px', height: 'auto' }} alt="An eagle with a yellow rectangle layer using the Overlay blend mode" />
+
 - `Soft Light` - A gentler version of Overlay.
+  <Image src={b11} style={{ width: '200px', height: 'auto' }} alt="An eagle with a yellow rectangle layer using the Soft Light blend mode" />
+
 - `Hard Light` - A stronger version of Overlay.
+  <Image src={b12} style={{ width: '200px', height: 'auto' }} alt="An eagle with a yellow rectangle layer using the Hard Light blend mode" />
 
 **Comparison**
-- `Difference` - Subtracts the colors of one layer from the other. Identical colors become black.
+- `Difference` - Subtracts the colors of one layer from the other.
+  <Image src={b13} style={{ width: '200px', height: 'auto' }} alt="An eagle with a yellow rectangle layer using the Difference blend mode" />
+
 - `Exclusion` - Similar to Difference, but with lower contrast.
+  <Image src={b14} style={{ width: '200px', height: 'auto' }} alt="An eagle with a yellow rectangle layer using the Exclusion blend mode" />
 
 **Color**
-- `Hue` - Applies the hue of the layer to the layers below and keeps their saturation and brightness.
-- `Saturation` - Applies the saturation of the layer.
-- `Color` - Applies both the hue and the saturation of the layer.
-- `Luminosity` - Applies the brightness of the layer and keeps the colors of the layers below.
+- `Hue` - Applies the hue of the layer to the layers below and keeps their saturation and luminosity.
+  <Image src={b15} style={{ width: '200px', height: 'auto' }} alt="An eagle with a yellow rectangle layer using the Hue blend mode" />
+
+- `Saturation` - Applies the saturation of the layer to the layers below and keeps their hue and luminosity.
+  <Image src={b16} style={{ width: '200px', height: 'auto' }} alt="An eagle with a yellow rectangle layer using the Saturation blend mode" />
+
+- `Luminosity` - Applies the luminosity of the layer to the layers below and keeps their hue and saturation.
+  <Image src={b17} style={{ width: '200px', height: 'auto' }} alt="An eagle with a yellow rectangle layer using the Color blend mode" />
+
+- `Color` - Applies both the hue and the saturation of the layer to the layers below and keeps their luminosity.
+  <Image src={b18} style={{ width: '200px', height: 'auto' }} alt="An eagle with a yellow rectangle layer using the Luminosity blend mode" />
 
 ## Masking
 
@@ -216,7 +299,7 @@ Folders can have masks too, so you can hide parts of everything inside the folde
 
 Right clicking on the layer in the layer list opens a menu in which you will find mask related actions:
 
-- `Create Mask` - Adds a mask to the selected layer or folder.
+- `Create Mask` - Adds a **raster** mask. To add a vector mask, you need to use the [node graph](#vector-masks-node-graph).
 - `Enable Mask` - Turns the effect of the mask on or off.
 - `Apply Mask` - Applies the mask to the layer permanently.
 - `Delete Mask` - Removes the mask and shows the layer fully again.
@@ -239,7 +322,7 @@ You can paint on a mask with any color selected, but only the Lightness of that 
 
 If you want to use a vector shape as a mask, for now you can do that using the Node Graph. 
 
-Prepare the vector mask layer and another layer that you want to mask. Open the Node Graph <span className="pixi-icon icon-nodes"/> and connect the vector layer output to the mask input of the other layer.
+Prepare the vector mask layer and another layer that you want to mask. Open the Node Graph <span className="pixi-icon icon-nodes"/> located at the top-center of the app and connect the vector layer output to the mask input of the other layer.
 
 ![Screenshot of a node setup for using vector layer as mask](./assets/vector_mask.png)
 
@@ -266,6 +349,6 @@ Once you select an image, you'll see it on the canvas, and some new elements wil
 
 ## Layer Shortcuts
 
-By default, many layer actions don't have any shortcut set. If you'd like to add them, go to `Edit → Settings → Key Binding`. To set a new shortcut, click on the input and press any key(s) you want on your keyboard.
+By default, many layer actions don't have any shortcut set. If you'd like to add them, go to `Edit → Settings → Key Binding`. To set a new shortcut, click on the input and press any key(s) you want on your keyboard. You can quickly preview all shortcuts by clicking `F1` on the keyboard.
 
 ![Screenshot of the Layer Shortcuts](./assets/layer-shortcuts.png)
