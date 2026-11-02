@@ -36,7 +36,7 @@ Aligning Multiple Layers and Layer Locking were added in PixiEditor 2.2, which i
 Most work around the layers is done from the layers panel, which is located in the middle of the right side of the app. 
 
 :::note
-In PixiEditor every layer is separate a node in the Node Graph and many advanced rendering behaviours can be customized there. To read more about nodes, go to [this page.](https://pixieditor.net/docs/handbook/node-graph/getting-started-with-node-graph/)
+In PixiEditor every layer is a separate node in the Node Graph and many advanced rendering behaviours can be customized there. To read more about nodes, go to [this page.](https://pixieditor.net/docs/handbook/node-graph/getting-started-with-node-graph/)
 :::
 
 ![Screenshot of the Layer Panel](./assets/layer-panel.png)
@@ -181,12 +181,10 @@ Merging combines layers into one. There are three options in the right-click men
 
 What you get after merging depends on the types of the layers:
 
-A blend mode is a mathematical formula that defines how pixels of two layers combine. In PixiEditor, the blend mode of a layer decides how that layer is combined with the layers below it.
-
 | Input | Output | Is it reversible? |
 | ------- | ------ | -------------------------- |
 | Raster + raster | One raster layer | The pixels are combined and can't be separated again. |
-| Vector + vector | One vector layer containing all the shapes | The shapes stay editable, and you can split them again with `Separate Shapes`. |
+| Vector + vector | One vector layer containing all the shapes | The shapes stay editable, and you can split them again with `Separate Shapes`. If the shapes have different fill, stroke or radius values, the merged layer keeps only one set of them.|
 | Raster + vector | One raster layer | The vector layer is rasterized first, so its shapes can't be edited anymore. |
 | Smart layer + any other layer | One raster layer | The smart layer is rasterized, so it no longer links to its embedded file. |
 
@@ -207,7 +205,7 @@ When you right-click a layer in the layer list, you'll find 4 actions specific t
 - `To Smart Layer` works with every type of layer. It turns the layer into a nested file that you can modify outside the original layer tree. 
 You can also use smart layers to embed another file in your document. It allows to use the same file several times in one document, for example the same tree repeated across a landscape.
 
-- `Reset Transform` brings back the default look of a vector or smart layer.
+- `Reset Transform` resets all transformations of a vector or smart layer: position, scale, rotation, shear and perspective.
 
 ## Blend Modes & Opacity
 
